@@ -1,0 +1,206 @@
+{
+  "active": false,
+  "connections": {
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-26T10:48:20.908Z",
+  "id": "8Y0DtcuVhDlgF30s",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "usuariossgaconcorreo",
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "17Y-ltLVFjlMP31IPLTbfpEuFhTi4WXVdiBLR7PcSJIY",
+          "mode": "list",
+          "cachedResultName": "usuarios sga con correos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17Y-ltLVFjlMP31IPLTbfpEuFhTi4WXVdiBLR7PcSJIY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 117727573,
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17Y-ltLVFjlMP31IPLTbfpEuFhTi4WXVdiBLR7PcSJIY/edit#gid=117727573"
+        },
+        "options": {}
+      },
+      "id": "30b14998-6f8a-49e4-82ec-4bb12beeff07",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        520,
+        220
+      ],
+      "retryOnFail": true,
+      "maxTries": null,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "e782a3ac-b478-4258-a63a-bf9426418cba",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        320,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "5771f869-7f2a-4a92-96ca-1afc52251587",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        740,
+        220
+      ],
+      "alwaysOutputData": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8dbb5e64-6afa-461b-adc3-42b861c2ad16",
+              "name": "mensaje",
+              "value": "=<!DOCTYPE html><html lang='es'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Notificación SGA</title></head><body style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'><p>Atento que por resolución <strong>Res 343/2024 HD</strong> se adhirió al sistema <strong>SGA (Sistema de Gestión Administrativa)</strong> en el módulo <strong>Gestión de RRHH</strong> en el marco del <strong>Programa de Transformación Digital</strong> impulsado por el Gobierno de la Provincia de Mendoza, en los términos de la <strong>Ley Nº9460/23</strong>, <strong>Decreto Provincial Nº948/23</strong> (Decreto reglamentario) y a las disposiciones de la <strong>Resolución Nº31/24</strong> emitida por el Ministerio de Salud y Deportes.</p><p>Se deberá ingresar al sistema desde la computadora o dispositivo móvil a través del siguiente enlace:</p><p><a href='http://www.sgasalud.mendoza.gov.ar/SITIOSALUD/default.aspx' target='_blank' style='color: #0066cc;'>http://www.sgasalud.mendoza.gov.ar/SITIOSALUD/default.aspx</a></p><p>El usuario podrá consultar su marcación horaria a través de la siguiente opción: </p>Cronograma De Horarios => Consulta Marcaciones <p>Si el usuario es jefe o responsable de áreas, además de su propia marcación podrá consultar la marcación del personal a cargo.</p><p>Se pone a su disposición la <strong>Mesa de Ayuda</strong> a través de <strong>ALMA</strong> para:</p><ul><li>Realizar consultas frecuentes.</li><li>Reportar errores o problemas en el usuario.</li><li>Acceder a la descarga del manual del sistema.</li></ul><p>Acceda por medio del siguiente enlace de whatsapp</p><p><a href='https://wa.link/l6rssl' target='_blank' style='color: #0066cc;'>https://wa.link/l6rssl</a></p><p><strong>Su usuario es:</strong>{{ $json.USUARIO }} </p><p><strong>Su contraseña es:</strong>123 </p></body></html>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "81e83d7b-ad0c-42d9-83ef-71b787733083",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1000,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://119.8.149.241:13001/enviarCorreo",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "toEmail",
+              "value": "={{ $('Google Sheets').item.json.Correo }}"
+            },
+            {
+              "name": "subject",
+              "value": "Notificación SGA"
+            },
+            {
+              "name": "body",
+              "value": "={{ $json.mensaje }}"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "6c9252f1-3396-42b5-8096-192638ff5e52",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        240
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "Ka3Av09A0xaGnOMT",
+          "name": "Unnamed credential"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-12-23T17:15:02.000Z",
+  "versionId": "24abd874-7540-4864-b1b3-fdc5524caf92"
+}
