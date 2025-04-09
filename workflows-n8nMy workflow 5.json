@@ -1,0 +1,330 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Availability Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Event Creator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "event Watcher": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-21T14:01:30.917Z",
+  "id": "8U6CCaU6I35ukLRq",
+  "meta": null,
+  "name": "My workflow 5",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ce1b0f86-d1c9-489f-8791-e052f861c5c6",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": false
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -60,
+        -280
+      ],
+      "id": "3f1ae382-f6be-4a9f-a3fe-219bd7b4660e",
+      "name": "Webhook",
+      "webhookId": "ce1b0f86-d1c9-489f-8791-e052f861c5c6",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        -280
+      ],
+      "id": "babea114-bac3-4967-8e56-0a7e7b866e16",
+      "name": "Respond to Webhook",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        220,
+        220
+      ],
+      "id": "d81591a8-9d7f-4217-9246-d9c87443882d",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Turnos Firma Digital"
+        },
+        "timeMin": "={{ $fromAI('start_time') }}",
+        "timeMax": "={{ $fromAI('end_time') }}",
+        "options": {
+          "timezone": {
+            "__rl": true,
+            "value": "America/Bogota",
+            "mode": "list",
+            "cachedResultName": "America/Bogota"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        540,
+        220
+      ],
+      "id": "0f84d730-245a-4f71-b607-babddb51dc63",
+      "name": "Availability Tool",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $fromAI('user_email') }}",
+        "subject": "Appointment Details ",
+        "message": "=<h2>Dear User {{ $fromAI('user_name') }}</h2>\n<p>\nThanks for calling us we will update you as soon as possible \n</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        220
+      ],
+      "id": "dfa3ac27-2801-437a-8165-f33cd00304d8",
+      "name": "Gmail",
+      "webhookId": "0774a1b2-e965-4948-8bb6-9df1cf29dbb1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "sPZgBvwCchV7Aoij",
+          "name": "Gmail account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Turnos Firma Digital"
+        },
+        "start": "= {{ $fromAI('start_time') }}",
+        "end": "= {{ $fromAI('end_time') }}",
+        "useDefaultReminders": false,
+        "additionalFields": {
+          "attendees": [
+            "= {{ $fromAI('user_email') }}"
+          ],
+          "description": "this event is User request of query",
+          "location": "= {{ $fromAI('user_location') }}",
+          "summary": "= {{ $fromAI('user_purpuse') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        220
+      ],
+      "id": "deeba773-325d-4929-86d5-f5b0b3deebb0",
+      "name": "Event Creator",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Turnos Firma Digital"
+        },
+        "options": {
+          "timeZone": {
+            "__rl": true,
+            "value": "America/Argentina/Mendoza",
+            "mode": "list",
+            "cachedResultName": "America/Argentina/Mendoza"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        380,
+        220
+      ],
+      "id": "078989d2-1b8b-46b6-af51-c3355f19644b",
+      "name": "event Watcher",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n\n",
+        "options": {
+          "systemMessage": "Rol y acción:\nAgente de servicio\n\nSi el usuario solicita consultar la disponibilidad para una inspección física o un servicio:\n\nUtilice la herramienta de disponibilidad para comprobar si hay un espacio disponible. Recuerde que cada reserva debe ser de al menos de media hora y el horario de atención es de 9:00 a 17:00.\nSi no hay reservas disponibles para el espacio deseado:\n\nUtilice la herramienta de observación de eventos para comprobar si hay espacios disponibles para la próxima semana.\nIndique al usuario los espacios disponibles.\nSi el usuario acepta un espacio:\n\nSolicite información adicional (si es necesario) y reserve la cita mediante la herramienta de creación de eventos.\nEnvíe un correo electrónico de confirmación al usuario por Gmail.\nHoy es {{ $now.format('D t') }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        300,
+        0
+      ],
+      "id": "d03508ae-c068-4ef4-adbc-0bcd4bd76d75",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        60,
+        220
+      ],
+      "id": "27f65b06-e04c-4226-8360-4ceb9f41ce82",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -60,
+        0
+      ],
+      "id": "5e0d0d7d-5300-4f48-857b-4e83fece66b8",
+      "name": "When chat message received",
+      "webhookId": "b73a387d-71b8-4508-82d6-5bec93ce8029"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-03-21T16:01:37.000Z",
+  "versionId": "3ec75762-f4a7-4a09-9f04-0e9da82317b1"
+}
