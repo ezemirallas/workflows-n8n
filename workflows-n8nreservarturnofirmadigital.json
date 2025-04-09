@@ -1,0 +1,447 @@
+{
+  "active": true,
+  "connections": {
+    "Verificar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Procesar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular Rango": {
+      "main": [
+        [
+          {
+            "node": "Verificar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Calcular Rango",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reservar": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "verificardisponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "verificardisponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-21T11:24:11.922Z",
+  "id": "wpxRPGs8XEkQTr81",
+  "meta": null,
+  "name": "reservarturnofirmadigital",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "options": {}
+      },
+      "name": "Verificar Disponibilidad",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        1580,
+        640
+      ],
+      "id": "04484f14-3f9d-4010-bba0-41ac3d130375",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener fecha desde la query\nconst query = $input.item.json.query;\nconst fecha = query.fecha || new Date().toISOString().split('T')[0];\n\n// Crear fecha de inicio (desde las 9am)\nconst fechaInicio = new Date(fecha);\nfechaInicio.setHours(9, 0, 0, 0);\n\n// Crear fecha de fin (hasta las 17pm / 5pm)\nconst fechaFin = new Date(fecha);\nfechaFin.setHours(17, 0, 0, 0);\n\nreturn {\n  fechaInicio: fechaInicio.toISOString(),\n  fechaFin: fechaFin.toISOString()\n};"
+      },
+      "name": "Calcular Rango",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        640
+      ],
+      "id": "c5eb2b3e-d6ee-43c1-8ae0-e45008410c5b"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Procesar eventos para encontrar espacios disponibles\nconst eventos = $input.item.json.items || [];\n\n// Horario de trabajo (9:00 AM - 17:00 PM / 5:00 PM)\nconst horaInicio = 9;\nconst horaFin = 17;\n\n// Duración de citas en horas\nconst duracionCita = 0.5; // 30 minutos\n\n// Obtener la fecha desde el nodo anterior\nconst fechaRango = $node[\"Calcular Rango\"].json;\nconst diaSeleccionado = new Date(fechaRango.fechaInicio);\n\n// Crear slots disponibles\nconst slotsDisponibles = [];\nlet horaActual = horaInicio;\n\nwhile (horaActual < horaFin) {\n  const inicio = new Date(diaSeleccionado);\n  inicio.setHours(Math.floor(horaActual));\n  inicio.setMinutes((horaActual % 1) * 60);\n  \n  const fin = new Date(inicio);\n  fin.setTime(inicio.getTime() + duracionCita * 60 * 60 * 1000);\n  \n  // Verificar si se solapa con algún evento existente\n  let disponible = true;\n  for (const evento of eventos) {\n    const eventStart = new Date(evento.start.dateTime || evento.start.date);\n    const eventEnd = new Date(evento.end.dateTime || evento.end.date);\n    \n    if (!(fin <= eventStart || inicio >= eventEnd)) {\n      disponible = false;\n      break;\n    }\n  }\n  \n  if (disponible) {\n    slotsDisponibles.push({\n      inicio: inicio.toISOString(),\n      fin: fin.toISOString(),\n      formato: `${inicio.getHours().toString().padStart(2, '0')}:${inicio.getMinutes().toString().padStart(2, '0')} - ${fin.getHours().toString().padStart(2, '0')}:${fin.getMinutes().toString().padStart(2, '0')}`\n    });\n  }\n  \n  horaActual += duracionCita;\n}\n\nreturn { slotsDisponibles };"
+      },
+      "name": "Procesar Disponibilidad",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        640
+      ],
+      "id": "fd71fc25-095e-46c9-9c1c-9b8bffba1cf4",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"turnos\":{{ $json.slotsDisponibles.toJsonString() }}}",
+        "options": {}
+      },
+      "name": "Respuesta Disponibilidad",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        640
+      ],
+      "id": "4b7f66f2-aec1-46ac-b9ba-8e58d7e6a1ee"
+    },
+    {
+      "parameters": {
+        "path": "disponibilidad",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Disponibilidad",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        960,
+        640
+      ],
+      "id": "d1b4bb43-de46-4ef5-97b6-3266c2b1614f",
+      "webhookId": "1f2ae858-38f4-437b-a462-9a0fa9e443f6"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reservar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Reservar",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        920,
+        1020
+      ],
+      "id": "92eec485-cd18-4c22-b81b-82204bf1bf11",
+      "webhookId": "f8188540-3c3f-4180-a829-1d574bebc1db"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "60de450b-91a0-44d1-806a-bce3f1a1b81b",
+              "leftValue": "{{json[\"nombre\"]}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "49c76c94-7b3e-4ec9-b657-f4bd48f10800",
+              "leftValue": "{{json[\"start\"]}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "efaa81b1-c446-459e-a1a5-62c52488f215",
+              "leftValue": "{{json[\"email\"]}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "81f673d8-4443-4152-961e-e4a8fbf068c6",
+              "leftValue": "{{json[\"end\"]}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1160,
+        1020
+      ],
+      "id": "f72a108b-c294-47be-a69a-5cff205351a5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.available }}",
+                    "rightValue": "Disponible",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Disponible"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b66ab4cf-a090-4299-a0eb-1fac6f23850c",
+                    "leftValue": "={{ $json.available }}",
+                    "rightValue": "No Disponible",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "false",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "No Disponible"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1660,
+        1000
+      ],
+      "id": "60fc3049-2424-4ddc-80f2-ce985b8291b4",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"Turno\": \"creado\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2180,
+        860
+      ],
+      "id": "900bcddb-8135-430e-b42d-467943347336",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"msg\": \"No disponible\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        1180
+      ],
+      "id": "9d70c547-72ce-47b5-9281-551ca97e1338",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma Digital"
+        },
+        "start": "={{ $('If').item.json.body.start }}",
+        "end": "={{ $('If').item.json.body.end }}",
+        "additionalFields": {
+          "summary": "=Turno reservado para {{ $('Reservar').item.json.body.nombre }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.2,
+      "position": [
+        1920,
+        860
+      ],
+      "id": "082bad6a-6c63-45f1-859d-2aa631013347",
+      "name": "Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "timeMin": "={{ $json.body.start }}",
+        "timeMax": "={{ $json.body.end }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        1000
+      ],
+      "id": "58bb9124-ad26-4853-998e-6505a0796cf0",
+      "name": "verificardisponibilidad",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-03-27T11:02:19.000Z",
+  "versionId": "f2d9c889-9275-4f2d-88e7-2fb4178064a3"
+}
