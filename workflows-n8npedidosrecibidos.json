@@ -1,0 +1,326 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "loop": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "MongoDB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-16T13:49:19.065Z",
+  "id": "y4RfG3QgLQN4LMRm",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "pedidosrecibidos",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "http://dwhservernew.servers.dg.intranet/bot/PedidosRecibidos.xlsx",
+        "options": {}
+      },
+      "id": "f6512c39-2736-4329-a998-3f91dc7a9a4e",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        820,
+        300
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "26685264-abbf-4ae3-94fc-34d67399dce8",
+              "name": "sede_set",
+              "value": "={{ $json.descripdel }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c99ca353-03d3-420d-af76-62dc8aa93bf3",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1460,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "options": {}
+      },
+      "id": "68014eeb-75bf-4f38-add9-1f27ec0e5814",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8a450a92-d758-4cdc-846b-0a6ec7fb244e",
+      "name": "loop",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nlet sede = $('Edit Fields').item.json.sede_set;\n\nif (sede == \"O.S.E.P. DIR.GRAL\") {\n  plantilla = \"aviso_farmacia_2\";\n  sede = \"OSEP DIR.GRAL\";\n} else {\n  plantilla = \"aviso_farmacia_3\";\n  sede = sede;\n  //sede = \"OSEP DIR.GRAL\";\n};\n//$('MongoDB').item.json.telefononuwvo = detalle;\nreturn {plantillamsj : plantilla, sedemsj : sede};"
+      },
+      "id": "cf276b35-fce4-4971-92da-f379338b9610",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "collection": "afiliados",
+        "options": {},
+        "query": "={\"documento\": \"{{ $('loop').item.json.numdocper }}\"}"
+      },
+      "id": "00e9a029-ca09-473f-a623-28f0ab1e275b",
+      "name": "MongoDB",
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.1,
+      "position": [
+        1820,
+        320
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "mongoDb": {
+          "id": "MW1Jr1HwnJOSj3z6",
+          "name": "MongoDB account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Add a new field called 'myNewField' to the JSON of the item\nlet detalle = $('MongoDB').item.json.telefono;\nconsole.log(detalle );\nif (detalle.substring(0, 3)!= \"549\") {\n  detalle = \"549\" + detalle;\n};\n//$('MongoDB').item.json.telefononuwvo = detalle;\nreturn {telefonoMsj : detalle};\n"
+      },
+      "id": "5e76b5e4-208a-4026-aab7-ba29737836d7",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        320
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://go.botmaker.com/api/v1.0/intent/v2",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "access-token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJidXNpbmVzc0lkIjoib3NlcCIsIm5hbWUiOiJzZXJnaW8uYmxhc2NvIiwiYXBpIjp0cnVlLCJpZCI6IlZoNXRYa09hNXVaYWYzN2d2ZFNSbUhaNnNVVjIiLCJleHAiOjE3ODE2MTg3OTIsImp0aSI6IlZoNXRYa09hNXVaYWYzN2d2ZFNSbUhaNnNVVjIifQ.bASMrzX-U6XmMAVQhovEEDY_9aTmEE9PjkiIkqFmiTATSZoWvHiFxmNkV2B8l-uZa5Yy13lwMn1HWdkDnMIYgQ"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chatPlatform",
+              "value": "whatsapp"
+            },
+            {
+              "name": "chatChannelNumber",
+              "value": "5492612058800"
+            },
+            {
+              "name": "platformContactId",
+              "value": "={{ $json.telefonoMsj }}"
+            },
+            {
+              "name": "=ruleNameOrId",
+              "value": "={{ $('Code1').item.json.plantillamsj }}"
+            },
+            {
+              "name": "params.apellidoNombre",
+              "value": "={{ $('loop').item.json.apenomper }}"
+            },
+            {
+              "name": "params.nro_documento",
+              "value": "={{ $('loop').item.json.numdocper }}"
+            },
+            {
+              "name": "params.sede",
+              "value": "={{ $('Code1').item.json.sedemsj }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2ce8c768-046d-43b6-a886-0c8441fbae28",
+      "name": "HTTP Request1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2340,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "id": "732b3b28-fa56-4223-b75e-cd814f160932",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        580,
+        300
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-01-02T11:24:30.000Z",
+  "versionId": "8d3c4ffa-a727-474f-8bbf-21342bb6d289"
+}
