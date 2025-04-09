@@ -1,0 +1,335 @@
+{
+  "active": false,
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "LDAP",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LDAP": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-22T16:34:30.627Z",
+  "id": "ue5mq5xY5pYTu2cP",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "usuariosRRHH",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "35ea482b-c20b-41c3-aa21-8fab908190c4",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        340
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE",
+          "mode": "list",
+          "cachedResultName": "usuariossga",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "20414b8f-2f9e-4ea7-928f-58a3555d3a1f",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        900,
+        340
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "1c48cd98-0308-4f30-9007-d672b910acab",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        700,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "id": "6398b11a-1d86-48a4-aeb6-1d036ec08684",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1960,
+        340
+      ],
+      "webhookId": "a9fff316-bd3e-43ab-a450-719e5fb7a274"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE",
+          "mode": "list",
+          "cachedResultName": "usuariossga",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Correo": "={{$json.mail}}",
+            "DNI": "={{ $json.dni }}"
+          },
+          "matchingColumns": [
+            "DNI"
+          ],
+          "schema": [
+            {
+              "id": "DNI",
+              "displayName": "DNI",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "APELLIDO",
+              "displayName": "APELLIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "NOMBRE",
+              "displayName": "NOMBRE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "USUARIO",
+              "displayName": "USUARIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Correo",
+              "displayName": "Correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c98e2abc-62a2-4a6b-b5c7-0d8fff9e53c1",
+      "name": "Google Sheets1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2180,
+        340
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2cb55336-3659-412e-af34-879770035898",
+              "leftValue": "={{ $json.row_number }}",
+              "rightValue": 427,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ebbd52cd-412f-4ada-91fe-6733eb21d2bc",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1460,
+        360
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "baseDN": "ou=usuarios,o=OSEP,c=AR",
+        "searchFor": "(objectclass=person)",
+        "attribute": "dni",
+        "searchText": "={{ $json.DNI }}",
+        "options": {}
+      },
+      "id": "65d8c80a-f9f5-4d5a-899e-cc3a1d67ab09",
+      "name": "LDAP",
+      "type": "n8n-nodes-base.ldap",
+      "typeVersion": 1,
+      "position": [
+        1740,
+        340
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "ldap": {
+          "id": "1MOEoixAaPeYjTCs",
+          "name": "LDAP account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-26T09:52:06.000Z",
+  "versionId": "3e05c7ab-1708-4e2a-889a-9b665e3c72be"
+}
