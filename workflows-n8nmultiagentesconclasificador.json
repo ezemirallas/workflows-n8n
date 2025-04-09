@@ -1,0 +1,165 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-01-09T12:48:10.718Z",
+  "id": "2fbibeuL2bqkts4G",
+  "meta": null,
+  "name": "multiagentesconclasificador",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -760,
+        -460
+      ],
+      "id": "d42e885d-607d-422f-9f1a-00330a28138e",
+      "name": "When chat message received",
+      "webhookId": "80ed4fd2-1f5f-4893-a72b-1cec7d8a94ef"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        -220
+      ],
+      "id": "c9539655-c034-4a9f-8dd1-337e19537a3e",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.chatInput }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "afiliaciones",
+              "description": "utiliza esta cuando el afiliado consulte sobre afiliaciones bajas o continuidad"
+            },
+            {
+              "category": "sedes",
+              "description": "utiliza esta cuando el afiliado consulte sobre informacion de algunas sedes(horarios, telefonos, direccion)"
+            }
+          ]
+        },
+        "options": {
+          "multiClass": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        -460
+      ],
+      "id": "f3219e32-d294-4aab-a030-3642c2005b07",
+      "name": "Text Classifier",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "C0GqvWHYxoknrz09",
+          "mode": "list",
+          "cachedResultName": "agentesedesterritoriales"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        -400
+      ],
+      "id": "cbd7cbf1-3827-490b-9298-7dcbdfe4506f",
+      "name": "Execute Workflow"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "VkUYau1bThHKeDrd",
+          "mode": "list",
+          "cachedResultName": "agenteafiliaciones"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        -620
+      ],
+      "id": "ad24a384-4756-4f6f-bff4-b1d5b82f10a9",
+      "name": "Execute Workflow1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-27T13:45:59.000Z",
+  "versionId": "21c5ffdd-20a8-480d-9cf3-93e9c682077a"
+}
