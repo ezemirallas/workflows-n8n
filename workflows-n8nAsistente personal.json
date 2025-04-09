@@ -1,0 +1,183 @@
+{
+  "active": false,
+  "connections": {
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Business Cloud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recibir mensaje": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-19T11:55:12.280Z",
+  "id": "3CUz0JLtYGCWkmgT",
+  "meta": null,
+  "name": "Asistente personal",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        20,
+        -100
+      ],
+      "id": "afd299b8-73c3-44da-9186-ab0d8b6e66b5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        140
+      ],
+      "id": "acd24c31-1607-4a6a-bdff-e9f170f1bc59",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ]
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        -100
+      ],
+      "id": "af37a31f-4831-4069-bab3-90523cd8a2fc",
+      "name": "Recibir mensaje",
+      "webhookId": "bb49723b-5515-4246-bcf6-17bf9415ae99",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "0A5KUjnGdIp6oMp8",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "559133487287472",
+        "recipientPhoneNumber": "={{ $('Code').item.json.processed_wa_id }}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -100
+      ],
+      "id": "0f1cf5a4-b6cd-4cad-a43a-ff56aba9fc47",
+      "name": "WhatsApp Business Cloud",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "vCJXtFxsTjMOLo1O",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Recibir mensaje').item.json.contacts[0].wa_id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        120,
+        140
+      ],
+      "id": "11af4b8b-ca0e-47a7-8019-816da6b480ae",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  // Obtener el wa_id original\n  let wa_id = item.json.contacts[0].wa_id;\n\n  // Procesar wa_id dependiendo del prefijo del país\n  if (wa_id.startsWith('549')) {\n    // Si el wa_id comienza con 549 (Argentina), modificar el prefijo a 54\n    wa_id = '54' + wa_id.slice(3); // Quitamos \"549\" y dejamos \"54\"\n  } else if (wa_id.startsWith('52')) {\n    // Si el wa_id comienza con 52 (México), mantener el prefijo tal cual\n    wa_id = '52' + wa_id.slice(2); // Quitamos \"52\" y lo volvemos a agregar\n  } else {\n    // Si no es ni Argentina ni México, dejamos el wa_id como está\n    wa_id = wa_id;\n  }\n\n  // Agregar el wa_id procesado al JSON\n  item.json.processed_wa_id = wa_id;\n}\n\n// Devolver el array modificado\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        -100
+      ],
+      "id": "c476c8d9-2e03-462a-8053-57526b5d1334",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-21T13:57:57.000Z",
+  "versionId": "d2a7dd23-da15-4e14-8f31-9d40355db392"
+}
