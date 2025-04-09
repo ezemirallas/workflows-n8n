@@ -1,0 +1,391 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "BUSCAR",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "BUSCAR",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BUSCAR": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-27T10:33:54.295Z",
+  "id": "aYiyn5rxVtFgeFQB",
+  "meta": null,
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -340,
+        20
+      ],
+      "id": "1deb54c6-7443-4d62-8af3-f510524a4074",
+      "name": "Telegram Trigger",
+      "webhookId": "391c3a72-2e21-4635-8665-de271c9e8064",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres un agente de inteligencia artificial experto en política empresarial de Intel. Tienes acceso a una base de datos vectorial llamada \"BUSCAR\" que contiene información detallada sobre las políticas, estrategias, directrices y modelos de negocio de Intel.\n\nResponderás a esto:\n{{ $json.message.text }} o {{ $json.text }}\n\nDirectrices:\nConsulta exclusiva a la base de datos:\n\nResponderás todas las preguntas de los usuarios únicamente basándote en la información contenida en la base de datos.\nNo debes inventar, suponer ni extrapolar información.\nPolítica o estrategia específica:\n\nCada vez que proporciones una respuesta, debes especificar claramente la política, estrategia o modelo de negocio relacionado del cual se extrae la información.\nRespuestas claras y precisas:\n\nSi la información no está disponible en tu herramienta, debes informar al usuario con claridad y evitar proporcionar datos inexactos o especulativos.\nEjemplos de respuestas:\nSi encuentras información:\n\n\"La estrategia IDM 2.0 de Intel se centra en combinar la fabricación interna con la utilización de socios externos y la creación de una fundición para terceros, según los datos de la base de BUSCAR.\"\nSi no encuentras información:\n\n\"Lo siento, la base de datos BUSCAR no contiene información relacionada con esa política, estrategia o modelo de negocio de Intel.\"\nTu objetivo:\nProporcionar respuestas confiables y basadas exclusivamente en los datos disponibles sobre las políticas empresariales y estrategias de Intel.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        400,
+        80
+      ],
+      "id": "5e58c427-df10-4555-bc57-568851698759",
+      "name": "AI Agent",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-2024-11-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        280,
+        380
+      ],
+      "id": "98a6fed3-73bf-44b1-9247-6686f7c03112",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.1,
+      "position": [
+        860,
+        680
+      ],
+      "id": "7b9eb44b-995f-4da5-8398-97d88ce78621",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        460
+      ],
+      "id": "7d1f4e7b-5331-4174-b90d-35735f613e06",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        700,
+        500
+      ],
+      "id": "0f5f9627-02f0-401d-ac70-562c5d37eb1e",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "BUSCAR",
+        "description": "Usa esta herramienta para buscar info sobre entrenamiento",
+        "topK": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        780,
+        300
+      ],
+      "id": "d7d861e4-9036-457e-ac0b-ee971a28b6cf",
+      "name": "BUSCAR"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "fe4dbc7a-2598-4522-90de-c54fd20a82f7",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0992bdce-b32c-414c-ae56-b7ce66d68d71",
+      "name": "Switch",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Telegram Trigger').item.json.message.voice.file_id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -60,
+        260
+      ],
+      "id": "1fea87cf-3f7a-404b-b579-fd45e62c026a",
+      "name": "Telegram1"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        180,
+        180
+      ],
+      "id": "40b180eb-c3af-466e-b638-9dd51080fafe",
+      "name": "OpenAI"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1000,
+        0
+      ],
+      "id": "3471564f-7d34-4ada-b27b-76626f29f531",
+      "name": "Telegram"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "1"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        340
+      ],
+      "id": "7d296934-5043-466b-a2ec-2bd9b6d21cd7",
+      "name": "Window Buffer Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-28T13:29:58.000Z",
+  "versionId": "eee40eb4-733a-404b-9169-d1edfb714559"
+}
