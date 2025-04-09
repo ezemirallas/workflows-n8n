@@ -1,0 +1,185 @@
+{
+  "active": false,
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-30T12:27:37.387Z",
+  "id": "tyzZTaGyc534NLWL",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "plantillabotmakerexcel",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "bdd8096a-87bd-4b13-aa3e-9a8978d201f5",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        300,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1r5u_yaOPZbt-Ov5CdOEnPx8DI8ynmHJ2OAFe14ADcvc",
+          "mode": "list",
+          "cachedResultName": "datos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r5u_yaOPZbt-Ov5CdOEnPx8DI8ynmHJ2OAFe14ADcvc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r5u_yaOPZbt-Ov5CdOEnPx8DI8ynmHJ2OAFe14ADcvc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "a1c2e863-403d-43e9-8fe4-2ddcce48696e",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        40,
+        380
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "f2416b4a-4ca8-483f-a243-121b3b865de0",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://go.botmaker.com/api/v1.0/intent/v2",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "access-token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJidXNpbmVzc0lkIjoib3NlcCIsIm5hbWUiOiJzZXJnaW8uYmxhc2NvIiwiYXBpIjp0cnVlLCJpZCI6IlZoNXRYa09hNXVaYWYzN2d2ZFNSbUhaNnNVVjIiLCJleHAiOjE3ODE2MTg3OTIsImp0aSI6IlZoNXRYa09hNXVaYWYzN2d2ZFNSbUhaNnNVVjIifQ.bASMrzX-U6XmMAVQhovEEDY_9aTmEE9PjkiIkqFmiTATSZoWvHiFxmNkV2B8l-uZa5Yy13lwMn1HWdkDnMIYgQ"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chatPlatform",
+              "value": "whatsapp"
+            },
+            {
+              "name": "chatChannelNumber",
+              "value": "5492612058800"
+            },
+            {
+              "name": "platformContactId",
+              "value": "={{ $json.telefono }}"
+            },
+            {
+              "name": "params.apellidoNombre",
+              "value": "={{ $json.nombreafiliado }}"
+            },
+            {
+              "name": "params.nro_documento",
+              "value": "={{ $json.nro_documento }}"
+            },
+            {
+              "name": "params.sede",
+              "value": "={{ $json.sede }}"
+            },
+            {
+              "name": "ruleNameOrId",
+              "value": "aviso_medicamento_farmacia_osep_3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "482de39c-a0cd-41fa-94f4-80f46cb33a92",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        620,
+        400
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-22T17:50:19.000Z",
+  "versionId": "ad947059-77ac-4ea4-a41d-476e8d545db8"
+}
