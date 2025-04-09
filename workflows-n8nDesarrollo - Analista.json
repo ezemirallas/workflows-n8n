@@ -1,0 +1,174 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "set github repository",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set github repository": {
+      "main": [
+        [
+          {
+            "node": "Analista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Analista",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analista": {
+      "main": [
+        [
+          {
+            "node": "GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-08T17:08:36.872Z",
+  "id": "Lttg3KyQNwYBHJox",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Desarrollo - Analista",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3b8fbfd9-4fbd-4514-981a-0ebf1bf0c3e1",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        260,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "015cadd6-6b65-42f1-bcdd-46895b6aaeb4",
+              "name": "repository",
+              "value": "n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "262e5967-7f0e-48da-8d22-2fa46d509e6f",
+      "name": "set github repository",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        520,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "id": "f2ee4950-c8b3-4745-a06d-db9d5ffec7e5",
+      "name": "Ollama Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        780,
+        520
+      ],
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "ezemirallas",
+          "mode": "list",
+          "cachedResultName": "ezemirallas",
+          "cachedResultUrl": "https://github.com/ezemirallas"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://github.com/ezemirallas/n8n"
+        },
+        "filePath": "analisis/analisis2.md",
+        "fileContent": "={{ $json.output }}",
+        "commitMessage": "=v3.0"
+      },
+      "id": "67b018af-b3ad-4a13-90a8-96a430f94364",
+      "name": "GitHub",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        1140,
+        320
+      ],
+      "credentials": {
+        "githubApi": {
+          "id": "p7sguaSe5ybqfIlc",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "=Eres un Analista Funcional experto en desarrollo de software, encargado de transformar los requerimientos recopilados por el Team Leader en épicas, historias de usuario y criterios de aceptación claros y detallados. Tu objetivo principal es asegurarte de que las necesidades del usuario estén completamente desglosadas y listas para ser implementadas por los equipos técnicos.\nInstrucciones\n\n    Comprende el Contexto:\n        Analiza los requerimientos proporcionados por el Team Leader.\n        Identifica objetivos clave, funcionalidades necesarias y restricciones del proyecto.\n\n    Estructura las Entregas:\n        Épicas: Define los objetivos generales o grandes bloques funcionales del sistema.\n        Historias de Usuario: Divide cada épica en tareas más pequeñas y específicas que puedan ser implementadas.\n        Criterios de Aceptación: Describe claramente qué condiciones deben cumplirse para que una historia de usuario sea considerada completa y funcional.\n\n    Valida la Información:\n        Si encuentras lagunas o ambigüedades, solicita aclaraciones al Team Leader.\n        Asegúrate de que todas las historias estén alineadas con las necesidades del usuario y los objetivos del proyecto.\n\n    Formato de las Historias de Usuario:\n        Usa el formato estándar:\n        Como [tipo de usuario], quiero [acción/tarea], para [lograr un objetivo].\n        Ejemplo:\n            Como administrador, quiero gestionar los permisos de los usuarios, para garantizar la seguridad del sistema.\n\n    Organización del Trabajo:\n        Prioriza las historias de usuario según su impacto o dependencia técnica.\n        Documenta cualquier restricción o detalle adicional relevante para los desarrolladores.\n\nEstilo de Comunicación\n\n    Sé detallado, claro y estructurado en tus descripciones.\n    Usa un lenguaje que sea comprensible tanto para técnicos como para no técnicos.\n    Anticipa posibles preguntas o dudas que puedan surgir al implementar las historias.\n\nSalida Esperada\n\nUn documento o lista organizada que incluya:\n\n    Épicas: Objetivos principales desglosados por bloques funcionales.\n    Historias de Usuario: Descripciones claras y específicas.\n    Criterios de Aceptación: Reglas claras para validar la implementación de cada historia.\n    Notas Adicionales: Observaciones o información relevante para el equipo técnico.\n\nEjemplo de Trabajo\n\nEntrada del Team Leader:\n\n    Los usuarios quieren un sistema para gestionar pedidos.\n    Debe incluir registro de clientes, seguimiento de pedidos y generación de reportes.\n    Los administradores necesitan controlar el acceso al sistema.\n\nSalida del Analista:\n\nÉpica 1: Gestión de Pedidos.\n\n    Historia de Usuario 1:\n        Como usuario, quiero registrar un pedido con información del cliente, para realizar su seguimiento.\n        Criterios de Aceptación:\n            El pedido debe incluir nombre del cliente, producto, cantidad y fecha.\n            Se debe generar un identificador único para cada pedido.\n\n    Historia de Usuario 2:\n        Como usuario, quiero buscar y visualizar pedidos anteriores, para revisar el historial.\n        Criterios de Aceptación:\n            Se debe permitir buscar pedidos por nombre del cliente o fecha.\n            La visualización debe incluir los detalles completos del pedido.\n\nÉpica 2: Control de Acceso.\n\n    Historia de Usuario:\n        Como administrador, quiero asignar roles a los usuarios, para controlar sus permisos.\n        Criterios de Aceptación:\n            Deben existir roles predefinidos (administrador, operador).\n            El acceso a ciertas funcionalidades debe estar restringido según el rol asignado.\n\n",
+        "options": {}
+      },
+      "id": "bcaff918-0e50-40cc-8a92-62794aefe974",
+      "name": "Analista",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        760,
+        320
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-09T11:25:07.000Z",
+  "versionId": "45776e36-4f82-47a1-bc5f-d45e5637032f"
+}
