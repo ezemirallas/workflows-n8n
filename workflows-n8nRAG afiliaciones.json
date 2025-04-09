@@ -1,0 +1,429 @@
+{
+  "active": false,
+  "connections": {
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Extract Document Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Document Text": {
+      "main": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Old Doc Rows": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set File ID": {
+      "main": [
+        [
+          {
+            "node": "Delete Old Doc Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Set File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert into Supabase Vectorstore": {
+      "main": [
+        []
+      ]
+    },
+    "Embeddings HuggingFace Inference1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-24T16:42:42.743Z",
+  "id": "2UrnYojelpYuF5p6",
+  "meta": null,
+  "name": "RAG afiliaciones",
+  "nodes": [
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.data }}",
+        "options": {}
+      },
+      "id": "5fe4d853-bb27-4378-b4a9-4682b34e2eea",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        1340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 772,
+        "width": 2777,
+        "color": 5
+      },
+      "id": "2f6f780b-0da8-4a85-9e61-71faddc7713a",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3200,
+        1060
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "text/plain"
+            }
+          }
+        }
+      },
+      "id": "5a47546a-cab7-47c7-9b5c-a13a24de5848",
+      "name": "Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1520,
+        1140
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "text",
+        "options": {}
+      },
+      "id": "2569b3e1-54ef-4bdc-8d83-43fec0a77db2",
+      "name": "Extract Document Text",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        1140
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "chunkSize": 1489,
+        "chunkOverlap": 248,
+        "options": {
+          "splitCode": "markdown"
+        }
+      },
+      "id": "ecc14704-a049-4604-b3f8-9c29b40bb1ad",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        1540
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "documents_afiliaciones",
+        "filterType": "string",
+        "filterString": "=metadata->>file_id=like.*{{ $json.file_id }}*"
+      },
+      "id": "252ce44f-6699-4359-a886-75e7963b82a9",
+      "name": "Delete Old Doc Rows",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -2400,
+        1140
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
+              "name": "file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "79436417-ab34-4d59-94f3-e8d0cd4553a5",
+      "name": "Set File ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2660,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1QteRExn2ocxe-MS-xumKQA5GlvsZaTEh",
+            "mode": "list",
+            "cachedResultName": "multiagentes",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1QteRExn2ocxe-MS-xumKQA5GlvsZaTEh"
+          }
+        },
+        "options": {}
+      },
+      "id": "93c41627-e62d-414f-af10-8ba436bd7bd2",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2120,
+        1140
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1QteRExn2ocxe-MS-xumKQA5GlvsZaTEh",
+            "mode": "list",
+            "cachedResultName": "multiagentes",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1QteRExn2ocxe-MS-xumKQA5GlvsZaTEh"
+          }
+        },
+        "options": {}
+      },
+      "id": "8c02a25f-5266-4b39-9d8e-18b727603cf3",
+      "name": "Google Drive1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2900,
+        1140
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "523fe412-9d26-4fb6-b6b9-066964cab968",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c5570f7d-844a-41fa-adea-98733bc70cb2",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1820,
+        1140
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_afiliaciones",
+          "mode": "list",
+          "cachedResultName": "documents_afiliaciones"
+        },
+        "options": {
+          "queryName": "match_documents_afiliaciones"
+        }
+      },
+      "id": "0d4ad1fb-2f8d-42f2-9ccd-6074b4ae548e",
+      "name": "Insert into Supabase Vectorstore",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        -900,
+        1140
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "options": {
+          "endpointUrl": ""
+        }
+      },
+      "id": "027e1d34-39cb-4c36-9fcd-1bb9b724e270",
+      "name": "Embeddings HuggingFace Inference1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        1380
+      ],
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "9c97264b-259d-443e-ab7d-82a1af438451",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3180,
+        1140
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-25T13:36:25.000Z",
+  "versionId": "de684a7c-9227-4dee-bf25-ed4b25a3248a"
+}
