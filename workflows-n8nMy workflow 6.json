@@ -1,0 +1,405 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validar Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Datos": {
+      "main": [
+        [
+          {
+            "node": "Calcular Duración",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "main": [
+        [
+          {
+            "node": "Notificar Reserva",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular Duración": {
+      "main": [
+        [
+          {
+            "node": "Google Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar Reserva": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Exitosa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Procesar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Calcular Rango",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular Rango": {
+      "main": [
+        [
+          {
+            "node": "Verificar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-26T18:17:30.463Z",
+  "id": "J2QoFieKVofc1WiE",
+  "meta": null,
+  "name": "My workflow 6",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reservar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -20
+      ],
+      "id": "377ad511-f9ce-43be-9f98-b75d32b903e6",
+      "webhookId": "07ed9215-f267-4f93-8830-3fa492c45e3d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.nombre }}",
+              "operation": "isEmpty"
+            }
+          ],
+          "dateTime": [
+            {
+              "value1": "={{ $json.body.fecha }}"
+            }
+          ]
+        }
+      },
+      "name": "Validar Datos",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        860,
+        -20
+      ],
+      "id": "19aede5a-9705-4db8-8796-c2e20d120236"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "id"
+        },
+        "start": "={{$node[\"Calcular Duración\"].json[\"fechaInicio\"]}}",
+        "end": "={{$node[\"Calcular Duración\"].json[\"fechaFin\"]}}",
+        "additionalFields": {
+          "attendees": "={{[\n  { email: $json[\"email\"] }\n]}}",
+          "sendUpdates": "all"
+        }
+      },
+      "name": "Google Calendar",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        -40
+      ],
+      "id": "7a5104ef-f48b-4584-9d89-dfab7136d149",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener datos del webhook\nconst data = $input.item.json;\n\n// Calcular la duración según el servicio\nlet duracionMinutos = 30; // Por defecto 30 minutos\n\nif (data.servicio === \"Consulta Básica\") {\n  duracionMinutos = 30;\n} else if (data.servicio === \"Consulta Completa\") {\n  duracionMinutos = 60;\n} else if (data.servicio === \"Tratamiento Especial\") {\n  duracionMinutos = 90;\n}\n\n// Calcular fecha de fin sumando la duración\nconst fechaInicio = new Date(data.fecha);\nconst fechaFin = new Date(fechaInicio.getTime() + duracionMinutos * 60000);\n\n// Formatear para Google Calendar\nconst formatoGoogleCalendar = (fecha) => {\n  return fecha.toISOString();\n};\n\nreturn {\n  fechaFin: formatoGoogleCalendar(fechaFin),\n  fechaInicio: formatoGoogleCalendar(fechaInicio),\n  duracionMinutos\n};"
+      },
+      "name": "Calcular Duración",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        -40
+      ],
+      "id": "c4c1a7dc-1d8d-4e60-902d-8432b88c7c25",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$node[\"Set\"].json[\"webhookNotificacion\"]}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "nombreCliente",
+              "value": "={{$json[\"nombre\"]}}"
+            },
+            {
+              "name": "email",
+              "value": "={{$json[\"email\"]}}"
+            },
+            {
+              "name": "fecha",
+              "value": "={{$json[\"fecha\"]}}"
+            },
+            {
+              "name": "servicio",
+              "value": "={{$json[\"servicio\"]}}"
+            },
+            {
+              "name": "eventoId",
+              "value": "={{$json[\"id\"]}}"
+            },
+            {
+              "name": "enlaceEvento",
+              "value": "={{$json[\"htmlLink\"]}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Notificar Reserva",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1520,
+        -40
+      ],
+      "id": "385621e4-56e0-4d9b-af24-887d263bb45e",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "calendarioId",
+              "value": "primary"
+            },
+            {
+              "name": "webhookNotificacion",
+              "value": "https://ejemplo.com/notificaciones"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        820,
+        -300
+      ],
+      "id": "b72ba58a-aa59-48df-bacf-f6a936bb8e95"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  \"success\": true,\n  \"message\": \"Reserva creada correctamente\",\n  \"detalles\": {\n    \"id\": $json[\"id\"],\n    \"nombre\": $json[\"summary\"],\n    \"fechaInicio\": $json[\"start\"],\n    \"fechaFin\": $json[\"end\"],\n    \"enlace\": $json[\"htmlLink\"]\n  }\n}}",
+        "options": {}
+      },
+      "name": "Respuesta Exitosa",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        -40
+      ],
+      "id": "f13bdab0-5023-45cf-ae19-0ee4b028cf24"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  \"success\": false,\n  \"message\": \"Datos inválidos o incompletos\",\n  \"requiredFields\": [\"nombre\", \"email\", \"fecha\", \"servicio\", \"descripcion\"]\n}}",
+        "options": {}
+      },
+      "name": "Respuesta Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        180
+      ],
+      "id": "c0c8cef8-ca08-4fd3-aacf-52d3dcb3dcef"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "options": {
+          "showDeleted": false,
+          "singleEvents": true
+        }
+      },
+      "name": "Verificar Disponibilidad",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        -300
+      ],
+      "id": "12b0733b-5745-46ee-a1e0-f6f443aaa8c8",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "disponibilidad",
+        "options": {}
+      },
+      "name": "Webhook Disponibilidad",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        -300
+      ],
+      "id": "c3093c22-9ad3-4916-a960-32e1daa9c4e7",
+      "webhookId": "16125528-9626-43c5-93f1-8d6d92ccb26c"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener fecha desde la query\nconst query = $input.item.json.query;\nconst fecha = query.fecha || new Date().toISOString().split('T')[0];\n\n// Crear fecha de inicio (desde las 9am)\nconst fechaInicio = new Date(fecha);\nfechaInicio.setHours(9, 0, 0, 0);\n\n// Crear fecha de fin (hasta las 17pm / 5pm)\nconst fechaFin = new Date(fecha);\nfechaFin.setHours(17, 0, 0, 0);\n\nreturn {\n  fechaInicio: fechaInicio.toISOString(),\n  fechaFin: fechaFin.toISOString()\n};"
+      },
+      "name": "Calcular Rango",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1020,
+        -300
+      ],
+      "id": "14a3b246-ef4a-4b8b-adb4-e88022a85265"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Procesar eventos para encontrar espacios disponibles\nconst eventos = $input.item.json.items || [];\n\n// Horario de trabajo (9:00 AM - 17:00 PM / 5:00 PM)\nconst horaInicio = 9;\nconst horaFin = 17;\n\n// Duración de citas en horas\nconst duracionCita = 0.5; // 30 minutos\n\n// Obtener la fecha desde el nodo anterior\nconst fechaRango = $node[\"Calcular Rango\"].json;\nconst diaSeleccionado = new Date(fechaRango.fechaInicio);\n\n// Crear slots disponibles\nconst slotsDisponibles = [];\nlet horaActual = horaInicio;\n\nwhile (horaActual < horaFin) {\n  const inicio = new Date(diaSeleccionado);\n  inicio.setHours(Math.floor(horaActual));\n  inicio.setMinutes((horaActual % 1) * 60);\n  \n  const fin = new Date(inicio);\n  fin.setTime(inicio.getTime() + duracionCita * 60 * 60 * 1000);\n  \n  // Verificar si se solapa con algún evento existente\n  let disponible = true;\n  for (const evento of eventos) {\n    const eventStart = new Date(evento.start.dateTime || evento.start.date);\n    const eventEnd = new Date(evento.end.dateTime || evento.end.date);\n    \n    if (!(fin <= eventStart || inicio >= eventEnd)) {\n      disponible = false;\n      break;\n    }\n  }\n  \n  if (disponible) {\n    slotsDisponibles.push({\n      inicio: inicio.toISOString(),\n      fin: fin.toISOString(),\n      formato: `${inicio.getHours().toString().padStart(2, '0')}:${inicio.getMinutes().toString().padStart(2, '0')} - ${fin.getHours().toString().padStart(2, '0')}:${fin.getMinutes().toString().padStart(2, '0')}`\n    });\n  }\n  \n  horaActual += duracionCita;\n}\n\nreturn { slotsDisponibles };"
+      },
+      "name": "Procesar Disponibilidad",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        -300
+      ],
+      "id": "731fcade-bb70-44ac-aeb5-21c63615a455"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"turnos\":{{ $json.slotsDisponibles.toJsonString() }}}",
+        "options": {}
+      },
+      "name": "Respuesta Disponibilidad",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        -300
+      ],
+      "id": "2be076c4-fb35-44b9-adb6-e7cd538d2ed5"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-26T18:45:40.000Z",
+  "versionId": "a1da1d05-c769-407d-9d64-e40d1e2013c8"
+}
