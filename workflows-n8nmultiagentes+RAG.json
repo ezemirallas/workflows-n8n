@@ -1,0 +1,224 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "afiliaciones": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "fleming": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sedesterritoriales": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-24T16:06:52.553Z",
+  "id": "BzoXpVByeT6PKqPl",
+  "meta": null,
+  "name": "multiagentes+RAG",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        -240
+      ],
+      "id": "50b89ce5-b125-405d-8ffe-c64b61a8ec0d",
+      "name": "When chat message received",
+      "webhookId": "f1e886de-7eac-4056-9454-dfd4ec13f1be"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Tu nombre es ALMA, eres la asistente virtual de OSEP (Obra Social de Empleados Públicos de la Provincia de Mendoza).\nRespondes con tono informal, empático y amable. \nVives en la nube, Trabajas  24/7. Responde con un máximo de 100 caracteres.\nReglas:\n1. Tus respuestas deben ser como para mensajes de WhatsApp, usa \"*\" para poner negrita y/o \"_\" para italic para marcar lo importante. \n2. Usa emojis en tus respuestas.\n3. Nunca adivinar, solo proporcionar información basada en la información de la base de datos o hechos.\n4. Solo responde consultas acerca de OSEP.\n5. Nunca hables mal de OSEP.\n6. No saludes salvo que te saluden.\nAhora, procede a responder la siguiente pregunta teniendo en cuenta estas instrucciones.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -80,
+        -240
+      ],
+      "id": "438ffb94-c9a1-471b-b5f4-84bf858e069a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "name": "agente_afiliaciones",
+        "description": "Usa esta herramienta cuando el usuario solicite información sobre afiliaciones",
+        "workflowId": {
+          "__rl": true,
+          "value": "VkUYau1bThHKeDrd",
+          "mode": "list",
+          "cachedResultName": "agenteafiliaciones"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        60,
+        80
+      ],
+      "id": "ed6daa0e-6466-4e38-93b6-3158a8d810d7",
+      "name": "afiliaciones"
+    },
+    {
+      "parameters": {
+        "name": "agente_fleming",
+        "description": "Usa esta herramienta cuando el usuario solicite información sobre hospital fleming ",
+        "workflowId": {
+          "__rl": true,
+          "value": "iw5inAfYjsM70Am3",
+          "mode": "list",
+          "cachedResultName": "agentefleming"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        300,
+        80
+      ],
+      "id": "076f7ed1-fda4-4f1f-bd0c-e30348f741e8",
+      "name": "fleming"
+    },
+    {
+      "parameters": {
+        "content": "MULTIAGENTES\nAgentes especializados en cada tipo de consulta",
+        "height": 220,
+        "width": 640,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        20
+      ],
+      "id": "3d7cc014-2b21-474f-adcf-7ebdb152353c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        20
+      ],
+      "id": "f4941ce2-ec87-4c9a-98db-ce74f56ff8d7",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        -120
+      ],
+      "id": "4b02dc44-484c-4631-903f-547d971e29f7",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "agente_sedes_territoriales",
+        "description": "Usa esta herramienta cuando el usuario solicite información sobre sedes territoriales",
+        "workflowId": {
+          "__rl": true,
+          "value": "C0GqvWHYxoknrz09",
+          "mode": "list",
+          "cachedResultName": "agentesedesterritoriales"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        180,
+        80
+      ],
+      "id": "f7fd5457-4528-49fd-a339-a0697d1404ec",
+      "name": "sedesterritoriales"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-25T12:48:58.000Z",
+  "versionId": "4d3b7756-5742-4618-ab34-9647a7b2eced"
+}
