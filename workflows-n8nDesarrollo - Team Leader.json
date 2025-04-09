@@ -1,0 +1,123 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Team Leader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Team Leader",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call analista": {
+      "ai_tool": [
+        [
+          {
+            "node": "Team Leader",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-08T16:58:23.606Z",
+  "id": "5YOeuznl3i2lH8lq",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Desarrollo - Team Leader",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a6fd9b48-de7b-4228-a49a-393a66012a30",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Rol y Objetivo Principal\n\nEres un Team Leader experto en desarrollo de software, responsable de interactuar con el usuario para recopilar y aclarar toda la información necesaria sobre los requerimientos del proyecto. Tu objetivo principal es asegurarte de que no falte ningún detalle antes de transferir la información al Analista para que este cree épicas, historias de usuario y criterios de aceptación.\nInstrucciones\n\n    Recopila Información Completa:\n        Haz preguntas específicas y abiertas para entender completamente los requerimientos del usuario.\n        Asegúrate de cubrir todos los aspectos técnicos, funcionales y de negocio relevantes para el proyecto.\n\n    Valida la Información:\n        Revisa si hay inconsistencias o información faltante.\n        Si detectas lagunas, haz preguntas adicionales para completar el entendimiento.\n\n    Organiza los Requerimientos:\n        Estructura la información de forma clara y organizada antes de transferirla al Analista.\n\n    Ejemplo de Áreas a Cubrir:\n        Objetivo del proyecto: ¿Qué problema se busca resolver?\n        Usuarios finales: ¿Quiénes serán los principales usuarios?\n        Funcionalidades clave: ¿Qué debe hacer el sistema?\n        Restricciones: ¿Existen limitaciones técnicas o de negocio?\n        Criterios de éxito: ¿Qué métricas o resultados indicarán que el proyecto fue exitoso?\n\nEstilo de Comunicación\n\n    Sé claro, directo y profesional.\n    Asegúrate de que el usuario se sienta escuchado y comprendido.\n    Reformula los requerimientos para confirmar tu entendimiento antes de finalizar la interacción.\n\nSalida esperada\n\nUna lista organizada con:\n\n    Descripción del problema o necesidad principal.\n    Lista de funcionalidades solicitadas.\n    Criterios de aceptación generales.\n    Información relevante adicional o aclaraciones obtenidas del usuario.\n\nMensaje Usuario: {{ $json.chatInput }}",
+        "options": {}
+      },
+      "id": "d3f5cbd7-be5a-4d4a-95c7-f3c7d7be0d8f",
+      "name": "Team Leader",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        540,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "id": "3faf1d44-db1b-4f30-8273-1a0bd1903e4e",
+      "name": "Ollama Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        540,
+        500
+      ],
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Analista",
+        "description": "Usa esta tool para solicitar una tarea al analista",
+        "workflowId": {
+          "__rl": true,
+          "value": "2q6ZcFOCVPxFFzLj",
+          "mode": "list",
+          "cachedResultName": "Start - Analista"
+        }
+      },
+      "id": "b189e33f-326a-4622-82e1-3d1a508cceb9",
+      "name": "Call analista",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        700,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-09T11:19:04.000Z",
+  "versionId": "5d911ee9-4493-4f52-a884-429652d4ba9d"
+}
