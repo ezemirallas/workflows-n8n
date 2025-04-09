@@ -1,0 +1,291 @@
+{
+  "active": false,
+  "connections": {
+    "Set github repository": {
+      "main": [
+        [
+          {
+            "node": "GitHub1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Set github repository",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Analista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Team Leader": {
+      "main": [
+        [
+          {
+            "node": "Analista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Analista",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "QA agente",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analista": {
+      "main": [
+        [
+          {
+            "node": "QA agente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "QA agente": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-08T17:03:53.839Z",
+  "id": "2q6ZcFOCVPxFFzLj",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Start - Analista",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "ezemirallas",
+          "mode": "list",
+          "cachedResultName": "ezemirallas",
+          "cachedResultUrl": "https://github.com/ezemirallas"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ $('Set github repository').item.json.repository }}",
+          "mode": "name"
+        },
+        "filePath": "analisis/Documento de Analisis.md",
+        "fileContent": "={{ $json.output }}",
+        "commitMessage": "=v3.0"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        680,
+        480
+      ],
+      "id": "2e67b04f-de69-4fb4-bee0-8048a8658292",
+      "name": "GitHub1",
+      "credentials": {
+        "githubApi": {
+          "id": "p7sguaSe5ybqfIlc",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d5a546a5-7239-404d-8784-e1335e6b1b5d",
+              "name": "repository",
+              "value": "ABM-vehiculos",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        460,
+        480
+      ],
+      "id": "55b67751-746e-425a-acaf-8590cf9c71da",
+      "name": "Set github repository"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "544d3543-cc2b-46d7-9f40-5c49b38a9aad",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "cumple",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        220,
+        500
+      ],
+      "id": "a51464cd-e3a7-47d9-8ff6-50cc411d0044",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        780
+      ],
+      "id": "5dda5684-61a3-4c7d-95a0-7e022199273d",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -500,
+        760
+      ],
+      "id": "a21f5704-7589-4697-92ca-be03c677b465",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -740,
+        500
+      ],
+      "id": "cdcf9c7a-0ecd-46c8-8d24-e0d6f69c4103",
+      "name": "Team Leader",
+      "webhookId": "8b8aaaab-8e30-4a29-b29a-0ef0f78f2376"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Eres un Analista Funcional experto en desarrollo de software, encargado de transformar los requerimientos recopilados por el Team Leader en épicas, historias de usuario y criterios de aceptación claros y detallados. Tu objetivo principal es asegurarte de que las necesidades del usuario estén completamente desglosadas y listas para ser implementadas por los equipos técnicos.\nInstrucciones\n\n    Comprende el Contexto:\n        Analiza los requerimientos proporcionados por el Team Leader.\n        Identifica objetivos clave, funcionalidades necesarias y restricciones del proyecto.\n\n    Estructura las Entregas:\n        Épicas: Define los objetivos generales o grandes bloques funcionales del sistema.\n        Historias de Usuario: Divide cada épica en tareas más pequeñas y específicas que puedan ser implementadas.\n        Criterios de Aceptación: Describe claramente qué condiciones deben cumplirse para que una historia de usuario sea considerada completa y funcional.\n\n    Valida la Información:\n        Si encuentras lagunas o ambigüedades, solicita aclaraciones al Team Leader.\n        Asegúrate de que todas las historias estén alineadas con las necesidades del usuario y los objetivos del proyecto.\n\n    Formato de las Historias de Usuario:\n        Usa el formato estándar:\n        Como [tipo de usuario], quiero [acción/tarea], para [lograr un objetivo].\n        Ejemplo:\n            Como administrador, quiero gestionar los permisos de los usuarios, para garantizar la seguridad del sistema.\n\n    Organización del Trabajo:\n        Prioriza las historias de usuario según su impacto o dependencia técnica.\n        Documenta cualquier restricción o detalle adicional relevante para los desarrolladores.\n\nEstilo de Comunicación\n\n    Sé detallado, claro y estructurado en tus descripciones.\n    Usa un lenguaje que sea comprensible tanto para técnicos como para no técnicos.\n    Anticipa posibles preguntas o dudas que puedan surgir al implementar las historias.\n\nSalida Esperada\n\nUn documento o lista organizada que incluya:\n\n    Épicas: Objetivos principales desglosados por bloques funcionales.\n    Historias de Usuario: Descripciones claras y específicas.\n    Criterios de Aceptación: Reglas claras para validar la implementación de cada historia.\n    Notas Adicionales: Observaciones o información relevante para el equipo técnico.\n\nEjemplo de Trabajo\n\nEntrada del Team Leader:\n\n    Los usuarios quieren un sistema para gestionar pedidos.\n    Debe incluir registro de clientes, seguimiento de pedidos y generación de reportes.\n    Los administradores necesitan controlar el acceso al sistema.\n\nSalida del Analista:\n\nÉpica 1: Gestión de Pedidos.\n\n    Historia de Usuario 1:\n        Como usuario, quiero registrar un pedido con información del cliente, para realizar su seguimiento.\n        Criterios de Aceptación:\n            El pedido debe incluir nombre del cliente, producto, cantidad y fecha.\n            Se debe generar un identificador único para cada pedido.\n\n    Historia de Usuario 2:\n        Como usuario, quiero buscar y visualizar pedidos anteriores, para revisar el historial.\n        Criterios de Aceptación:\n            Se debe permitir buscar pedidos por nombre del cliente o fecha.\n            La visualización debe incluir los detalles completos del pedido.\n\nÉpica 2: Control de Acceso.\n\n    Historia de Usuario:\n        Como administrador, quiero asignar roles a los usuarios, para controlar sus permisos.\n        Criterios de Aceptación:\n            Deben existir roles predefinidos (administrador, operador).\n            El acceso a ciertas funcionalidades debe estar restringido según el rol asignado.\n\nAhora necesito que generes la documentación de análisis en base al siguiente documento del Team Leader:\n\n{{ $json.chatInput }}",
+        "options": {}
+      },
+      "id": "c9a33d92-2fb3-4709-aa9d-1a5950c063f0",
+      "name": "Analista",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -520,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres una analista de QA de un equipo de desarrollo, por  favor compara el documento del  team leader \"{{ $('Team Leader').item.json.chatInput }}\", con la documentación del analista con las épicas e historias de usuario \"{{ $json.output }}\" para asegurarte que todos los requerimientos el team leader se cumplen en el documento de análisis.\n\nResponde con un JSON con los siguientes campos:\n- Un campo \"status\" que indique si \"cumple\" o \"no_cumple\".\n- Una lista de \"observaciones\" en caso de que no cumpla.\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "id": "7e28a1ec-339e-4c46-881c-0bd58627879b",
+      "name": "QA agente",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [
+        -160,
+        500
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-01-08T17:03:21.808Z",
+      "updatedAt": "2025-01-08T17:03:21.808Z",
+      "id": "ZxbksJ4xELHKufDR",
+      "name": "#Agentes IA"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-09T11:27:24.000Z",
+  "versionId": "16c55b3b-6195-44b5-9b7b-634916f8f166"
+}
