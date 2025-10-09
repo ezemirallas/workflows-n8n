@@ -1,0 +1,485 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        []
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        []
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        []
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-14T13:52:17.110Z",
+  "id": "FYGQrBOq7JQc3qyb",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "manipulaciondedatos",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        -40
+      ],
+      "id": "09d44b81-6cd0-4ac1-81bb-87bece1abcf3",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1bA0qdE5XdjCpJdms6PJ6YR6o4GOVYy-sQETr1arHLdg",
+          "mode": "list",
+          "cachedResultName": "Productos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bA0qdE5XdjCpJdms6PJ6YR6o4GOVYy-sQETr1arHLdg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1bA0qdE5XdjCpJdms6PJ6YR6o4GOVYy-sQETr1arHLdg/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -720,
+        -40
+      ],
+      "id": "cc36a8c7-2622-40f1-8dda-7ef5f3e366ff",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3e520860-0c9f-4001-a5fb-3ff4dcd362d2",
+              "name": "producto",
+              "value": "={{ $json.Producto}}",
+              "type": "string"
+            },
+            {
+              "id": "99926864-f896-41e6-90f6-934c580cbff8",
+              "name": "precio",
+              "value": "={{ $json[\"Precio \"] }}",
+              "type": "number"
+            },
+            {
+              "id": "e90d015a-cf82-4757-b742-78acecd8aad3",
+              "name": "stock",
+              "value": "={{ $json.Stock }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        40,
+        -20
+      ],
+      "id": "253313ae-4adb-468d-a9e2-22466ad0e46a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "69937e86-13ad-41b3-9fd2-aff74efbbbae",
+              "leftValue": "={{ $json.precio }}",
+              "rightValue": 800,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            },
+            {
+              "id": "c070494e-dd23-4b35-96d5-a626ba4a9509",
+              "leftValue": "={{ $json.producto.toLowerCase() }}",
+              "rightValue": "ordenador",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        -20
+      ],
+      "id": "2f7b1688-1008-4aa0-96c6-f82654f88b2c",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "maxItems": 5,
+        "keep": "lastItems"
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        400,
+        140
+      ],
+      "id": "4761e061-9c16-4766-aa2d-a1a6586060a1",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "producto,precio",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        400,
+        320
+      ],
+      "id": "9b885462-2cda-4a2c-93f9-7a83ce1cd499",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        400,
+        500
+      ],
+      "id": "f0bc9ba8-90dc-4356-a18a-5c417c35a241",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "sendTo": "ezemirallas2011@gmail.com",
+        "subject": "prueba",
+        "emailType": "text",
+        "message": "fdsfsdfsdfsadfdfsadfsafd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        360,
+        -300
+      ],
+      "id": "50d8fd5f-e022-4a4c-b292-e9300e1f995c",
+      "name": "Send a message",
+      "webhookId": "7ccee911-f61a-4f61-8291-c216cba2bf97",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        660,
+        500
+      ],
+      "id": "1ed4807b-7415-4e0b-aeb1-03a14fe9e59c",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        720,
+        60
+      ],
+      "id": "aadbb787-59f5-4dd6-8db1-8eb801ac460e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "average",
+              "field": "precio"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        1020,
+        60
+      ],
+      "id": "c88e7604-0129-47b0-af81-66c230c9992b",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  item.json.nuevocampo= 1;\n}\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        500
+      ],
+      "id": "b2814f05-6f6f-4322-87b3-f79233e7b88b",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "batchSize": 2,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -440,
+        -40
+      ],
+      "id": "5f1e4824-8d61-4df0-bb3e-45ec37c4520b",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5f75aecf-e39e-44cc-ad22-e9e444a4c2c4",
+              "name": "precio_x_2",
+              "value": "={{ $json[\"Precio \"] * 2 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -180,
+        60
+      ],
+      "id": "c63d5fec-9b51-4a99-bfb1-dd48d339e3f8",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "f840961d-034f-47d3-a9ae-6b8d82a7cc5e",
+      "name": "Wait",
+      "webhookId": "1cf8dd67-ef31-4a51-9866-22c605de6417"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-14T18:50:05.000Z",
+  "versionId": "3320f6de-df50-4452-be91-98a1b0f2bffb"
+}
