@@ -1,0 +1,158 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-06-24T11:14:15.461Z",
+  "id": "cnnsHfHOOYj8xUN9",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "interfaces",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "prueba",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -300,
+        -180
+      ],
+      "id": "0b49af82-ba64-4395-b3f3-6ace9e823c73",
+      "name": "Webhook",
+      "webhookId": "413c5535-6cce-472a-b873-62ed0ea152e6"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Registro de Asistencia</title>\n    <style>\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n            min-height: 100vh;\n            padding: 20px;\n        }\n\n        .container {\n            max-width: 900px;\n            margin: 0 auto;\n            background: white;\n            border-radius: 15px;\n            box-shadow: 0 20px 40px rgba(0,0,0,0.1);\n            overflow: hidden;\n        }\n\n        .header {\n            background: linear-gradient(135deg, #4CAF50, #45a049);\n            color: white;\n            padding: 30px;\n            text-align: center;\n        }\n\n        .header h1 {\n            font-size: 2.5rem;\n            margin-bottom: 10px;\n        }\n\n        .content {\n            display: grid;\n            grid-template-columns: 1fr 1fr;\n            gap: 30px;\n            padding: 30px;\n        }\n\n        .form-section {\n            background: #f8f9fa;\n            padding: 25px;\n            border-radius: 10px;\n            border-left: 4px solid #4CAF50;\n        }\n\n        .form-section h2 {\n            color: #333;\n            margin-bottom: 20px;\n            font-size: 1.5rem;\n        }\n\n        .form-group {\n            margin-bottom: 20px;\n        }\n\n        label {\n            display: block;\n            margin-bottom: 8px;\n            font-weight: 600;\n            color: #555;\n        }\n\n        input, select, textarea {\n            width: 100%;\n            padding: 12px;\n            border: 2px solid #ddd;\n            border-radius: 8px;\n            font-size: 16px;\n            transition: all 0.3s ease;\n        }\n\n        input:focus, select:focus, textarea:focus {\n            outline: none;\n            border-color: #4CAF50;\n            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);\n        }\n\n        .btn {\n            background: linear-gradient(135deg, #4CAF50, #45a049);\n            color: white;\n            padding: 12px 30px;\n            border: none;\n            border-radius: 8px;\n            font-size: 16px;\n            font-weight: 600;\n            cursor: pointer;\n            transition: all 0.3s ease;\n            width: 100%;\n        }\n\n        .btn:hover {\n            transform: translateY(-2px);\n            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);\n        }\n\n        .attendance-list {\n            background: #f8f9fa;\n            padding: 25px;\n            border-radius: 10px;\n            border-left: 4px solid #2196F3;\n        }\n\n        .attendance-item {\n            background: white;\n            padding: 15px;\n            margin-bottom: 10px;\n            border-radius: 8px;\n            border-left: 3px solid #4CAF50;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.1);\n            animation: slideIn 0.3s ease;\n        }\n\n        @keyframes slideIn {\n            from {\n                opacity: 0;\n                transform: translateX(-20px);\n            }\n            to {\n                opacity: 1;\n                transform: translateX(0);\n            }\n        }\n\n        .attendance-item h4 {\n            color: #333;\n            margin-bottom: 5px;\n        }\n\n        .attendance-item p {\n            color: #666;\n            font-size: 14px;\n            margin: 2px 0;\n        }\n\n        .time-badge {\n            background: #4CAF50;\n            color: white;\n            padding: 4px 8px;\n            border-radius: 12px;\n            font-size: 12px;\n            display: inline-block;\n            margin-top: 5px;\n        }\n\n        .error {\n            border-color: #f44336 !important;\n            background-color: #ffebee;\n        }\n\n        .error-message {\n            color: #f44336;\n            font-size: 14px;\n            margin-top: 5px;\n        }\n\n        .success-message {\n            background: #4CAF50;\n            color: white;\n            padding: 15px;\n            border-radius: 8px;\n            margin-bottom: 20px;\n            text-align: center;\n            animation: fadeIn 0.5s ease;\n        }\n\n        @keyframes fadeIn {\n            from { opacity: 0; }\n            to { opacity: 1; }\n        }\n\n        .stats {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));\n            gap: 15px;\n            margin-bottom: 20px;\n        }\n\n        .stat-card {\n            background: white;\n            padding: 15px;\n            border-radius: 8px;\n            text-align: center;\n            box-shadow: 0 2px 5px rgba(0,0,0,0.1);\n        }\n\n        .stat-number {\n            font-size: 24px;\n            font-weight: bold;\n            color: #4CAF50;\n        }\n\n        .stat-label {\n            font-size: 12px;\n            color: #666;\n            text-transform: uppercase;\n        }\n\n        @media (max-width: 768px) {\n            .content {\n                grid-template-columns: 1fr;\n                gap: 20px;\n                padding: 20px;\n            }\n            \n            .header h1 {\n                font-size: 2rem;\n            }\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h1>📋 Registro de Asistencia</h1>\n            <p>Sistema de control de asistencia en tiempo real</p>\n        </div>\n\n        <div class=\"content\">\n            <div class=\"form-section\">\n                <h2>Registrar Asistencia</h2>\n                <div id=\"successMessage\" style=\"display: none;\"></div>\n                \n                <form id=\"attendanceForm\">\n                    <div class=\"form-group\">\n                        <label for=\"fullName\">Nombre Completo *</label>\n                        <input type=\"text\" id=\"fullName\" name=\"fullName\" required>\n                        <div class=\"error-message\" id=\"fullNameError\"></div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"email\">Correo Electrónico *</label>\n                        <input type=\"email\" id=\"email\" name=\"email\" required>\n                        <div class=\"error-message\" id=\"emailError\"></div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"phone\">Teléfono</label>\n                        <input type=\"tel\" id=\"phone\" name=\"phone\">\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"department\">Departamento/Área *</label>\n                        <select id=\"department\" name=\"department\" required>\n                            <option value=\"\">Seleccionar departamento</option>\n                            <option value=\"Administración\">Administración</option>\n                            <option value=\"Ventas\">Ventas</option>\n                            <option value=\"Marketing\">Marketing</option>\n                            <option value=\"IT\">Tecnología</option>\n                            <option value=\"RRHH\">Recursos Humanos</option>\n                            <option value=\"Finanzas\">Finanzas</option>\n                            <option value=\"Operaciones\">Operaciones</option>\n                        </select>\n                        <div class=\"error-message\" id=\"departmentError\"></div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"eventDate\">Fecha del Evento *</label>\n                        <input type=\"date\" id=\"eventDate\" name=\"eventDate\" required>\n                        <div class=\"error-message\" id=\"eventDateError\"></div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"attendanceType\">Tipo de Asistencia *</label>\n                        <select id=\"attendanceType\" name=\"attendanceType\" required>\n                            <option value=\"\">Seleccionar tipo</option>\n                            <option value=\"Entrada\">Entrada</option>\n                            <option value=\"Salida\">Salida</option>\n                            <option value=\"Reunión\">Reunión</option>\n                            <option value=\"Evento\">Evento Especial</option>\n                        </select>\n                        <div class=\"error-message\" id=\"attendanceTypeError\"></div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label for=\"comments\">Comentarios</label>\n                        <textarea id=\"comments\" name=\"comments\" rows=\"3\" placeholder=\"Observaciones adicionales...\"></textarea>\n                    </div>\n\n                    <button type=\"submit\" class=\"btn\">✅ Registrar Asistencia</button>\n                </form>\n            </div>\n\n            <div class=\"attendance-list\">\n                <h2>Lista de Asistencia</h2>\n                \n                <div class=\"stats\">\n                    <div class=\"stat-card\">\n                        <div class=\"stat-number\" id=\"totalCount\">0</div>\n                        <div class=\"stat-label\">Total Registros</div>\n                    </div>\n                    <div class=\"stat-card\">\n                        <div class=\"stat-number\" id=\"todayCount\">0</div>\n                        <div class=\"stat-label\">Hoy</div>\n                    </div>\n                </div>\n\n                <div id=\"attendanceRecords\">\n                    <p style=\"text-align: center; color: #666; padding: 20px;\">\n                        No hay registros de asistencia aún.\n                    </p>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <script>\n        // Array para almacenar los registros de asistencia\n        let attendanceRecords = [];\n\n        // Elementos del DOM\n        const form = document.getElementById('attendanceForm');\n        const recordsContainer = document.getElementById('attendanceRecords');\n        const successMessage = document.getElementById('successMessage');\n        const totalCountElement = document.getElementById('totalCount');\n        const todayCountElement = document.getElementById('todayCount');\n\n        // Establecer fecha actual por defecto\n        document.getElementById('eventDate').valueAsDate = new Date();\n\n        // Event listener para el formulario\n        form.addEventListener('submit', async function(e) {\n            e.preventDefault();\n            \n            if (validateForm()) {\n                await registerAttendance();\n            }\n        });\n\n        // Función de validación del formulario\n        function validateForm() {\n            let isValid = true;\n            const requiredFields = ['fullName', 'email', 'department', 'eventDate', 'attendanceType'];\n            \n            // Limpiar errores anteriores\n            document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));\n            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');\n\n            requiredFields.forEach(fieldName => {\n                const field = document.getElementById(fieldName);\n                const errorElement = document.getElementById(fieldName + 'Error');\n                \n                if (!field.value.trim()) {\n                    field.classList.add('error');\n                    errorElement.textContent = 'Este campo es obligatorio';\n                    isValid = false;\n                }\n            });\n\n            // Validar email\n            const email = document.getElementById('email');\n            const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n            if (email.value && !emailRegex.test(email.value)) {\n                email.classList.add('error');\n                document.getElementById('emailError').textContent = 'Ingrese un email válido';\n                isValid = false;\n            }\n\n            // Validar fecha (no puede ser futura)\n            const eventDate = document.getElementById('eventDate');\n            const selectedDate = new Date(eventDate.value);\n            const today = new Date();\n            today.setHours(23, 59, 59, 999);\n            \n            if (selectedDate > today) {\n                eventDate.classList.add('error');\n                document.getElementById('eventDateError').textContent = 'La fecha no puede ser futura';\n                isValid = false;\n            }\n\n            return isValid;\n        }\n\n        // Función para registrar asistencia\n        async function registerAttendance() {\n            const formData = new FormData(form);\n            const record = {\n                id: Date.now(),\n                fullName: formData.get('fullName'),\n                email: formData.get('email'),\n                phone: formData.get('phone') || 'No especificado',\n                department: formData.get('department'),\n                eventDate: formData.get('eventDate'),\n                attendanceType: formData.get('attendanceType'),\n                comments: formData.get('comments') || '',\n                registrationTime: new Date().toLocaleString('es-ES')\n            };\n\n            // Deshabilitar el botón mientras se envía\n            const submitButton = form.querySelector('button[type=\"submit\"]');\n            const originalText = submitButton.textContent;\n            submitButton.disabled = true;\n            submitButton.textContent = '⏳ Enviando...';\n\n            try {\n                // Enviar datos al webhook\n                const response = await fetch('http://localhost:5678/webhook/datos', {\n                    method: 'POST',\n                    headers: {\n                        'Content-Type': 'application/json',\n                    },\n                    body: JSON.stringify(record)\n                });\n\n                if (response.ok) {\n                    // Si el webhook responde correctamente, agregar a la lista local\n                    attendanceRecords.unshift(record);\n                    displayRecords();\n                    updateStats();\n                    showSuccessMessage(`✅ Asistencia registrada exitosamente para ${record.fullName}`);\n                    form.reset();\n                    document.getElementById('eventDate').valueAsDate = new Date();\n                } else {\n                    throw new Error(`Error del servidor: ${response.status}`);\n                }\n            } catch (error) {\n                console.error('Error al enviar datos al webhook:', error);\n                showErrorMessage(`❌ Error al registrar asistencia: ${error.message}`);\n            } finally {\n                // Rehabilitar el botón\n                submitButton.disabled = false;\n                submitButton.textContent = originalText;\n            }\n        }\n\n        // Función para mostrar registros\n        function displayRecords() {\n            if (attendanceRecords.length === 0) {\n                recordsContainer.innerHTML = `\n                    <p style=\"text-align: center; color: #666; padding: 20px;\">\n                        No hay registros de asistencia aún.\n                    </p>\n                `;\n                return;\n            }\n\n            recordsContainer.innerHTML = attendanceRecords.map(record => `\n                <div class=\"attendance-item\">\n                    <h4>${record.fullName}</h4>\n                    <p><strong>📧</strong> ${record.email}</p>\n                    <p><strong>📱</strong> ${record.phone}</p>\n                    <p><strong>🏢</strong> ${record.department}</p>\n                    <p><strong>📅</strong> ${new Date(record.eventDate).toLocaleDateString('es-ES')}</p>\n                    ${record.comments ? `<p><strong>💬</strong> ${record.comments}</p>` : ''}\n                    <span class=\"time-badge\">${record.attendanceType}</span>\n                    <p style=\"font-size: 12px; color: #999; margin-top: 10px;\">\n                        Registrado: ${record.registrationTime}\n                    </p>\n                </div>\n            `).join('');\n        }\n\n        // Función para actualizar estadísticas\n        function updateStats() {\n            const today = new Date().toDateString();\n            const todayRecords = attendanceRecords.filter(record => \n                new Date(record.eventDate).toDateString() === today\n            );\n\n            totalCountElement.textContent = attendanceRecords.length;\n            todayCountElement.textContent = todayRecords.length;\n        }\n\n        // Función para mostrar mensaje de éxito\n        function showSuccessMessage(message) {\n            successMessage.innerHTML = `<div class=\"success-message\">${message}</div>`;\n            successMessage.style.display = 'block';\n            \n            setTimeout(() => {\n                successMessage.style.display = 'none';\n            }, 3000);\n        }\n\n        // Función para mostrar mensaje de error\n        function showErrorMessage(message) {\n            successMessage.innerHTML = `<div class=\"error-message\" style=\"background: #f44336; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;\">${message}</div>`;\n            successMessage.style.display = 'block';\n            \n            setTimeout(() => {\n                successMessage.style.display = 'none';\n            }, 5000);\n        }\n\n        // Validación en tiempo real\n        document.querySelectorAll('input, select').forEach(field => {\n            field.addEventListener('blur', function() {\n                if (this.hasAttribute('required') && !this.value.trim()) {\n                    this.classList.add('error');\n                } else {\n                    this.classList.remove('error');\n                    const errorElement = document.getElementById(this.id + 'Error');\n                    if (errorElement) {\n                        errorElement.textContent = '';\n                    }\n                }\n            });\n\n            field.addEventListener('input', function() {\n                if (this.classList.contains('error') && this.value.trim()) {\n                    this.classList.remove('error');\n                    const errorElement = document.getElementById(this.id + 'Error');\n                    if (errorElement) {\n                        errorElement.textContent = '';\n                    }\n                }\n            });\n        });\n    </script>\n</body>\n</html>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -80,
+        -180
+      ],
+      "id": "14379187-95a2-4a64-9715-d78f1e60a7d2",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        140,
+        -180
+      ],
+      "id": "e0bd290e-29ae-4be5-bebe-76ad5a431905",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "datos",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -300,
+        20
+      ],
+      "id": "c87afc85-9f6d-48a0-a206-dc446e4e19bc",
+      "name": "Webhook1",
+      "webhookId": "468c5f00-d3d0-4336-a484-dced9434749d"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7399fd3b-e042-4ded-a618-423c583036e2",
+              "name": "body.id",
+              "value": "={{ $json.body.id }}",
+              "type": "number"
+            },
+            {
+              "id": "6d740e49-f4e3-4dcf-a169-496e63ef6092",
+              "name": "body.fullName",
+              "value": "={{ $json.body.fullName }}",
+              "type": "string"
+            },
+            {
+              "id": "14e78cba-412c-4f6a-830f-54b5a7945e70",
+              "name": "body.email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -80,
+        20
+      ],
+      "id": "88b0a8d1-b018-4313-9f3d-e581e3290eef",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-10-01T14:05:17.000Z",
+  "versionId": "0d841a5d-1a9c-4962-99e4-4aeb5288e6cf"
+}
