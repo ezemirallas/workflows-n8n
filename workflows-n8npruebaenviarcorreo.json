@@ -1,0 +1,244 @@
+{
+  "active": true,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-12T13:00:26.845Z",
+  "id": "u8TMH7ceXGRTevtL",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "pruebaenviarcorreo",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "BlunexAI - Consultoría IA",
+        "emailType": "text",
+        "message": "=Hola {{ $json.Nombre }},\nMuchas gracias por contactar con nosotros. \nHa solicitado la siguiente automatización:\n{{ $json['Descripción detallada de la solución'] }}.\nEl rango de precios es el siguiente:\n{{ $json.Precio }}\n\nEn breve nos pondremos en contacto con usted\nMuchas Gracias,\nUn saludo",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        20
+      ],
+      "id": "31e5197e-e5d2-4f80-8fd1-6fd359366d07",
+      "name": "Send a message",
+      "webhookId": "344cfe88-8b4f-4c4c-b23f-19449fdf64c9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "BlunexAI",
+        "formDescription": "Automatiza tu empresa",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nombre",
+              "placeholder": "Ingresa aquí tu nombre",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "Ingresa aquí tu correo electrónico",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Número de Teléfono",
+              "fieldType": "number",
+              "placeholder": "Ingresa aquí tu número de teléfono"
+            },
+            {
+              "fieldLabel": "Precio",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Básica 1000 - 2000 $"
+                  },
+                  {
+                    "option": "Intermedia 2000 - 4000 $"
+                  },
+                  {
+                    "option": "Avanzada 4000 - 20000 $"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Descripción detallada de la solución",
+              "fieldType": "textarea",
+              "placeholder": "Ingresa una descripción detallada de la solución que necesitas ",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Enviar"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -420,
+        20
+      ],
+      "id": "aa5ef1f3-f03b-48c7-bd8c-82b04bf1e3bd",
+      "name": "On form submission",
+      "webhookId": "06d5c7ac-9cab-4359-996d-83d3a1281eef"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "19ci5N7kTyW1KWWgkWIlGOQEDm2JcVP1aQ5QYPjpvRdI",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ci5N7kTyW1KWWgkWIlGOQEDm2JcVP1aQ5QYPjpvRdI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19ci5N7kTyW1KWWgkWIlGOQEDm2JcVP1aQ5QYPjpvRdI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $json.Nombre }}",
+            "Email": "={{ $json.Email }}",
+            "Telefono": "={{ $json['Número de Teléfono'] }}",
+            "Precio": "={{ $json.Precio }}",
+            "Descripcion": "={{ $json['Descripción detallada de la solución'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Precio",
+              "displayName": "Precio",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Descripcion",
+              "displayName": "Descripcion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "useAppend": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -120,
+        20
+      ],
+      "id": "f1898e97-8a7d-4032-89f5-f577f9aeda82",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Nombre": "Ezequiel",
+          "Email": "ezemirallas2011@gmail.com",
+          "Número de Teléfono": 2616180504,
+          "Precio": "Intermedia 2000 - 4000 $",
+          "Descripción detallada de la solución": "Agente ia chatbot con supabase",
+          "submittedAt": "2025-08-12T12:15:46.490-03:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-08-13T12:51:17.000Z",
+  "versionId": "c01c0285-fc36-42cc-9217-69562cd86403"
+}
