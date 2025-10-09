@@ -1,0 +1,338 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-29T13:52:15.161Z",
+  "id": "VfJhfGo3YSXK3Ypc",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "telefonosafiliadosbot",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        -20
+      ],
+      "id": "010fa49f-6811-4ba7-a82a-b7ab78477da4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1rJjZbWSqPJm8zPQie6YMd_WdtCEOtZ_vWy0Nt2kafIk",
+          "mode": "list",
+          "cachedResultName": "Listado Telefonos Vacios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJjZbWSqPJm8zPQie6YMd_WdtCEOtZ_vWy0Nt2kafIk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1893730084,
+          "mode": "list",
+          "cachedResultName": "Listado Telefonos Vacios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJjZbWSqPJm8zPQie6YMd_WdtCEOtZ_vWy0Nt2kafIk/edit#gid=1893730084"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        20,
+        -20
+      ],
+      "id": "d541b124-faf6-409a-9379-e14ee7600759",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        240,
+        -20
+      ],
+      "id": "d73d6e78-bfa9-4e03-8e20-994959264475",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "494c4608-813f-49fb-a9b2-069147dcfa2e",
+              "name": "documento",
+              "value": "={{ $json['Nº Doc.'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        580,
+        0
+      ],
+      "id": "40e20c2c-29f6-4f8b-9252-509eca04b7c3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1rJjZbWSqPJm8zPQie6YMd_WdtCEOtZ_vWy0Nt2kafIk",
+          "mode": "list",
+          "cachedResultName": "Listado Telefonos Vacios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJjZbWSqPJm8zPQie6YMd_WdtCEOtZ_vWy0Nt2kafIk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1893730084,
+          "mode": "list",
+          "cachedResultName": "Listado Telefonos Vacios",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rJjZbWSqPJm8zPQie6YMd_WdtCEOtZ_vWy0Nt2kafIk/edit#gid=1893730084"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telbot": "={{ $json.Telefono }}",
+            "Tipo": "={{ $('Get row(s) in sheet').item.json.row_number }}",
+            "Núm": "={{ $('Get row(s) in sheet').item.json['Núm'] }}",
+            "Nº Doc.": "={{ $('Get row(s) in sheet').item.json['Nº Doc.'] }}",
+            "Tel 2": "={{ $('Get row(s) in sheet').item.json['Tel 2'] }}",
+            "Tel 1": "={{ $('Get row(s) in sheet').item.json['Tel 1'] }}",
+            "Apellido y Nombre": "={{ $('Get row(s) in sheet').item.json['Apellido y Nombre'] }}",
+            "Vinc.": "={{ $('Get row(s) in sheet').item.json['Vinc.'] }}"
+          },
+          "matchingColumns": [
+            "telbot"
+          ],
+          "schema": [
+            {
+              "id": "Tipo",
+              "displayName": "Tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Núm",
+              "displayName": "Núm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Vinc.",
+              "displayName": "Vinc.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Apellido y Nombre",
+              "displayName": "Apellido y Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tel 1",
+              "displayName": "Tel 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Tel 2",
+              "displayName": "Tel 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Nº Doc.",
+              "displayName": "Nº Doc.",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telbot",
+              "displayName": "telbot",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1500,
+        0
+      ],
+      "id": "3dd348e4-4eac-4412-be9a-4ce6effd980c",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=http://172.16.64.83:31583/afiliado/{{ $json.documento }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        0
+      ],
+      "id": "7050fcb2-4f33-4374-b526-5e13b33e53de",
+      "name": "HTTP Request",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        0
+      ],
+      "id": "73222c87-da59-45cb-a6b9-e12636e7db1c",
+      "name": "Wait",
+      "webhookId": "63255f9a-ca94-4ca6-935c-645ff70e5814"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-02T15:10:02.000Z",
+  "versionId": "c7fba854-f497-4069-a3a1-b79c3eef747c"
+}
