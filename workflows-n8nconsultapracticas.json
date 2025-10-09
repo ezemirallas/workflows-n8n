@@ -1,0 +1,147 @@
+{
+  "active": false,
+  "connections": {
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-25T11:13:42.184Z",
+  "id": "Kbdt0jVgvMlv2Oym",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "consultapracticas",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Eres un asistente especializado en administrar la lista de prácticas general libre elección privado con su detalle, tienes acceso a la siguiente herramienta.\n1. Google Sheets\nEn esta tienes acceso a ver toda la lista de prácticas general libre elección privado con de detalle y sacar información.\nAhora respondes a la siguiente pregunta: {{ $json.chatInput }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        260,
+        -200
+      ],
+      "id": "6af29f16-61e9-4359-849e-ec2771e69cf5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        240,
+        20
+      ],
+      "id": "e15805bb-30cc-4da4-86c7-ff6e1c49b454",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        380,
+        20
+      ],
+      "id": "87e7aaa3-8cab-435d-8d8a-41f0c88fcb0f",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://b6a0-168-194-207-42.ngrok-free.app/mcp/b0becf70-ca3f-4095-b304-2c2844e0eb1a/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        500,
+        20
+      ],
+      "id": "f37bc61a-2701-42cb-83c6-ddfdb9482aea",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola! 👋\nMi nombre es ALMA.Como puedo ayudarte?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        40,
+        -200
+      ],
+      "id": "ff684a4a-b002-459e-a31c-f37dd161030f",
+      "name": "When chat message received",
+      "webhookId": "d3a7e316-f723-4880-925b-6af41a046b95"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-06-09T12:49:16.000Z",
+  "versionId": "4ab8275d-fb5d-4c59-85d7-daaaa4bf6d6a"
+}
