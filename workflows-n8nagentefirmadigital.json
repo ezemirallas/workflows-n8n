@@ -1,0 +1,305 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ComprobarDisponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CrearReunion": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "obtener_horarios_disponibles": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-19T12:54:54.960Z",
+  "id": "0Jo5k31XWOHlzTjj",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "agentefirmadigital",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola, en que puedo ayudarte?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        -260
+      ],
+      "id": "894a4e3e-2b4e-4c78-9a14-034bee1772fe",
+      "name": "When chat message received",
+      "webhookId": "3b7d2827-7e18-467e-8875-116797c27b77"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Identidad\n\nEres un asistente virtual de atención al usuario, que se dedica a agendar reuniones.\n\n# Objetivo\n\nTu objetivo principal es que tienes la capacidad de agendar una reunión con el usuario. Debes tratar de ofrecer al usuario de forma proactiva la opción de agendar una reunión. Sin embargo nunca ofrezcas una reunión sin que el cliente te haya solicitado previamente información\nPara agendar una reunión solicita al usuario la siguiente información: nombre y apellido, email, fecha y hora de la reunión, y una descripción de la reunión (solo pide esto si no te lo ha dicho antes).\nUna vez que te haya dado toda la información, utiliza tu herramienta \"ComprobarDisponibilidad\" y si hay disponibilidad utiliza la herramienta \"CrearReunión\", donde el titulo de la reunion será \"FIRMA DIGITAL - {nombre}\" y la descripción será la {descripción} aportada por el usuario.\n\n# Herramientas:\n* \"Think\": utiliza esta herramienta para analizar que acción realizar y para mejorar tus respuestas.\n* \"ComprobarDisponibilidad\": utiliza esta herramienta para comprobar la disponiblidad\nde la fecha solicitada por el usuario para agendar. Siempre tienes que ejecutar esta herramienta antes de \"CrearReunión\".\n* \"CrearReunion\": utiliza esta herramienta para agendar una reunion donde el titulo de la reunión será \"FIRMA DIGITAL - {nombre}\" y la descripción será la {descripción} aportada por el usuario.\n\n# Comportamiento:\n* Usa un tono profesional y alegre.\n* Nunca corrijas a los usuarios, limítate a responder a sus consultas.\n* Cuando la consulta no tenga que ver con tu cometido, limítate a responder que no puedes contestar eso.\n\n# Recordatorios:\n* Cuando la consulta no tenga que ver con su cometido, limítate a responder que no puedes contestar a eso.\n* Utiliza siempre tu MEMORY para mantener el hilo de la conversación. Es muy importante cuando le pidas datos al usuario para agendar una reunión, consultes primero tu MEMORY para no pedirle datos de forma repetida\n* Fecha y hora actual: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -260
+      ],
+      "id": "358e6ad2-6be5-4cd2-b881-2127267c1648",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -40,
+        -40
+      ],
+      "id": "5b0455aa-40e5-4e74-8147-3cd91cf98708",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "description": "=Usa la herramienta para reflexionar sobre algo. No obtendrá información nueva ni modificará la base de datos, sino que simplemente añadirá la idea al registro. Úsala cuando se requiera un razonamiento complejo o memoria caché."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -40
+      ],
+      "id": "523c8a4d-836e-440e-9cc2-5deea56b25af",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Time', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Time', ``, 'string') }}",
+        "options": {
+          "timezone": {
+            "__rl": true,
+            "value": "America/Argentina/Buenos_Aires",
+            "mode": "list",
+            "cachedResultName": "America/Argentina/Buenos_Aires"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        300,
+        -40
+      ],
+      "id": "032e59f0-f21e-48db-92e6-9d50d2ac877f",
+      "name": "ComprobarDisponibilidad",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ $fromAI('more30minuts_start', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [],
+          "color": "11",
+          "location": "OSEP-CIO",
+          "showMeAs": "opaque",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', `La reunión tiene una duración de 30 minutos`, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        -40
+      ],
+      "id": "8a88d805-11fa-44d8-a0cb-38d3c655afa1",
+      "name": "CrearReunion",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -60
+      ],
+      "id": "92e67018-7fbb-4472-8683-d5e1d0ffa95a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bGEmvboF1pzvbFVh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -200,
+        -60
+      ],
+      "id": "53b144bf-cab4-49a4-9f16-8e67893d0dc9",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "description": "llama a esta herramienta cuando el usuario desee saber los horarios disponibles que hay para el agendamiento:\ndebes mostrar los horarios disponibled de manera eficaz por hora, fecha.",
+        "workflowId": {
+          "__rl": true,
+          "value": "GqXrKGUbczR6Hmae",
+          "mode": "list",
+          "cachedResultName": "obtener_disponibilidad"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        -40
+      ],
+      "id": "35bf1a73-287d-4613-b74f-e81accb5445d",
+      "name": "obtener_horarios_disponibles",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Argentina/Buenos_Aires",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-03T17:57:09.000Z",
+  "versionId": "3692fd94-bf76-4091-bbde-b4ac65cd3b29"
+}
