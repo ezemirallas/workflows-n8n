@@ -1,0 +1,696 @@
+{
+  "active": false,
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-15T17:06:37.661Z",
+  "id": "Dhq7XpJJH86Gbmmn",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "CAGgemini",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "965dea79-40f9-49fb-9f47-32bcf3ccba48",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "70655ff7-fb08-41a9-a00f-5599db49ff05",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        620,
+        560
+      ],
+      "id": "a13699ab-a0ea-41c6-a756-628e244a4a8b",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1942c213-a4ba-4ab1-9aa0-a533a1f9ff68",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "506574fb-8dcb-4fb5-8493-a0e721af04a1",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        560
+      ],
+      "id": "a30e6a2f-46ce-49af-ae3a-ca3ccfb4d0f7",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        560
+      ],
+      "id": "8fbd5635-c1c4-4c8d-ae7a-f52a7ffa4e7b",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ebba6a0b-672d-4673-bab1-5ee1b2fa6fdc",
+              "name": "text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1580,
+        560
+      ],
+      "id": "20578f6c-e0b5-4a2e-9102-1398da124ea6",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $('Edit Fields2').first().json.text;\n\nconst base64 = new Buffer.from(text).toString('base64');\n\nreturn [\n  {\n    json:{\n      base64: base64\n    } \n  }\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        540
+      ],
+      "id": "72485b50-d404-4cee-9fab-c5299e250c16",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "[\n  {\n    \"name\": \"Content-Type\",\n    \"value\": \"application/json\"\n  }\n]",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"models/gemini-1.5-flash\",\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"inline_data\": {\n            \"mime_type\": \"text/plain\",\n            \"data\": \"{{ $json.base64 }}\"\n          }\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ],\n  \"systemInstruction\": {\n    \"parts\": [\n      {\n        \"text\": \"Eres un experto en responder exclusivamente con la informacion almacenada en la memoria. Si no tienes conocimiento de la respuesta que hizo el usuario, responde: 'Lo siento, no lo sé', no inventes datos, siempre da la respuesta correcta\"\n      }\n    ]\n  },\n  \"ttl\": \"3600s\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2580,
+        540
+      ],
+      "id": "5cd6891b-db20-450d-9bcc-d88949dd520b",
+      "name": "HTTP Request",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bGEmvboF1pzvbFVh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5db1ad6d-68d5-411e-b3af-101e52dd4ae7",
+              "leftValue": "={{ $now }}",
+              "rightValue": "={{ $json.Expiro }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1520,
+        1200
+      ],
+      "id": "549adb14-b16e-4f34-b28a-b2aca56b04f9",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "07c3906f-c550-4715-bcff-803b70ceb0d8",
+              "name": "id",
+              "value": "={{ $json['ID documento'] }}",
+              "type": "string"
+            },
+            {
+              "id": "7bd1c72d-3340-478b-a2bd-4189df120f3a",
+              "name": "name",
+              "value": "={{ $json['Nombre documento'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        700,
+        840
+      ],
+      "id": "f3080e64-044e-4e78-a55b-00fd61b6117b",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "06045058-cf89-4796-a7cf-4fe765220bc4",
+              "name": "response",
+              "value": "={{ $json.candidates[0].content.parts[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2120,
+        1220
+      ],
+      "id": "b9c5fb86-d67c-4226-bc8f-2886a5f938a5",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        780,
+        1200
+      ],
+      "id": "da9ad1c3-e594-4ba3-acc7-769c2ee2fc75",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1SgUCJLg1ag_-bQ6JKYYin1rDUOp8suE5eQg6PbelaL0",
+          "mode": "list",
+          "cachedResultName": "CAG",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SgUCJLg1ag_-bQ6JKYYin1rDUOp8suE5eQg6PbelaL0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SgUCJLg1ag_-bQ6JKYYin1rDUOp8suE5eQg6PbelaL0/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1140,
+        1200
+      ],
+      "id": "1c845ccf-9fc8-4449-93f8-b840569e9cd5",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1at6D8KX2cVbyb0PBNn5wvh6MOFK474IG",
+            "mode": "list",
+            "cachedResultName": "n8n Documents",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1at6D8KX2cVbyb0PBNn5wvh6MOFK474IG"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        260,
+        560
+      ],
+      "id": "dab72b78-d940-432c-af56-c472bb940bcd",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1140,
+        560
+      ],
+      "id": "204b5c13-a5e1-4412-8fca-026e074c1c99",
+      "name": "Search files and folders1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1SgUCJLg1ag_-bQ6JKYYin1rDUOp8suE5eQg6PbelaL0",
+          "mode": "list",
+          "cachedResultName": "CAG",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SgUCJLg1ag_-bQ6JKYYin1rDUOp8suE5eQg6PbelaL0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SgUCJLg1ag_-bQ6JKYYin1rDUOp8suE5eQg6PbelaL0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre documento": "={{ $('Edit Fields1').item.json.name }}",
+            "ID documento": "={{ $('Edit Fields1').item.json.id }}",
+            "cache ID": "={{ $json.name }}",
+            "Expiro": "={{ $json.expireTime }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre documento",
+              "displayName": "Nombre documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID documento",
+              "displayName": "ID documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cache ID",
+              "displayName": "cache ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Expiro",
+              "displayName": "Expiro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2820,
+        760
+      ],
+      "id": "649e0a2b-eb5d-48db-ba37-ef9eb462d4c8",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  const text = $input.first().json.text || '';\n  const characterCount = text.length;\n  const estimatedTokens = Math.ceil(characterCount / 4)\n\n  return {\n    json: {\n        characterCount,\n        estimatedTokens\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        560
+      ],
+      "id": "9b02be76-2f25-461c-84b6-bfc58c27a5e6",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a7f8815c-e640-4a75-a709-22d3e55641d0",
+              "leftValue": "={{ $json.estimatedTokens }}",
+              "rightValue": 35000,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2040,
+        560
+      ],
+      "id": "0dd672ea-12dc-4885-bc4f-17bbd99aa9ff",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"{{ $('When Executed by Another Workflow').item.json.query }}\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ],\n  \"cachedContent\": \"{{ $json['cache ID'] }}\",\n  \"generationConfig\":{\n    \"candidateCount\": 1,\n    \"temperature\": 0.2,\n    \"topK\": 40,\n    \"topP\" 0.95\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1800,
+        1220
+      ],
+      "id": "1e163f02-0e62-45b1-b023-49227cbacb5d",
+      "name": "HTTP Request1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bGEmvboF1pzvbFVh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-04T15:06:50.000Z",
+  "versionId": "a604e343-e90f-40bb-b230-8b84bcaf2d98"
+}
