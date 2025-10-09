@@ -1,0 +1,689 @@
+{
+  "active": false,
+  "connections": {
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-21T11:38:45.828Z",
+  "id": "eo65J0UcgUkZrhK0",
+  "isArchived": false,
+  "meta": null,
+  "name": "cachegemini",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1GycdIyoPKHElGL7YWCXjLfnsfb8G5fYB",
+          "mode": "list",
+          "cachedResultName": "Documentos CAG",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1GycdIyoPKHElGL7YWCXjLfnsfb8G5fYB"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        500,
+        560
+      ],
+      "id": "6d61d90e-bff2-40a7-854b-3858fbf66654",
+      "name": "Google Drive Trigger",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "965dea79-40f9-49fb-9f47-32bcf3ccba48",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "70655ff7-fb08-41a9-a00f-5599db49ff05",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        720,
+        560
+      ],
+      "id": "27fac0d1-9ffb-41cb-9a27-0f17a38c9134",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1942c213-a4ba-4ab1-9aa0-a533a1f9ff68",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "506574fb-8dcb-4fb5-8493-a0e721af04a1",
+              "name": "name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        940,
+        560
+      ],
+      "id": "97c58baf-77ac-41dc-abe5-34e8056b1aba",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1140,
+        560
+      ],
+      "id": "b03d99c0-e339-4359-a168-1f44bf9d9928",
+      "name": "Google Drive"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        560
+      ],
+      "id": "6a501677-a4ad-46f5-be9a-6f3d669ccf1a",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ebba6a0b-672d-4673-bab1-5ee1b2fa6fdc",
+              "name": "text",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1580,
+        560
+      ],
+      "id": "6eb0c701-d13f-4b22-af87-34d4c1c1c661",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  const text = $input.first().json.text || '';\n  const characterCount = text.length;\n  const estimatedTokens = Math.ceil(characterCount / 4)\n\n  return {\n    json: {\n        characterCount,\n        estimatedTokens\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1800,
+        560
+      ],
+      "id": "06bc90ff-09ba-4d1b-baaf-424a15079182",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a7f8815c-e640-4a75-a709-22d3e55641d0",
+              "leftValue": "={{ $json.estimatedTokens }}",
+              "rightValue": 35000,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2020,
+        560
+      ],
+      "id": "09b81595-f5cb-4763-b88e-cca40bff39bb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $('Edit Fields2').first().json.text;\n\nconst base64 = new Buffer.from(text).toString('base64');\n\nreturn [\n  {\n    json:{\n      base64: base64\n    } \n  }\n]"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        460
+      ],
+      "id": "253b437b-45ce-4894-8d5d-6125606ceb9d",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/cachedContents",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"models/gemini-1.5-flash-001\",\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"inline_data\": {\n            \"mime_type\": \"text/plain\",\n            \"data\": \"{{ $json.base64 }}\"\n          }\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ],\n  \"systemInstruction\": {\n    \"parts\": [\n      {\n        \"text\": \"Eres un asistente experto en responder en base a la información que te  proporcionare con este documento . Si no tienes conocimiento de la respuesta que hizo el usuario, responde: 'Lo siento, no lo sé', no inventes datos, siempre da la respuesta correcta y basa tus  respuestas en la  informacion proporcionada del documento de esta manera resolveras las dudas del usuario con precision, recuerda debes realizar tu tarea correctamente, si lo haces te pagare 2000 USD de lo contrario no tendre para alimentar a mi pequeña hija\"\n      }\n    ]\n  },\n  \"ttl\": \"3600s\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2460,
+        460
+      ],
+      "id": "341d6008-de3a-4063-9be6-2de5c0542f0e",
+      "name": "HTTP Request",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bGEmvboF1pzvbFVh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1r-5EstAM_CDT62ciS_5C7DhNTJTRujmwUIuGStsgioc",
+          "mode": "list",
+          "cachedResultName": "CAG",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r-5EstAM_CDT62ciS_5C7DhNTJTRujmwUIuGStsgioc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Documentos Cargados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r-5EstAM_CDT62ciS_5C7DhNTJTRujmwUIuGStsgioc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1140,
+        1200
+      ],
+      "id": "953b641a-98d6-4c69-af63-07eb5dd994fe",
+      "name": "Google Sheets1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5db1ad6d-68d5-411e-b3af-101e52dd4ae7",
+              "leftValue": "={{ $now }}",
+              "rightValue": "={{ $json.Expiro }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1520,
+        1200
+      ],
+      "id": "7b874bbc-03e5-40c4-8c18-0abb61d7c29b",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "07c3906f-c550-4715-bcff-803b70ceb0d8",
+              "name": "id",
+              "value": "={{ $json['ID documento'] }}",
+              "type": "string"
+            },
+            {
+              "id": "7bd1c72d-3340-478b-a2bd-4189df120f3a",
+              "name": "name",
+              "value": "={{ $json['Nombre documento'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        700,
+        840
+      ],
+      "id": "e28457b6-650e-4080-9dfe-d037f184d96a",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"{{ $('When Executed by Another Workflow').item.json.query }}\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ],\n  \"cachedContent\": \"{{ $json['cache ID'] }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        1220
+      ],
+      "id": "c93445f3-37da-4808-977b-e6f4226c6462",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "06045058-cf89-4796-a7cf-4fe765220bc4",
+              "name": "response",
+              "value": "={{ $json.candidates[0].content.parts[0].text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2120,
+        1220
+      ],
+      "id": "9d460b06-43db-44cb-85a6-56fdc69a8f9c",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        780,
+        1200
+      ],
+      "id": "114ddc14-9a11-4bb5-b9ce-fb8498d53dd2",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "content": "AIzaSyDBC4t0aY-SvMr6kO5ACtwH6vmNLitUg1w"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        380
+      ],
+      "id": "56a06d2e-14b1-4535-a88a-d46d06e31125",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1r-5EstAM_CDT62ciS_5C7DhNTJTRujmwUIuGStsgioc",
+          "mode": "list",
+          "cachedResultName": "CAG",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r-5EstAM_CDT62ciS_5C7DhNTJTRujmwUIuGStsgioc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Documentos Cargados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r-5EstAM_CDT62ciS_5C7DhNTJTRujmwUIuGStsgioc/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "cache ID": "={{ $json.name }}",
+            "Expiro": "={{ $json.expireTime }}",
+            "ID documento": "={{ $('Edit Fields1').item.json.id }}",
+            "Nombre documento": "={{ $('Edit Fields1').item.json.name }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre documento",
+              "displayName": "Nombre documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID documento",
+              "displayName": "ID documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "cache ID",
+              "displayName": "cache ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Expiro",
+              "displayName": "Expiro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2740,
+        680
+      ],
+      "id": "e19feebf-53ac-4855-ab4b-cba1da6adb46",
+      "name": "Google Sheets"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-07T11:32:42.000Z",
+  "versionId": "8f03f01e-d9d6-4663-887c-ea6ab53ad136"
+}
