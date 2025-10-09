@@ -1,0 +1,433 @@
+{
+  "active": false,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Sentiment Analysis",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "Etiquetar como informacion",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Etiquetar como Agendar",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Etiquetar como Otro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Etiquetar como informacion": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Etiquetar como Agendar": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Etiquetar como Otro": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Sentiment Analysis",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sentiment Analysis": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-18T12:12:32.690Z",
+  "id": "hrW42F61yj8vpKBJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "clasificadoremails",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -580,
+        -40
+      ],
+      "id": "c09cf060-c141-4df8-b217-45d814aba111",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "=Aquí te envío el email que tienes que clasificar.\nAsunto: {{ $json.subject }}\nCuerpo del correo: {{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "SolicitarInformacion",
+              "description": "El lead solicita informacion de los servicios de la empresa"
+            },
+            {
+              "category": "AgendarReunion",
+              "description": "El lead hace mención a realizar el agendamiento de una reunión para automatizar su negocio"
+            }
+          ]
+        },
+        "options": {
+          "fallback": "other"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        -40
+      ],
+      "id": "4450b562-9788-4b51-bcf7-f1cd83639026",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "inputText": "=Aquí te envío el email que tienes que analizar\nAsunto: {{ $json.subject }}\nCuerpo del correo: {{ $json.text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        -380
+      ],
+      "id": "35ce7894-f201-454d-a247-fbf024fe63df",
+      "name": "Sentiment Analysis"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        180
+      ],
+      "id": "c2697c05-da63-4009-96cb-c73f523507de",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        180
+      ],
+      "id": "4fcc2901-17ca-4d7e-ab19-427b58011f9a",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "bGEmvboF1pzvbFVh",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_423232290154235892"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        -60
+      ],
+      "id": "91f90f60-98e5-47e3-b299-b1e551085b94",
+      "name": "Etiquetar como informacion",
+      "webhookId": "4cad1c2a-7bb7-4e01-b35a-fdd5d89506b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        380,
+        -60
+      ],
+      "id": "9fcaa96f-26a4-4ea9-903b-6a8e6706954e",
+      "name": "Mark a message as read",
+      "webhookId": "2cb845d8-a481-472c-9c3d-d264516b72ab",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        360,
+        160
+      ],
+      "id": "d5e9134b-4486-4b9a-b118-a00c995d50aa",
+      "name": "Mark a message as read1",
+      "webhookId": "2cb845d8-a481-472c-9c3d-d264516b72ab",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_8096710282274094726"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        160
+      ],
+      "id": "2e8b60a7-d072-42db-82a8-0409e2b16830",
+      "name": "Etiquetar como Agendar",
+      "webhookId": "4cad1c2a-7bb7-4e01-b35a-fdd5d89506b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        360,
+        380
+      ],
+      "id": "6c89a4af-ac4c-4a4a-8dd7-41e7e147419c",
+      "name": "Mark a message as read2",
+      "webhookId": "2cb845d8-a481-472c-9c3d-d264516b72ab",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_6917798491392086301"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        380
+      ],
+      "id": "8d2659d6-e365-47d0-9878-61b375bf0f17",
+      "name": "Etiquetar como Otro",
+      "webhookId": "4cad1c2a-7bb7-4e01-b35a-fdd5d89506b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -300,
+        -200
+      ],
+      "id": "68de2832-d41b-4b14-a223-b386fdaa37a3",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "ezemirallas2011@gmail.com",
+        "subject": "!ATENCION!",
+        "emailType": "text",
+        "message": "=Un usuario está enfadado y requiere atención. Por favor preste atencion al siguiente email:\nContacto: {{ $json.to.value[0].address }}\nAsunto: {{ $json.subject }}\nMotivo: {{ $json.text }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        180,
+        -360
+      ],
+      "id": "3f42e1d8-c73e-4865-a835-a057088730aa",
+      "name": "Send a message",
+      "webhookId": "5137d28e-2a44-4fa1-8fe8-a94e0a8d313c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-18T13:53:31.000Z",
+  "versionId": "71e2cc8b-43e0-4ea7-90fe-d2009cb2856f"
+}
