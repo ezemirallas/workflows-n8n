@@ -1,0 +1,59 @@
+{
+  "active": false,
+  "connections": {
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-14T14:55:03.205Z",
+  "id": "crG3aYephYpppGXt",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "serverMCPcalculadora",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "MCP"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -120
+      ],
+      "id": "67195816-affe-4cc6-8fb3-26ab540967f8",
+      "name": "MCP Server Trigger",
+      "webhookId": "210959b5-07f1-45ec-a140-5070ab0613dd"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        140
+      ],
+      "id": "d6a81e2b-9fbc-49e2-99ce-dd260c63709c",
+      "name": "Calculator"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-07T13:39:10.000Z",
+  "versionId": "3e75f1fb-a16c-4f93-bb04-3b27736fda08"
+}
