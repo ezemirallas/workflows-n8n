@@ -1,0 +1,150 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-05T14:20:56.771Z",
+  "id": "wWYXLa3TqGmBb5Ta",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "consultausuariossga",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        -380
+      ],
+      "id": "5f3e49cd-c55c-4655-86f1-cb95ff4d785b",
+      "name": "When chat message received",
+      "webhookId": "eeb55e99-ad21-4b87-b6f4-58f881cc805d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Eres un asistente especializado administrar la lista de usuarios, tienes acceso a las siguientes herramientas.\n1. Google Sheets\nEn esta tienes acceso a ver toda la lista de usuarios y sacar información.\nAhora respondes a la siguiente pregunta: {{ $json.chatInput }}\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        180,
+        -380
+      ],
+      "id": "7bf4b18d-c5cb-40a3-a06b-2d602da6c8d0",
+      "name": "AI Agent",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -140
+      ],
+      "id": "9f07b27a-ed89-4159-b454-f83c4d38b84e",
+      "name": "Ollama Chat Model",
+      "notesInFlow": false,
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://5742-168-194-207-42.ngrok-free.app/mcp/67a55c8c-db06-4c5f-bf59-2dd04e018819/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        440,
+        -140
+      ],
+      "id": "117b12e4-4bcd-4c08-abd6-fa83e5b965ae",
+      "name": "MCP Client",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        300,
+        -140
+      ],
+      "id": "5a3a8f59-e82d-4280-8615-c3c308249339",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-07T13:39:08.000Z",
+  "versionId": "65fe2590-8d26-4b06-a8f0-ccf71f1650e7"
+}
