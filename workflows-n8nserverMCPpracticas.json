@@ -1,0 +1,81 @@
+{
+  "active": false,
+  "connections": {
+    "Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-15T12:54:38.917Z",
+  "id": "cTt3uUmrInx6vQfh",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "serverMCPpracticas",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "b0becf70-ca3f-4095-b304-2c2844e0eb1a"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "748db2d2-cbdd-4218-9d49-37e42e80c397",
+      "name": "MCP Server Trigger",
+      "webhookId": "b0becf70-ca3f-4095-b304-2c2844e0eb1a"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1r5u_yaOPZbt-Ov5CdOEnPx8DI8ynmHJ2OAFe14ADcvc",
+          "mode": "list",
+          "cachedResultName": "datos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r5u_yaOPZbt-Ov5CdOEnPx8DI8ynmHJ2OAFe14ADcvc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 852711691,
+          "mode": "list",
+          "cachedResultName": "Hoja 4",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1r5u_yaOPZbt-Ov5CdOEnPx8DI8ynmHJ2OAFe14ADcvc/edit#gid=852711691"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        40,
+        220
+      ],
+      "id": "aa4f9b1f-62a5-4470-bb8a-f32285f97e4a",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "8g1UuMKxFMytrLaY",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-07T13:39:02.000Z",
+  "versionId": "5f8f3c51-6b06-4983-8f3d-82be5ba3cf06"
+}
