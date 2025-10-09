@@ -1,0 +1,95 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "MCP Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "main": [
+        [
+          {
+            "node": "MCP Client1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-15T18:35:25.692Z",
+  "id": "DMGloT1zDhUtGsJm",
+  "isArchived": false,
+  "meta": null,
+  "name": "MCP",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -560,
+        -140
+      ],
+      "id": "21b5841d-6aac-45bc-952a-7d711dc1ba6a",
+      "name": "When chat message received",
+      "webhookId": "124663a4-7d80-4261-a4a5-3d0ba7cb1942"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -140
+      ],
+      "id": "408539d4-bc0d-4b95-b490-24f440c44496",
+      "name": "MCP Client",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "HDyhu0F2xcLCid03",
+          "name": "Airbnb Credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeTool",
+        "toolName": "airbnb_search",
+        "toolParameters": "{\n  \"location\":\"Mendoza\"\n}"
+      },
+      "type": "n8n-nodes-mcp.mcpClient",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        -140
+      ],
+      "id": "8f293a61-08b6-454a-8316-b254b23b46d0",
+      "name": "MCP Client1",
+      "credentials": {
+        "mcpClientApi": {
+          "id": "HDyhu0F2xcLCid03",
+          "name": "Airbnb Credentials"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-21T11:07:27.000Z",
+  "versionId": "658d3e75-4135-4ea6-87d4-baa8973ff797"
+}
