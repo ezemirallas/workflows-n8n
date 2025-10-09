@@ -1,0 +1,173 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-17T14:23:43.287Z",
+  "id": "Df5tUOMpEPtjvhyI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "agentepracticassql",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -360,
+        -260
+      ],
+      "id": "3ea05df3-86ba-46ef-bb3d-9e94dec2e0b3",
+      "name": "When chat message received",
+      "webhookId": "8445a278-3b26-4405-8bb6-5a6c8bcd9a95"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Eres un asistente experto en PostgreSQL. Tu objetivo es:\n1. Recibir una pregunta en lenguaje natural sobre los datos de una base de datos de especialidades.\n2. Convertir la única y exclusivamente en una instrucción SQL SELECT válida.\n3. No ejecutar nunca INSERT, UPDATE ni DELETE.\n4. Al generar la consulta SELECT, simpere usar la función SIMILARITY para encontrar búsquedas parecidas. En el WHERE usa el operador % para filtrar por similitud.\n5. Usar siempre la herramienta “postgres” para ejecutar la consulta\n6. Tras la ejecución, utiliza los resultados para responder en lenguaje natural.\n\nA continuación tienes la **estructura completa** de tu base de datos (schema DDL). Úsala para conocer nombres de tabla, columnas y tipos:\n\n```sql\n-- ============================================\n-- Script de creación de tabla practicas\n-- ============================================\n\n-- 1. Tabla: practicas\nCREATE TABLE practicas (\n  TipoConvenio TEXT,\n  CentroPrestador TEXT,       ,\n  Domicilio TEXT,\n  Tel TEXT,\n  Tel1 TEXT,\n  Tel2 TEXT,\n  Localidad TEXT,\n  Departamento TEXT,\n  Zona TEXT,\n  DescripcionPractica TEXT,\n  AutorizacionPrevia TEXT,\n  Especialidad TEXT\n);\n\nEjemplo 1:\n\nEntrada: donde me puedo realizar una ecografia en segunda seccion\nRespuesta: \nSELECT\n  \"CentroPrestador\"\nFROM practicas\nWHERE \"Especialidad\" % 'ecografia' AND \"Localidad\" = 'SEGUNDA SECCION'\nORDER BY \"CentroPrestador\" ASC\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        -260
+      ],
+      "id": "db3a539f-b0a3-4b04-9402-21227041c4f7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        -40
+      ],
+      "id": "55d03c0d-b701-4d58-a038-f9d70ad5aa21",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "practicas",
+          "mode": "name"
+        },
+        "limit": null,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        20,
+        -40
+      ],
+      "id": "1c01223e-eabb-4ef2-9c77-6a601de77669",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": {
+          "id": "YkWDJCP4jnGKXU0x",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b7ae2fae-f6ee-46a1-9f6b-71f2c1839395",
+              "name": "output",
+              "value": "={{$json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        -260
+      ],
+      "id": "728b0526-125a-45e5-a986-64f7a429931d",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-17T18:01:02.000Z",
+  "versionId": "2e07285e-24a2-4d5e-830d-2a21fa341cd3"
+}
