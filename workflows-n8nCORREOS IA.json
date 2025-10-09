@@ -1,0 +1,167 @@
+{
+  "active": false,
+  "connections": {
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Enviar respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-24T12:35:03.544Z",
+  "id": "65CWE7j4G8bHUIKp",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "CORREOS IA",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "munificado",
+              "value": "={{ $json.snippet }}"
+            },
+            {
+              "name": "destinatario",
+              "value": "={{ $json.To }}"
+            },
+            {
+              "name": "asunto_original",
+              "value": "={{ $json.Subject }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Set Variables",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        180,
+        0
+      ],
+      "id": "1cd75632-5075-4a0f-8730-a741ce40b2b8"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "subject": "=Re:  {{ $('Gmail Trigger1').item.json.Subject }}",
+        "message": "={{ $('HTTP Request').item.json.candidates[0].content.parts[0].text }}",
+        "toList": [
+          "={{ $('Gmail Trigger1').item.json.To }}"
+        ],
+        "additionalFields": {}
+      },
+      "name": "Enviar respuesta",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 1,
+      "position": [
+        600,
+        0
+      ],
+      "id": "9408ca42-5202-4345-9571-9e028969eb2f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "labelIds": [
+            "Label_8963676925412704497"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -60,
+        0
+      ],
+      "id": "5fa4f8dd-ebca-46b9-9a49-25953a50d838",
+      "name": "Gmail Trigger1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDGGAabbqAaG6NsSwLGhYYK0B9ELciIOo8",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"Actuá como un agente de mesa de ayuda. Clasificá el mensaje y redactá una respuesta profesional, clara y una frase que inspire buen humor.\\n\\nMensaje:\\n{{ $json.munificado }}\"\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"temperature\": 0.1,\n    \"topK\": 40,  \n    \"topP\": 0.95,\n    \"maxOutputTokens\": 1024\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        0
+      ],
+      "id": "0a598db5-075a-4ecf-92bf-5441d414d39c",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-25T11:40:56.000Z",
+  "versionId": "e0bbfd19-c8c3-497d-89d1-f48c133af841"
+}
