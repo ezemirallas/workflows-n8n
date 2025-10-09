@@ -1,0 +1,611 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission1": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter1": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader1",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Extract from File1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File1": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store5": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store5",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-18T11:44:53.889Z",
+  "id": "jQCe8LTdjkPnwtdp",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "experton8n",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Subir Archivos",
+        "height": 620,
+        "width": 1160
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "18bd6dc2-1e3b-451a-8fe7-c8998904733c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "formTitle": "Subir archivos",
+        "formDescription": "nd",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Subir archivos",
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        60,
+        120
+      ],
+      "id": "e84711d6-b0a4-42c1-a74f-ebbe4ff93ee1",
+      "name": "On form submission1",
+      "webhookId": "c127dc72-d344-4566-80df-fda5fec653dc"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.2,
+      "position": [
+        300,
+        120
+      ],
+      "id": "81252622-32bd-44c6-9d0f-d805032655c1",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "wnWtHSjezKsvkiGC",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ],
+      "id": "0f6b1b6f-d131-4a10-ac46-7eb1f671d0c6",
+      "name": "Default Data Loader1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        480,
+        440
+      ],
+      "id": "6ea5cddf-c2c3-41f8-b821-711756f4d636",
+      "name": "Recursive Character Text Splitter1"
+    },
+    {
+      "parameters": {
+        "content": "## Experto en N8N",
+        "height": 940,
+        "width": 2100,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -160,
+        720
+      ],
+      "typeVersion": 1,
+      "id": "384967e9-f6e7-4013-905f-4c0fc38ba4da",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "5323e7ee-feb4-4cb5-b9ba-118eb50d6614",
+              "leftValue": "={{ $json.files[0] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        180,
+        1020
+      ],
+      "id": "9257ea1e-a9c5-4222-beaf-62fb5911ed0b",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "binaryPropertyName": "data0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        420,
+        800
+      ],
+      "id": "31434bc9-5a59-47c0-ab1e-a45df18e01bf",
+      "name": "Extract from File1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const jsonContent = $input.first().json.data;\nconst text = JSON.stringify(jsonContent, null, 2); // Pretty-print with 2-space indentation\nreturn { json: { text } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        800
+      ],
+      "id": "b8a54565-b5c0-4987-b73a-c1daaa51c4c2",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=contenido archivo: {{ $json.text }}\nmensaje usuario: {{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "Eres un experto en n8n y ayudas a las personas con preguntas sobre n8n. Para todas las preguntas consulta la base de datos vectorial donde encuentras toda la documentación de n8n.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        920,
+        800
+      ],
+      "id": "16080be7-7972-4892-be56-6e0e7926fba1",
+      "name": "AI Agent2",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "1",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        980,
+        1020
+      ],
+      "id": "8515e643-11ad-49a7-ba0f-0de5bbc3f272",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=mensaje usuario: {{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "Eres un experto en n8n y ayudas a las personas con preguntas sobre n8n. Para todas las preguntas conulta la base de datos vecotrial donde encuentras toda la documentacion de n8n.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        440,
+        1120
+      ],
+      "id": "637eecd6-1780-4e7a-a185-c5dd6e924882",
+      "name": "AI Agent3"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "1",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        540,
+        1360
+      ],
+      "id": "8c7a490c-3093-4a4a-bef0-4787ac9c796b",
+      "name": "Simple Memory3"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "documentacion_n8n",
+        "toolDescription": "Acá encuentras toda la documentación de n8n",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.2,
+      "position": [
+        800,
+        1280
+      ],
+      "id": "9554ddd6-189a-4c76-8741-889721dfb12b",
+      "name": "Pinecone Vector Store5",
+      "credentials": {
+        "pineconeApi": {
+          "id": "wnWtHSjezKsvkiGC",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "GandalfBaum/llama3.2-claude3.7:latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        800,
+        980
+      ],
+      "id": "0ad315a9-0b0d-4ecd-ade5-83c84db6152a",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "allowFileUploads": true
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -100,
+        1020
+      ],
+      "id": "135977da-41f0-4ba6-a69e-ebb81d2d1b46",
+      "name": "When chat message received",
+      "webhookId": "43de3d38-b007-47db-bdc1-414388e02dda"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        260,
+        340
+      ],
+      "id": "066012bd-decb-4484-bdf0-8d092e68f677",
+      "name": "Embeddings HuggingFace Inference",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        840,
+        1460
+      ],
+      "id": "1b38b05e-27fd-4b6a-a5aa-b115e620a5ce",
+      "name": "Embeddings HuggingFace Inference2",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "n8n",
+        "toolDescription": "Acá encuentras toda la documentación de n8n",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n",
+          "mode": "list",
+          "cachedResultName": "n8n"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        1020
+      ],
+      "id": "1e87f5e7-9b2a-4fb7-bb1d-5695f4333fbd",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "wnWtHSjezKsvkiGC",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        1180
+      ],
+      "id": "ed9ba15d-4d33-4121-8131-ca23cc38b4cb",
+      "name": "Embeddings HuggingFace Inference1",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "GandalfBaum/llama3.2-claude3.7:latest",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        380,
+        1360
+      ],
+      "id": "e7797c03-94d3-4f63-9663-3e0653729b03",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-06-19T12:16:05.000Z",
+  "versionId": "cb42c7b9-d306-4500-8151-7af1f84c3b3b"
+}
