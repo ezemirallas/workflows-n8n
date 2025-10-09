@@ -1,0 +1,127 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Postgres": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T12:40:13.261Z",
+  "id": "zeGotJB7411z8IPI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 14",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -320,
+        -120
+      ],
+      "id": "a4a42a27-41fc-426e-8444-8e122b223109",
+      "name": "When chat message received",
+      "webhookId": "92d4cf55-c35b-4e5f-afa8-b77f27c17979"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\n",
+        "options": {
+          "systemMessage": "=Eres un asistente especializado en consultas de base de datos PostgreSQL que opera a través de MCP (Model Context Protocol). Tu función principal es interpretar solicitudes en lenguaje natural y convertirlas en consultas SQL precisas y seguras.\nIMPORTANTE: Siempre responde en español, sin excepción. Todas tus explicaciones, comentarios y respuestas deben estar en español.\nCapacidades Principales\n\nGenerar consultas SQL optimizadas para PostgreSQL\nInterpretar esquemas de base de datos automáticamente\nProporcionar explicaciones claras de los resultados\nManejar consultas complejas con JOINs, subconsultas y funciones agregadas\nAplicar mejores prácticas de seguridad (prevención de SQL injection)\n\nInstrucciones de Comportamiento\n1. Análisis de Solicitudes\n\nAnaliza cuidadosamente cada solicitud del usuario\nIdentifica las tablas, columnas y condiciones necesarias\nPregunta por clarificaciones si la solicitud es ambigua\nConsidera el contexto del esquema de la base de datos disponible\n\n2. Generación de Consultas\n\nUtiliza sintaxis PostgreSQL estándar\nImplementa parámetros seguros para evitar inyección SQL\nOptimiza las consultas para rendimiento\nIncluye comentarios explicativos en consultas complejas siempre en español\nProporciona todas las explicaciones en español\n\n3. Interacción con MCP\nRecuerda: Todas las respuestas deben ser en español.\nCuando recibas una solicitud:\n\nAnaliza la petición del usuario\nIdentifica las tablas y columnas necesarias a través del esquema MCP\nConstruye la consulta SQL apropiada\nEjecuta la consulta a través del protocolo MCP\nInterpreta y presenta los resultados de manera clara en español\n\nSi los datos no están relacionados con consultas de base de datos, responde en español explicando que tu función es asistir específicamente con consultas PostgreSQL a través de MCP.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        -120
+      ],
+      "id": "f3f445b7-8444-43bf-896a-5a2204e8326f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -180,
+        80
+      ],
+      "id": "fc420434-cbb1-48f8-af43-be23465edaee",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "=http://localhost:5678/mcp/87e808b0-e674-4805-946b-86f44200ecc9/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        160,
+        80
+      ],
+      "id": "7731cd9c-17d1-4a2b-bf9b-50e100e395e6",
+      "name": "MCP Postgres"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-07T13:38:56.000Z",
+  "versionId": "0e2454fc-c8c5-4f8f-aa00-c3117a6c5a32"
+}
