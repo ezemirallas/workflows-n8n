@@ -1,0 +1,387 @@
+{
+  "active": true,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "TURNOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "paso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TURNOS": {
+      "main": [
+        [
+          {
+            "node": "paso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EFECTOR": {
+      "main": [
+        [
+          {
+            "node": "SERVICIO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "paso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SERVICIO": {
+      "main": [
+        [
+          {
+            "node": "defineTelefono",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "paso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "paso": {
+      "main": [
+        [],
+        [
+          {
+            "node": "EFECTOR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "defineTelefono": {
+      "main": [
+        [
+          {
+            "node": "telefonoVacio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "telefonoVacio": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "paso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-10T15:52:36.646Z",
+  "id": "611sgYgHjO6ToXmY",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "turnoscentroodontologico",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "sender": "carina.rodriguez@osep.mendoza.gov.ar"
+        },
+        "options": {
+          "dataPropertyAttachmentsPrefixName": "attachment_",
+          "downloadAttachments": true
+        }
+      },
+      "id": "8a55a66c-4a3d-445c-8f13-1dff3d174276",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        -60
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nnnYdQteEYMo0uDh",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        0
+      ],
+      "id": "e5e2bafe-21ff-4c0e-9865-283ba15270f7"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "attachment_0",
+        "options": {
+          "headerRow": true,
+          "sheetName": "DETALLADO"
+        }
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        60,
+        -60
+      ],
+      "id": "0f27693d-822a-4594-875f-68d927bdb887",
+      "name": "TURNOS",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "46c08ae5-3013-4207-9803-2d9e65cf97f9",
+              "leftValue": "={{$node[\"paso\"].json[\"Desc Efector\"]}}",
+              "rightValue": "NUEVO CENTRO ODONTOLOGICO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        520,
+        -40
+      ],
+      "id": "5e48beaa-e5c2-482f-9cb3-b26c8c4e2993",
+      "name": "EFECTOR"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b040ca8f-bae6-4142-a31e-2364abe15cd4",
+              "leftValue": "={{$node[\"paso\"].json[\"Servicio\"]}}",
+              "rightValue": "ODONTOLOGIA INTEGRAL ADULTOS",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "7af1a31d-2563-495c-93f4-5566b7e60318",
+              "leftValue": "={{$node[\"paso\"].json[\"Servicio\"]}}",
+              "rightValue": "ODONTOLOGIA INTEGRAL ADULTOS - SEGUIMIENTO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        -60
+      ],
+      "id": "c37371f9-3f09-4126-9fe4-9aba748eeffb",
+      "name": "SERVICIO"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        260,
+        -60
+      ],
+      "id": "2c1fbe16-8696-4456-bd73-47e3b7f936aa",
+      "name": "paso"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const tel1 = $node[\"paso\"].json[\"TELEFONO\"] || '';\n  const tel2 = $node[\"paso\"].json[\"TELEFONO 2\"] || '';\n\n  // Prioriza TELÉFONO 2 si existe, si no usa TELÉFONO\n  let raw = tel2.trim() !== '' ? tel2 : tel1;\n\n  // Elimina espacios, guiones, paréntesis\n  raw = raw.replace(/[^\\d]/g, '');\n\n  // Elimina un 15 al inicio si lo tiene\n  if (raw.startsWith('15')) {\n    raw = raw.substring(2);\n  }\n\n  // Si comienza con 0, se lo quitamos\n  if (raw.startsWith('0')) {\n    raw = raw.substring(1);\n  }\n\n  // Si tiene solo 7 dígitos, le agregamos código de área 261\n  if (raw.length === 7) {\n    raw = '261' + raw;\n  }\n\n  // Aseguramos que empiece con 549 (código internacional +9 + celular)\n  if (!raw.startsWith('549')) {\n    raw = '549' + raw;\n  }\n\n  return {\n    json: {\n      telefono_estandarizado: raw\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        -80
+      ],
+      "id": "2763968d-d52d-4ed7-a268-b084d65c2f21",
+      "name": "defineTelefono"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "546b6719-8a68-4524-93ee-bd53a03fa32c",
+              "leftValue": "={{ $json.telefono_estandarizado }}",
+              "rightValue": "549",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        -80
+      ],
+      "id": "58b9e838-d483-430a-930f-75aebe86cdba",
+      "name": "telefonoVacio"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://go.botmaker.com/api/v1.0/message/v3",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "access-token",
+              "value": "eyJhbGciOiJIUzUxMiJ9.eyJidXNpbmVzc0lkIjoib3NlcCIsIm5hbWUiOiJzZXJnaW8uYmxhc2NvIiwiYXBpIjp0cnVlLCJpZCI6IlZoNXRYa09hNXVaYWYzN2d2ZFNSbUhaNnNVVjIiLCJleHAiOjE3ODE2MTg3OTIsImp0aSI6IlZoNXRYa09hNXVaYWYzN2d2ZFNSbUhaNnNVVjIifQ.bASMrzX-U6XmMAVQhovEEDY_9aTmEE9PjkiIkqFmiTATSZoWvHiFxmNkV2B8l-uZa5Yy13lwMn1HWdkDnMIYgQ"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chatPlatform",
+              "value": "whatsapp"
+            },
+            {
+              "name": "chatChannelNumber",
+              "value": "5492612058800"
+            },
+            {
+              "name": "platformContactId",
+              "value": "={{ $('setNroAfiliado').item.json.telefono }}"
+            },
+            {
+              "name": "messageText",
+              "value": "=Queremos informarte que durante el mes de {{ $('Busca Consumo').item.json.MES }}, el monto total de los *consumos familiares en medicamentos* cubiertos por la obra social fue de *{{ $json.montoFormateado }}* 💊 \n\nSeguimos comprometidos con tu salud y la de tu familia, trabajando cada día para brindarte una mejor cobertura y atención.\n\nPara conocer más detalles, ingresá a la _sección \"Mis consumos\"_ en la app de OSEP."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1260,
+        260
+      ],
+      "id": "61935f31-175d-4c2d-af91-b863d46eddb8",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Gmail Trigger": {
+      "lastTimeChecked": 1757760606,
+      "possibleDuplicates": [
+        "19942b2608536db7"
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-22T12:11:35.000Z",
+  "versionId": "87caab98-1063-473c-b7c7-2c53a3f609a2"
+}
