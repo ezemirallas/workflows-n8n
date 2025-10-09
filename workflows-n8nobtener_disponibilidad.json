@@ -1,0 +1,156 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get many events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many events": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-20T10:47:06.417Z",
+  "id": "GqXrKGUbczR6Hmae",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "obtener_disponibilidad",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -520,
+        -80
+      ],
+      "id": "2e0f710c-f447-4ca1-8aa5-566642b22c27",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "timeMax": "={{ $now.plus({ day: 3 }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -300,
+        -80
+      ],
+      "id": "34f1b9cd-eaf5-402a-896c-35bf330c6f8e",
+      "name": "Get many events",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 🔧 Configuración\nconst diasABuscar = 7;        // cantidad de días hacia adelante\nconst horaInicio = 9;         // hora de inicio (ej: 9 AM)\nconst horaFin = 17;           // hora de fin (ej: 18 hs)\nconst duracionSlot = 30;      // duración de cada slot en minutos\nconst espacioEntreSlots = 0;  // minutos de espacio entre slots\n\n// Función para convertir a hora de Mendoza (UTC-3)\nfunction toMendozaDate(dateTimeStr) {\n  const date = new Date(dateTimeStr);\n  // Ajustar manualmente a UTC-3\n  const utc = date.getTime() + (date.getTimezoneOffset() * 60000);\n  return new Date(utc - (3 * 60 * 60000));\n}\n\n// Obtener los eventos normalizados\nconst eventos = items.map(item => {\n  const inicio = toMendozaDate(item.json.start.dateTime);\n  const fin = toMendozaDate(item.json.end.dateTime);\n  return { inicio, fin };\n});\n\n// Verifica si un slot se cruza con algún evento ocupado\nfunction estaDisponible(inicioSlot, finSlot, eventos) {\n  for (const ev of eventos) {\n    if (inicioSlot < ev.fin && finSlot > ev.inicio) {\n      return false;\n    }\n  }\n  return true;\n}\n\n// Generar slots por día\nconst resultados = [];\nconst ahora = new Date();\nahora.setHours(0, 0, 0, 0); // reset hora actual\n\nfor (let d = 0; d < diasABuscar; d++) {\n  const fechaBase = new Date(ahora);\n  fechaBase.setDate(fechaBase.getDate() + d);\n\n  let cursor = new Date(fechaBase);\n  cursor.setHours(horaInicio, 0, 0, 0);\n\n  const finDia = new Date(fechaBase);\n  finDia.setHours(horaFin, 0, 0, 0);\n\n  while (cursor.getTime() + duracionSlot * 60000 <= finDia.getTime()) {\n    const inicioSlot = new Date(cursor);\n    const finSlot = new Date(cursor.getTime() + duracionSlot * 60000);\n\n    if (estaDisponible(inicioSlot, finSlot, eventos)) {\n      resultados.push({\n        fecha: inicioSlot.toISOString().split('T')[0],\n        desde: inicioSlot.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' }),\n        hasta: finSlot.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' }),\n        isoInicio: inicioSlot.toISOString(),\n        isoFin: finSlot.toISOString()\n      });\n    }\n\n    cursor = new Date(cursor.getTime() + (duracionSlot + espacioEntreSlots) * 60000);\n  }\n}\n\n// Agrupar todos los resultados en un solo objeto\nreturn [\n  {\n    json: {\n      disponibilidad: resultados\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        -80
+      ],
+      "id": "7219759d-967e-481b-b1ff-f84e5836b21a",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "const disponibilidad = items.map(item => item.json);\n\n// Devolver un solo item con esa lista como propiedad\nreturn [\n{\njson: {\ndisponibilidad\n}\n}\n];\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        140,
+        -80
+      ],
+      "id": "d1c562e2-241d-4842-b890-194291b6c7b5",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e44f25f5-c052-4118-8bfc-b427a20826c0",
+              "name": "response",
+              "value": "={{ $json.disponibilidad }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        360,
+        -80
+      ],
+      "id": "67729c0b-c2e9-4bc5-b6b1-57cd51d31b31",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-08-20T11:33:58.000Z",
+  "versionId": "927c3c4f-fec7-4b6d-92d4-b47ca661da0f"
+}
