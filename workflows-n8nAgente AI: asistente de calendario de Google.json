@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Calendar AI Agent": {
       "main": [
@@ -50,7 +50,7 @@
         ]
       ]
     },
-    "Google Calendar": {
+    "Get availability in a calendar in Google Calendar": {
       "ai_tool": [
         [
           {
@@ -64,6 +64,7 @@
   },
   "createdAt": "2025-03-20T10:14:50.323Z",
   "id": "C30GXSZ3QbEw8Ze1",
+  "isArchived": false,
   "meta": {
     "templateId": "2703"
   },
@@ -102,9 +103,9 @@
         "toolDescription": "Utilice esta herramienta de Google Calendar cuando se le solicite crear un evento.",
         "calendar": {
           "__rl": true,
-          "value": "family06768887662418209056@group.calendar.google.com",
+          "value": "ezemirallas2011@gmail.com",
           "mode": "list",
-          "cachedResultName": "reuniones"
+          "cachedResultName": "Firma digital"
         },
         "start": "={{ new Date($fromAI(\"start_date\")).toISOString() }}",
         "end": "={{ new Date($fromAI(\"end_date\")).toISOString() }}",
@@ -268,16 +269,18 @@
         "resource": "calendar",
         "calendar": {
           "__rl": true,
-          "value": "family06768887662418209056@group.calendar.google.com",
+          "value": "ezemirallas2011@gmail.com",
           "mode": "list",
-          "cachedResultName": "reuniones"
+          "cachedResultName": "Firma digital"
         },
         "timeMin": "={{ new Date($fromAI(\"start_date\")).toISOString() }}",
         "timeMax": "={{ new Date($fromAI(\"end_date\")).toISOString() }}",
         "options": {
           "timezone": {
+            "__rl": true,
+            "value": "America/Argentina/Mendoza",
             "mode": "list",
-            "value": ""
+            "cachedResultName": "America/Argentina/Mendoza"
           }
         }
       },
@@ -288,7 +291,7 @@
         1040
       ],
       "id": "4ac26df2-bc2e-4bcc-82d9-e2962eba917d",
-      "name": "Google Calendar",
+      "name": "Get availability in a calendar in Google Calendar",
       "credentials": {
         "googleCalendarOAuth2Api": {
           "id": "Vf5bgRrnud34w82z",
@@ -301,7 +304,7 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2025-03-25T14:54:04.000Z",
-  "versionId": "8219f82e-26cf-4090-93a6-797512d1f531"
+  "triggerCount": 1,
+  "updatedAt": "2025-08-19T13:57:45.000Z",
+  "versionId": "0ac774a6-7623-4641-a0f3-9b9846069f26"
 }
