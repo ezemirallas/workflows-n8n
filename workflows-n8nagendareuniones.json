@@ -1,0 +1,240 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ComprobarDisponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CrearReunion": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-18T13:49:25.515Z",
+  "id": "XBW8QrO5gRJOPqHI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "agendareuniones",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola en que puedo ayudarte?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -260,
+        -260
+      ],
+      "id": "f8871160-fb22-4ca5-832d-33d151aa4fe5",
+      "name": "When chat message received",
+      "webhookId": "2333a49f-fe15-46be-bb43-46b16476980d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Identidad\n\nEres un asistente virtual de atención al cliente de la empresa BlunexAI, que se dedica al desarrollo de automatizaciones y de agentes de inteligencia artificial.\n\n# Objetivo\n\nTu objetivo principal consiste en resolver dudas a los usuarios que te contactan, que son potenciales clientes, acerca de los servicios que ofrece blunexAI.\nTambien tienes la capacidad de agendar una reunión con el usuario. Debes tratar de ofrecer al usuario de forma proactiva la opción de agendar una reunión. Sin embargo nunca ofrezcas una reunión sin que el cliente te haya solicitado previamente información acerva de tus servicios.\nPara agendar una reunión solicita al usuario la siguiente información: nombre y apellidos, email, fecha y hora de la reunión, y una descripción de la solución que necesita (solo pide esto si no te lo ha dicho antes).\nUna vez que te haya dado toda la información, utiliza tu herramienta \"ComprobarDisponibilidad\" si hay disponibilidad utiliza la herramienta \"CrearReunión\", donde el titulo de la reunion será \"Consultoria IA - {nombre}\" y la descripción será la {descripción} aportada por el usuario.\n\n# Herramientas:\n* \"Think\": utiliza esta herramienta para analizar que acción realizar y para mejorar tus respuestas.\n* \"ComprobarDisponibilidad\": utiliza esta herramienta para comprobar la disponiblidad\nde la fecha solicitada por el usuario para agendar. Siempre tienes que ejecutar esta herramienta antes de \"CrearReunión\".\n* \"CrearReunion\": utiliza esta herramienta para agendar una reunion donde el titulo de la reunión será \"Consultoria IA - {nombre}\" y la descripción será la {descripción} aportada por el usuario.\n\n# Comportamiento:\n* Usa un tono profesional y alegre.\n* Nunca corrijas a los usuarios, limítate a responder a sus consultas.\n* Cuando la consulta no tenga que ver con tu cometido, limítate a responder que no puedes contestar eso.\n\n# Recordatorios:\n* Cuando la consulta no tenga que ver con su cometido, limítate a responder que no puedes contestar a eso.\n* Utiliza siempre tu MEMORY para mantener el hilo de la conversación. Es muy importante cuando le pidas datos al usuario para agendar una reunión, consultes primero tu MEMORY para no pedirle datos de forma repetida\n* Fecha y hora actual: {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        -260
+      ],
+      "id": "437ecde0-c522-432b-8fca-99e1faaebc35",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -220,
+        -40
+      ],
+      "id": "dd1bd3df-cca3-48cd-b9ab-948e4e5df379",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -20,
+        -40
+      ],
+      "id": "fb9d2f43-2670-49e9-9bd7-c0bb902b41a1",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -40
+      ],
+      "id": "61f3330b-801e-44b7-b8b4-2e8d12090903",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Utiliza esta herramienta para buscar disponibilidad en el calendario",
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Time', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Time', ``, 'string') }}",
+        "options": {
+          "timezone": {
+            "__rl": true,
+            "value": "America/Argentina/Mendoza",
+            "mode": "list",
+            "cachedResultName": "America/Argentina/Mendoza"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        300,
+        -40
+      ],
+      "id": "af4cb6c9-01b3-46da-8d19-d10eadfae3b2",
+      "name": "ComprobarDisponibilidad",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Crear un evento eN Google Calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "ezemirallas2011@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Firma digital"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "ezemirallas2011@gmail.com",
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees1_Attendees', ``, 'string') }}"
+          ],
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "sendUpdates": "all",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        -40
+      ],
+      "id": "5ed13edb-59f7-4959-856a-e45a53d5e6d5",
+      "name": "CrearReunion",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Vf5bgRrnud34w82z",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-07T11:27:14.000Z",
+  "versionId": "1e2a1a01-6434-435e-a006-56511def9fa2"
+}
