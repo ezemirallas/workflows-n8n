@@ -1,0 +1,80 @@
+{
+  "active": false,
+  "connections": {
+    "Postgres": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T12:43:32.765Z",
+  "id": "YhbC1RveXfm72kyn",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Postgres Server",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "87e808b0-e674-4805-946b-86f44200ecc9"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        20,
+        -140
+      ],
+      "id": "c0212759-b067-462b-8c46-517ad583a65f",
+      "name": "MCP Server Trigger",
+      "webhookId": "87e808b0-e674-4805-946b-86f44200ecc9"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        180,
+        80
+      ],
+      "id": "44cf726e-31c6-4854-9018-51782d79af5f",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": {
+          "id": "YkWDJCP4jnGKXU0x",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-07-07T13:38:58.000Z",
+  "versionId": "ae55d583-8ac5-40de-9900-a1a8563285e6"
+}
