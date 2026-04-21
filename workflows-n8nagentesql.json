@@ -1,0 +1,507 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-06-17T12:18:57.985Z",
+    "createdAt": "2025-06-17T12:18:57.985Z",
+    "versionId": "a31a37ad-947b-41f3-81d4-767327afaff4",
+    "workflowId": "JrkZpeODyyTdqj9I",
+    "nodes": [
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          180
+        ],
+        "id": "f5fddae5-0f0a-4f07-9f9e-3ef88508c2bd",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e8937f7a-17cc-4e17-970f-7c711fe88fb0",
+                "name": "output",
+                "value": "={{ $json.output }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1020,
+          100
+        ],
+        "id": "7a661f83-9b93-4e0e-a78c-f6fd9ce6a2cc",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "model": "llama3.1:8b",
+          "options": {
+            "temperature": 0
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "typeVersion": 1,
+        "position": [
+          340,
+          420
+        ],
+        "id": "32a370cf-aad6-4b54-8402-26d216deeb54",
+        "name": "Ollama Chat Model",
+        "credentials": {
+          "ollamaApi": {
+            "id": "NQCaIfW9ruiVvrK4",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "public": true,
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "d9f347d0-fd21-4cdf-b065-1de45c9389b0",
+        "name": "When chat message received1",
+        "webhookId": "68a549db-0c87-49ea-b19c-a7757aca8524"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          500,
+          420
+        ],
+        "id": "49245357-f40b-4014-8c2c-607eefae35ca",
+        "name": "Simple Memory",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "name": "get_schema_supabase",
+          "description": "=Call this tool to retrieve the schema of all the tables inside of the database. A string will be retrieved with the name of the table and its columns, each table is separated by \\n\\n.",
+          "workflowId": {
+            "__rl": true,
+            "value": "ayljFA5XElZe7Nmz",
+            "mode": "list",
+            "cachedResultName": "get_schema_supabase"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 2,
+        "position": [
+          660,
+          420
+        ],
+        "id": "53b8174b-1abf-47c0-988f-737b1e0f6818",
+        "name": "get_schema_supabase"
+      },
+      {
+        "parameters": {
+          "name": "query_sql",
+          "description": "Call this tool to execute a query. Remember that it should be in a postgreSQL query structure.",
+          "workflowId": {
+            "__rl": true,
+            "value": "6kYA64GFPoWYqKQE",
+            "mode": "list",
+            "cachedResultName": "query_sql"
+          },
+          "specifyInputSchema": true,
+          "schemaType": "manual"
+        },
+        "id": "f243a704-5316-4d22-9687-3ebd719db619",
+        "name": "query_sql",
+        "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+        "typeVersion": 1.2,
+        "position": [
+          800,
+          420
+        ]
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.query || $json.chatInput }}",
+          "options": {
+            "systemMessage": "=Sos un experto en SQL y tu tarea es generar consultas PostgreSQL correctas para una base de datos alojada en Supabase. La base contiene una tabla llamada `supermercado_productos` con los siguientes campos:\n\n- id (entero)\n- nombre (texto)\n- descripcion (texto)\n- precio (numérico o texto en algunos casos)\n- cantidad (entero)\n- categoria (texto)\n- marca (texto)\n\nTu objetivo es generar **únicamente** consultas SQL basadas en preguntas en lenguaje natural. No agregues explicaciones ni comentarios. Sólo devolvé la consulta SQL lista para ser ejecutada\n\nEjemplos:\n\n**Pregunta:** ¿Cual es el producto mas caro? \n**Respuesta:** \nSELECT \n    nombre, \n    precio AS precio_limpio\nFROM \n    supermercado_productos\nORDER BY \n    precio DESC\nLIMIT 1;\n",
+            "maxIterations": 5
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.8,
+        "position": [
+          560,
+          100
+        ],
+        "id": "53d96045-db78-4a25-aeba-f8a87b6924a4",
+        "name": "Agente SQL"
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Agente SQL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ollama Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "Agente SQL",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When chat message received1": {
+        "main": [
+          [
+            {
+              "node": "Agente SQL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "Agente SQL",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "get_schema_supabase": {
+        "ai_tool": [
+          [
+            {
+              "node": "Agente SQL",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "query_sql": {
+        "ai_tool": [
+          [
+            {
+              "node": "Agente SQL",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agente SQL": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Ezequiel  Mirallas",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "a31a37ad-947b-41f3-81d4-767327afaff4",
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Agente SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente SQL",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received1": {
+      "main": [
+        [
+          {
+            "node": "Agente SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agente SQL",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_schema_supabase": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente SQL",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "query_sql": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente SQL",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agente SQL": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-13T11:31:31.728Z",
+  "id": "JrkZpeODyyTdqj9I",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "agentesql",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        180
+      ],
+      "id": "f5fddae5-0f0a-4f07-9f9e-3ef88508c2bd",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e8937f7a-17cc-4e17-970f-7c711fe88fb0",
+              "name": "output",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        100
+      ],
+      "id": "7a661f83-9b93-4e0e-a78c-f6fd9ce6a2cc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        340,
+        420
+      ],
+      "id": "32a370cf-aad6-4b54-8402-26d216deeb54",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d9f347d0-fd21-4cdf-b065-1de45c9389b0",
+      "name": "When chat message received1",
+      "webhookId": "68a549db-0c87-49ea-b19c-a7757aca8524"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        500,
+        420
+      ],
+      "id": "49245357-f40b-4014-8c2c-607eefae35ca",
+      "name": "Simple Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "name": "get_schema_supabase",
+        "description": "=Call this tool to retrieve the schema of all the tables inside of the database. A string will be retrieved with the name of the table and its columns, each table is separated by \\n\\n.",
+        "workflowId": {
+          "__rl": true,
+          "value": "ayljFA5XElZe7Nmz",
+          "mode": "list",
+          "cachedResultName": "get_schema_supabase"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        660,
+        420
+      ],
+      "id": "53b8174b-1abf-47c0-988f-737b1e0f6818",
+      "name": "get_schema_supabase"
+    },
+    {
+      "parameters": {
+        "name": "query_sql",
+        "description": "Call this tool to execute a query. Remember that it should be in a postgreSQL query structure.",
+        "workflowId": {
+          "__rl": true,
+          "value": "6kYA64GFPoWYqKQE",
+          "mode": "list",
+          "cachedResultName": "query_sql"
+        },
+        "specifyInputSchema": true,
+        "schemaType": "manual"
+      },
+      "id": "f243a704-5316-4d22-9687-3ebd719db619",
+      "name": "query_sql",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        800,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query || $json.chatInput }}",
+        "options": {
+          "systemMessage": "=Sos un experto en SQL y tu tarea es generar consultas PostgreSQL correctas para una base de datos alojada en Supabase. La base contiene una tabla llamada `supermercado_productos` con los siguientes campos:\n\n- id (entero)\n- nombre (texto)\n- descripcion (texto)\n- precio (numérico o texto en algunos casos)\n- cantidad (entero)\n- categoria (texto)\n- marca (texto)\n\nTu objetivo es generar **únicamente** consultas SQL basadas en preguntas en lenguaje natural. No agregues explicaciones ni comentarios. Sólo devolvé la consulta SQL lista para ser ejecutada\n\nEjemplos:\n\n**Pregunta:** ¿Cual es el producto mas caro? \n**Respuesta:** \nSELECT \n    nombre, \n    precio AS precio_limpio\nFROM \n    supermercado_productos\nORDER BY \n    precio DESC\nLIMIT 1;\n",
+          "maxIterations": 5
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        560,
+        100
+      ],
+      "id": "53d96045-db78-4a25-aeba-f8a87b6924a4",
+      "name": "Agente SQL"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-06-13T11:31:31.736Z",
+      "createdAt": "2025-06-13T11:31:31.736Z",
+      "role": "workflow:owner",
+      "workflowId": "JrkZpeODyyTdqj9I",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-06-17T12:18:57.000Z",
+  "versionId": "a31a37ad-947b-41f3-81d4-767327afaff4"
+}
