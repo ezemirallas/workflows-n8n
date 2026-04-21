@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "HTTP Request": {
       "main": [
@@ -315,6 +317,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2024-12-16T13:49:19.091Z",
+      "createdAt": "2024-12-16T13:49:19.091Z",
+      "role": "workflow:owner",
+      "workflowId": "y4RfG3QgLQN4LMRm",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": []
