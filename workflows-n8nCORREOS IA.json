@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Set Variables": {
       "main": [
@@ -35,12 +37,10 @@
       ]
     }
   },
-  "createdAt": "2025-06-24T12:35:03.544Z",
-  "id": "65CWE7j4G8bHUIKp",
+  "createdAt": "2026-03-17T17:25:44.443Z",
+  "id": "ZZMYmkg4666HAWsy7Nf0Y",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "meta": null,
   "name": "CORREOS IA",
   "nodes": [
     {
@@ -67,10 +67,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
       "position": [
-        180,
+        240,
         0
       ],
-      "id": "1cd75632-5075-4a0f-8730-a741ce40b2b8"
+      "id": "b584c928-f459-451d-ae7e-98afebf5fe25"
     },
     {
       "parameters": {
@@ -86,16 +86,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 1,
       "position": [
-        600,
+        672,
         0
       ],
-      "id": "9408ca42-5202-4345-9571-9e028969eb2f",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "nnnYdQteEYMo0uDh",
-          "name": "Gmail account 2"
-        }
-      }
+      "id": "57399b48-bb24-494c-bcc3-3d359300e3a0"
     },
     {
       "parameters": {
@@ -115,17 +109,11 @@
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1.2,
       "position": [
-        -60,
+        0,
         0
       ],
-      "id": "5fa4f8dd-ebca-46b9-9a49-25953a50d838",
-      "name": "Gmail Trigger1",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "nnnYdQteEYMo0uDh",
-          "name": "Gmail account 2"
-        }
-      }
+      "id": "7be706e0-8e0c-4622-8c21-2a8f76d3a58f",
+      "name": "Gmail Trigger1"
     },
     {
       "parameters": {
@@ -148,20 +136,30 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        400,
+        464,
         0
       ],
-      "id": "0a598db5-075a-4ecf-92bf-5441d414d39c",
+      "id": "440c94b6-7a0b-44fb-839d-23769ab457d4",
       "name": "HTTP Request"
     }
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "availableInMCP": false
   },
+  "shared": [
+    {
+      "updatedAt": "2026-03-17T17:25:44.525Z",
+      "createdAt": "2026-03-17T17:25:44.525Z",
+      "role": "workflow:owner",
+      "workflowId": "ZZMYmkg4666HAWsy7Nf0Y",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-06-25T11:40:56.000Z",
-  "versionId": "e0bbfd19-c8c3-497d-89d1-f48c133af841"
+  "updatedAt": "2026-03-17T17:25:44.443Z",
+  "versionId": "1129dd13-ca71-4a77-9625-45b7b6c3c68d"
 }
