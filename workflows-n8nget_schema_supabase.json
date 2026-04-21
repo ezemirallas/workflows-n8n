@@ -1,0 +1,185 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-12T10:46:43.997Z",
+    "createdAt": "2026-01-12T10:46:43.997Z",
+    "versionId": "1cad8efc-224c-4088-8216-ea41ebd559a3",
+    "workflowId": "ayljFA5XElZe7Nmz",
+    "nodes": [
+      {
+        "parameters": {
+          "jsCode": "function transformSchema(input) {\n    const tables = {};\n    \n    input.forEach(({ json }) => {\n        if (!json) return;\n        \n        const { tablename, schemaname, column_name, data_type } = json;\n        \n        if (!tables[tablename]) {\n            tables[tablename] = { schema: schemaname, columns: [] };\n        }\n        tables[tablename].columns.push(`${column_name} (${data_type})`);\n    });\n    \n    return Object.entries(tables)\n        .map(([tablename, { schema, columns }]) => `Table ${tablename} (Schema: ${schema}) has columns: ${columns.join(\", \")}`)\n        .join(\"\\n\\n\");\n}\n\n// Example usage\nconst input = $input.all();\nconsole.log(input);\nconst transformedSchema = transformSchema(input);\n\nreturn { data: transformedSchema };"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          720,
+          -80
+        ],
+        "id": "b7259206-b26b-4d40-bc1b-4f5102ffa338",
+        "name": "Code"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT \n    t.schemaname,\n    t.tablename,\n    c.column_name,\n    c.data_type\nFROM \n    pg_catalog.pg_tables t\nJOIN \n    information_schema.columns c\n    ON t.schemaname = c.table_schema\n    AND t.tablename = c.table_name\nWHERE \n    t.schemaname = 'public'\n    AND t.tablename = 'supermercado_productos'\nORDER BY \n    c.ordinal_position;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.5,
+        "position": [
+          500,
+          -80
+        ],
+        "id": "5a9c87f8-7356-41a6-b2e7-08916714f327",
+        "name": "Postgres1",
+        "alwaysOutputData": false,
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "YkWDJCP4jnGKXU0x",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "id": "23fc4516-d183-445d-819e-6d40c9a10bc7",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          280,
+          -80
+        ]
+      }
+    ],
+    "connections": {
+      "Postgres1": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Postgres1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "1cad8efc-224c-4088-8216-ea41ebd559a3",
+  "connections": {
+    "Postgres1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Postgres1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-13T11:33:09.904Z",
+  "id": "ayljFA5XElZe7Nmz",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "get_schema_supabase",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "function transformSchema(input) {\n    const tables = {};\n    \n    input.forEach(({ json }) => {\n        if (!json) return;\n        \n        const { tablename, schemaname, column_name, data_type } = json;\n        \n        if (!tables[tablename]) {\n            tables[tablename] = { schema: schemaname, columns: [] };\n        }\n        tables[tablename].columns.push(`${column_name} (${data_type})`);\n    });\n    \n    return Object.entries(tables)\n        .map(([tablename, { schema, columns }]) => `Table ${tablename} (Schema: ${schema}) has columns: ${columns.join(\", \")}`)\n        .join(\"\\n\\n\");\n}\n\n// Example usage\nconst input = $input.all();\nconsole.log(input);\nconst transformedSchema = transformSchema(input);\n\nreturn { data: transformedSchema };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -80
+      ],
+      "id": "b7259206-b26b-4d40-bc1b-4f5102ffa338",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    t.schemaname,\n    t.tablename,\n    c.column_name,\n    c.data_type\nFROM \n    pg_catalog.pg_tables t\nJOIN \n    information_schema.columns c\n    ON t.schemaname = c.table_schema\n    AND t.tablename = c.table_name\nWHERE \n    t.schemaname = 'public'\n    AND t.tablename = 'supermercado_productos'\nORDER BY \n    c.ordinal_position;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        500,
+        -80
+      ],
+      "id": "5a9c87f8-7356-41a6-b2e7-08916714f327",
+      "name": "Postgres1",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "YkWDJCP4jnGKXU0x",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "23fc4516-d183-445d-819e-6d40c9a10bc7",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        280,
+        -80
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-06-13T11:33:09.908Z",
+      "createdAt": "2025-06-13T11:33:09.908Z",
+      "role": "workflow:owner",
+      "workflowId": "ayljFA5XElZe7Nmz",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-13T15:44:46.000Z",
+  "versionId": "1cad8efc-224c-4088-8216-ea41ebd559a3"
+}
