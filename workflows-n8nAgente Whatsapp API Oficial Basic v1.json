@@ -1,0 +1,1143 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "File": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Audio": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "From audio to audio?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Input type": {
+      "main": [
+        [
+          {
+            "node": "Text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Audio Url",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Image Url",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Only PDF File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not supported",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File Url": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Image": {
+      "main": [
+        [
+          {
+            "node": "Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Audio Url": {
+      "main": [
+        [
+          {
+            "node": "Download Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image Url": {
+      "main": [
+        [
+          {
+            "node": "Download Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only PDF File": {
+      "main": [
+        [
+          {
+            "node": "Get File Url",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Incorrect format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Audio": {
+      "main": [
+        [
+          {
+            "node": "Transcribe Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Image": {
+      "main": [
+        [
+          {
+            "node": "Analyze Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe Audio": {
+      "main": [
+        [
+          {
+            "node": "Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "From audio to audio?": {
+      "main": [
+        [
+          {
+            "node": "Generate Audio Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fix mimeType for Audio": {
+      "main": [
+        [
+          {
+            "node": "Send audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Audio Response": {
+      "main": [
+        [
+          {
+            "node": "Fix mimeType for Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Input type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-12T11:10:07.287Z",
+  "id": "06r9u_yIgzoV2iwqIP7It",
+  "isArchived": false,
+  "meta": null,
+  "name": "Agente Whatsapp API Oficial Basic v1",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "15055050-b53a-4346-8b72-a12026ebe4f8",
+      "name": "Download Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1776,
+        672
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "text": "=You are an advanced image description AI assistant . Your primary function is to provide detailed, accurate descriptions of images submitted through WhatsApp.\n\nCORE FUNCTIONALITY:\n- When presented with an image, you will analyze it thoroughly and provide a comprehensive description in English.\n- Your descriptions should capture both the obvious and subtle elements within the image.\n\nIMAGE DESCRIPTION GUIDELINES:\n- Begin with a broad overview of what the image contains\n- Describe key subjects, people, objects, and their relationships\n- Note significant visual elements such as colors, lighting, composition, and perspective\n- Identify any text visible in the image\n- Describe the setting or environment\n- Mention any notable actions or events taking place\n- Comment on mood, tone, or atmosphere when relevant\n- If applicable, identify landmarks, famous people, or cultural references\n\nRESPONSE FORMAT:\n- Start with \"Image Description:\" followed by your analysis\n- Structure your description in a logical manner (general to specific)\n- Use clear, precise language appropriate for visual description\n- Format longer descriptions with paragraphs to enhance readability\n- End with any notable observations that might require special attention\n\nLIMITATIONS:\n- If the image is blurry, low resolution, or difficult to interpret, acknowledge these limitations\n- If an image contains potentially sensitive content, provide a factual description without judgment\n- Do not make assumptions about elements that cannot be clearly determined\n\nYour descriptions should be informative, objective, and thorough, enabling someone who cannot see the image to form an accurate mental picture of its contents.\n\nEl output debe estar en español.",
+        "inputType": "base64",
+        "options": {
+          "detail": "auto"
+        }
+      },
+      "id": "274ca391-d676-4bc8-9a76-3aa5c0c4344a",
+      "name": "Analyze Image",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        2016,
+        672
+      ],
+      "typeVersion": 1.8,
+      "notes": "https://platform.openai.com/"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "0b4e152f-bcf3-4cd8-a937-3e42c5cde780",
+      "name": "Download Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1776,
+        368
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "c6ceec53-4307-40e1-9cc0-3bf20f3cb75d",
+      "name": "Transcribe Audio",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        2016,
+        368
+      ],
+      "typeVersion": 1.8,
+      "notes": "https://platform.openai.com/\n"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=Eres un Agentes de Inteligencia Artificial, Your purpose is to analyze various types of input and provide helpful, accurate responses, eres propiedad de https://innovarketing.com/ una consultora experta en automatizacion con IA para negocios b2b creada por Javier Vrandecic \n\nImportante, el output debe estar siempre en español"
+        }
+      },
+      "id": "d9f4dce2-351f-4afe-a617-36c64a6be989",
+      "name": "AI Agent1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1232,
+        1504
+      ],
+      "typeVersion": 1.8,
+      "notes": "You are an intelligent assistant. Your purpose is to analyze various types of input and provide helpful, accurate responses, eres propiedad de innovarketing.com una consultora experta en automatizacion con IA para negocios b2b\n\nCAPABILITIES:\n- Process and respond to text messages\n- Analyze uploaded files\n- Interpret and describe images\n- Transcribe and understand voice messages\n\nINPUT HANDLING:\n1. For text messages: Analyze the content, understand the intent, and provide a relevant response.\n2. For file analysis: Examine the file content, extract key information, and summarize important points also based on the questions asked.\n3. For image analysis: Describe what you see in the image, identify key elements, and respond to any questions about the image.\n4. For voice messages: Transcribe the audio, understand the message, and respond appropriately.\n\nRESPONSE GUIDELINES:\n- Be concise but thorough\n- Prioritize accuracy over speculation\n- Maintain a professional and helpful tone\n- When uncertain, acknowledge limitations\n- Format responses for easy reading on mobile devices\n- Include actionable information when appropriate\n\nLIMITATIONS:\n- Mention if you're unable to process certain file formats\n- Indicate if an image is unclear or if details are difficult to discern\n- Note if audio quality impacts transcription accuracy\n\nSECURITY & PRIVACY:\n- Do not store or remember sensitive information shared in files, images, or voice notes\n- Do not share personal information across different user interactions\n- Inform users about data privacy limitations when relevant\n\nAnalyze all inputs carefully before responding. Your goal is to provide value through accurate information and helpful assistance.\n\nImportante, el output debe estar siempre en español\n\npropiedad de https://innovarketing.com/"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "eadeff48-2cc1-483e-a394-fbaa2a3a82e2",
+      "name": "Download File",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1776,
+        1008
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "e4611433-bf90-4133-88aa-f154ebfe1384",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        2032,
+        1008
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $('WhatsApp Trigger').item.json.messages[0].document.id }}"
+      },
+      "id": "9335e131-01c3-45f9-8b98-a71a31f61117",
+      "name": "Get File Url",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        1552,
+        1008
+      ],
+      "webhookId": "2369769f-c020-42ea-a7eb-56ba9ead771a",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "f52d2aaa-e0b2-45e5-8c4b-ceef42182a0d",
+              "operator": {
+                "name": "filter.operator.equals",
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $json.messages[0].document.mime_type }}",
+              "rightValue": "application/pdf"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "784f9da2-0ad4-4a75-83eb-260af0227392",
+      "name": "Only PDF File",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1280,
+        1024
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  if (item.binary) {\n    const binaryPropertyNames = Object.keys(item.binary);\n    for (const propName of binaryPropertyNames) {\n      if (item.binary[propName].mimeType === 'audio/mp3') {\n        item.binary[propName].mimeType = 'audio/mpeg';\n      }\n    }\n  }\n}\n\nreturn $input.all();"
+      },
+      "id": "e3d6e6ef-cbc3-4c89-8b2f-f1abff822102",
+      "name": "Fix mimeType for Audio",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1984,
+        1424
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('Input type').item.json.contacts[0].wa_id }}",
+        "messageType": "audio",
+        "mediaPath": "useMedian8n",
+        "additionalFields": {}
+      },
+      "id": "931493f5-768e-4572-8088-1f313c5b9073",
+      "name": "Send audio",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        2176,
+        1424
+      ],
+      "webhookId": "40f60bda-9791-44b5-8de0-756982d28e67",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "=Sorry but you can only send PDF files",
+        "additionalFields": {}
+      },
+      "id": "79474e2a-a4b2-49fb-b23e-b4c4bf5fb860",
+      "name": "Incorrect format",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        1552,
+        1200
+      ],
+      "webhookId": "5bd0a7db-71d2-42b8-844e-5369865a17f4",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c53cd9f9-77c1-4331-98ff-bfc9bdf95a3c",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $('WhatsApp Trigger').item.json.messages[0].text.body }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dcff6c50-5b83-4654-8316-9c376e897789",
+      "name": "Text",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2304,
+        32
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "219577d5-b028-48fc-90be-980f4171ab68",
+              "name": "text",
+              "type": "string",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a4d37dd7-1957-451a-87fe-0aca4af31e6d",
+      "name": "Audio",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2304,
+        368
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "67552183-de2e-494a-878e-c2948e8cb6bb",
+              "name": "text",
+              "type": "string",
+              "value": "=User request on the image:\n{{ \"Describe the following image\" || $('WhatsApp Trigger3').item.json.messages[0].image.caption }}\n\nImage description:\n{{ $json.content }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "12b38612-d980-4bb1-add3-d1e5aa5285f7",
+      "name": "Image",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2304,
+        672
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "67552183-de2e-494a-878e-c2948e8cb6bb",
+              "name": "text",
+              "type": "string",
+              "value": "=User request on the file:\n{{ \"Describe this file\" || $('Only PDF File').item.json.messages[0].document.caption }}\n\nFile content:\n{{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e1175c1f-68d0-4a32-b37b-d9c580b914f2",
+      "name": "File",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2304,
+        1008
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "=solo puedo aceptar audios y texto, si quieres enviar algun documento favor contactarte con contacto@innovarketing.com",
+        "additionalFields": {}
+      },
+      "id": "50e58a72-c2c6-4808-bf6a-ab798b4ace75",
+      "name": "Not supported",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        928,
+        352
+      ],
+      "webhookId": "5eee4df1-43b0-47c4-906d-3041a2d619e8",
+      "typeVersion": 1,
+      "notes": "{{ $('WhatsApp Trigger').item.json.messages[0].from }}"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $('WhatsApp Trigger').item.json.messages[0].image.id }}"
+      },
+      "id": "6161e530-6834-4407-8de2-bac849e26460",
+      "name": "Get Image Url",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        1536,
+        672
+      ],
+      "webhookId": "c237cf89-2720-4fa1-9560-4eee3339a312",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].audio.id }}"
+      },
+      "id": "66c0dddc-590c-4607-a971-f8b30484b26a",
+      "name": "Get Audio Url",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        1520,
+        368
+      ],
+      "webhookId": "149a2ec2-0512-4a69-8718-a346a5791b62",
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "input": "={{ $('AI Agent1').item.json.output }}",
+        "voice": "onyx",
+        "options": {}
+      },
+      "id": "bf159e31-e833-45b2-af08-da0c9432ffc9",
+      "name": "Generate Audio Response",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        1792,
+        1424
+      ],
+      "typeVersion": 1.8,
+      "notes": "https://platform.openai.com/"
+    },
+    {
+      "parameters": {
+        "content": "## Texto",
+        "height": 240,
+        "width": 1340,
+        "color": 5
+      },
+      "id": "a3f28c29-eab2-435b-94bc-66bf014fc270",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1184,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Audio",
+        "height": 240,
+        "width": 1340,
+        "color": 5
+      },
+      "id": "22367c0c-6e78-4180-87d0-6427dc122fa0",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1184,
+        320
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Imagen",
+        "height": 240,
+        "width": 1340,
+        "color": 5
+      },
+      "id": "cbb3c321-f9ab-46d0-833b-20d59cc3059e",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1184,
+        640
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Documento",
+        "height": 400,
+        "width": 1340,
+        "color": 5
+      },
+      "id": "b2ccfd44-93af-429e-9976-d78dc7eb4575",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1184,
+        960
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Respuesta",
+        "height": 600,
+        "width": 1340,
+        "color": 3
+      },
+      "id": "c85ea898-adc7-49ec-9ca3-690e24aa5bc2",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1184,
+        1376
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "b9d1d759-f585-4791-a743-b9d72951e77c",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              },
+              "leftValue": "={{ $('WhatsApp Trigger').item.json.messages[0].audio }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "83f4c7f9-beac-472b-9676-2e1805e4ac0e",
+      "name": "From audio to audio?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        1552,
+        1504
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "08fd0c80-307e-4f45-b1de-35192ee4ec5e",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.messages[0].text.body }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "b7b64446-f1ea-4622-990c-22f3999a8269",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.messages[0].audio }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Voice"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "202af928-a324-411a-bf15-68a349e7bf9e",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.messages[0].image }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Image"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "c63299e9-6069-4bc6-afb9-7beebf6e3d69",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.messages[0].document }}",
+                    "rightValue": ""
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "Document"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "3fa85704-0b15-42fa-8ad4-73f7e305e32c",
+      "name": "Input type",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        912,
+        48
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        1792,
+        1600
+      ],
+      "id": "8ceb254f-4eb0-46b8-8b88-f3e161c5798d",
+      "name": "Send message1",
+      "webhookId": "8d8b7888-a338-4197-a684-d175242f2008"
+    },
+    {
+      "parameters": {
+        "content": "## Filtro Input",
+        "height": 512,
+        "width": 448,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        656,
+        0
+      ],
+      "id": "a52f7797-e5a9-4810-ae07-c1afd44682e9",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## 📖 Documentación Completa\n\n\n👉 **Guía de instalación paso a paso:**\n\nhttps://youtube.com/playlist?list=PLzimRTP06iYiYcOTke4ful9Y4KNTO3jEl&si=Dd66g1bU-Fij7jri\n\nhttps://innovarketing.com/recursos/guias-n8n/agente-whatsapp-ia-gratis\n\n🌐 **Más recursos:** https://innovarketing.com/recursos/guias-n8n\n\n🚀Escenario de Registro HTTP :\nhttps://innovarketing.com/producto/registro-y-validacion-de-numero-whatsapp-meta-api-oficial\n\n🚀 **Versión PRO disponible** \nhttps://innovarketing.com/producto/workflow-whatsapp-pro-crm",
+        "height": 304,
+        "width": 624,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        16,
+        0
+      ],
+      "id": "883121a3-bac3-48c2-af1d-f08a60410b15",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1344,
+        1712
+      ],
+      "id": "150775ad-3fd8-4552-98aa-2065a390a68d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## Step 2 - Flujo de Registro HTTP\n1. Descargamos el Escenario de Registro Rapido desde :\nhttps://innovarketing.com/producto/registro-y-validacion-de-numero-whatsapp-meta-api-oficial\n\n(Si tienes el Escenario de Registro rapido, debes saltar este paso) 1.1 Registro Normal se realiza via Consola en developers.facebook con la siguiente documentación:\nhttps://developers.facebook.com/documentation/business-messaging/whatsapp/reference/whatsapp-business-phone-number/phone-number-registration\n\n2. Registramos Manualmente los datos requeridos que debemos obtener en Meta Business Facebook (Token + Certificado, ID Waba, Numero a registrar, Codigo Pais)\n\n3. Obtener ID Phone Number via Get (ID Waba + Token)\n\n4. Registramos el Id Phone Number via HTTP\n\n5. Validamos y Suscribimos Numero de Whatsapp (Token + Certificado + ID Phone Number + Codigo Pais + Numero)\n\n5. Suscribimos Cuenta Confirmada a la app Usamos identificador nuevo (ID Waba + Token)\n\n6. Validamos Suscripción de Waba a ID de la App en Meta Developers (ID Waba + Token)\n\n\n",
+        "height": 464,
+        "width": 448,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        624
+      ],
+      "id": "37268d74-76fb-459d-b1cb-d7afd80bf22c",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## STEP 3 - Login Whatsapp\n\n7. Creamos la Credencial Nodo Trigger:  \n\nClient ID y Cliente Secret\n\nCliente ID lo encontramos dentro de nuestra aplicación (Meta Developers) configuración básica con el nombre de “Identificador de la aplicación” y el Client Secret que lo encontraremos ahí mismo como “Clave secreta de la aplicación”\n\n8. Nodo Send Messages: \nAccess Token y Business Acount ID\n\nEl business account id es el identificador del numero que usaremos para producción \n\n",
+        "height": 368,
+        "width": 448,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1104
+      ],
+      "id": "09433af2-e9fd-4650-a0d5-f0e9d6333aa9",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "## Step 1 - Datos Requeridos\nRevisar: https://innovarketing.com/recursos/guias-n8n\n\nhttps://developers.facebook.com/apps/\nhttps://platform.openai.com/\n\n1. Token Permanente \n2. Certificado de Verificación\n3. ID Whatsapp Business\n4. ID Numero a Registrar\n5. Numero a Registrar en Whatsapp Business API \n",
+        "height": 288,
+        "width": 448,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        320
+      ],
+      "id": "344b0b36-8142-4fa1-932f-377826531a08",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cad5945a-05ae-4e48-9958-0d26dcd24632",
+              "name": "Token Permanente",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "4e2b6947-62fe-4cdd-9879-8a43fe97422b",
+              "name": "Certificado",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "dbfb954e-35a5-4043-b167-e650a1cbfe3f",
+              "name": "ID Whatsapp (waba)",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "a83dab51-d1a4-40c7-96d9-544100e3cf82",
+              "name": "ID Phone Number",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "6e97a378-624c-4209-b6e3-d1bc70a756ea",
+              "name": "Codigo Pais ",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "dd94e0a1-4c31-46ae-ba80-73053104a87d",
+              "name": "Numero",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        192,
+        1568
+      ],
+      "id": "232e75ff-7083-4de8-88b7-cd4a7835398f",
+      "name": "1. Set Data 1"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": []
+        }
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        688,
+        96
+      ],
+      "id": "9dee82a1-f99d-4549-98f2-8caee2d426fb",
+      "name": "WhatsApp Trigger",
+      "webhookId": "17321a6d-1d65-429e-808c-5eebe4db066d",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "iYQlzj0F9PCu7wwG",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        1712
+      ],
+      "id": "329a977e-dab6-4ae3-8f03-78b147b8b13e",
+      "name": "OpenRouter Chat Model"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-12T11:10:07.467Z",
+      "createdAt": "2026-03-12T11:10:07.467Z",
+      "role": "workflow:owner",
+      "workflowId": "06r9u_yIgzoV2iwqIP7It",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2026-03-12T10:41:58.298Z",
+      "createdAt": "2026-03-12T10:41:58.298Z",
+      "id": "vhow5EKsgn8R1zWU",
+      "name": "Agente Basico"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-12T11:10:07.287Z",
+  "versionId": "bd9de748-ad14-425a-914d-050d0c8c7b24"
+}
