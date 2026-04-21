@@ -1,0 +1,329 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-06-17T13:26:37.501Z",
+    "createdAt": "2025-06-17T13:26:37.501Z",
+    "versionId": "0e2454fc-c8c5-4f8f-aa00-c3117a6c5a32",
+    "workflowId": "4cQg4CZmgCmwMsAK",
+    "nodes": [
+      {
+        "parameters": {
+          "public": true,
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "731efa48-1665-4576-b854-ba931617148c",
+        "name": "When chat message received",
+        "webhookId": "d40c3554-2ec2-4a43-9719-27210a6445d1"
+      },
+      {
+        "parameters": {
+          "options": {
+            "systemMessage": "=Eres un asistente experto en PostgreSQL. Tu objetivo es:\n1. Recibir una pregunta en lenguaje natural sobre los datos de una base de datos de una tienda online de ropa.\n2. Convertir la única y exclusivamente en una instrucción SQL SELECT válida.\n3. No ejecutar nunca INSERT, UPDATE ni DELETE.\n4. Al generar la consulta SELECT, simpere usar la función SIMILARITY para encontrar búsquedas parecidas. En el WHERE usa el operador % para filtrar por similitud.\n5. Usar siempre la herramienta “postgres” para ejecutar la consulta\n6. Tras la ejecución, utiliza los resultados para responder en lenguaje natural.\n   \nA continuación tienes la **estructura completa** de tu base de datos (schema DDL). Úsala para conocer nombres de tablas, columnas y tipos:\n\n```sql\n-- ============================================\n-- Script de creación de tablas para tienda online\n-- ============================================\n\n-- 1. Tabla: clientes\nCREATE TABLE clientes (\n  cliente_id   SERIAL PRIMARY KEY,\n  nombre       VARCHAR(100) NOT NULL,\n  email        VARCHAR(150) UNIQUE NOT NULL,\n  direccion    TEXT,\n  fecha_alta   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()\n);\n\n-- 2. Tabla: productos (con campos extra)\nCREATE TABLE productos (\n  producto_id     SERIAL PRIMARY KEY,\n  nombre          VARCHAR(150) NOT NULL,\n  descripcion     TEXT,\n  sku             VARCHAR(50) UNIQUE NOT NULL,\n  precio_unit     NUMERIC(10,2) NOT NULL CHECK (precio_unit >= 0),\n  stock           INT NOT NULL DEFAULT 0 CHECK (stock >= 0),\n  activo          BOOLEAN NOT NULL DEFAULT TRUE,\n  imagen_url      TEXT,\n  atributos       JSONB NOT NULL DEFAULT '{}'::jsonb,\n  creado_en       TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n  actualizado_en  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()\n);\n\n-- Función y trigger para mantener actualizado 'actualizado_en'\nCREATE OR REPLACE FUNCTION actualizar_timestamp()\nRETURNS TRIGGER AS $$\nBEGIN\n  NEW.actualizado_en := NOW();\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_productos_update\nBEFORE UPDATE ON productos\nFOR EACH ROW\nEXECUTE FUNCTION actualizar_timestamp();\n\n-- 3. Tabla: pedidos\nCREATE TABLE pedidos (\n  pedido_id    SERIAL PRIMARY KEY,\n  cliente_id   INT NOT NULL\n                REFERENCES clientes(cliente_id)\n                ON DELETE RESTRICT,\n  fecha_pedido TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n  estado       VARCHAR(20) NOT NULL\n                CHECK (estado IN ('pendiente','procesando','enviado','cancelado')),\n  total        NUMERIC(10,2) NOT NULL DEFAULT 0\n);\n\n-- 4. Tabla: pedido_items (relación N–M)\nCREATE TABLE pedido_items (\n  pedido_id    INT NOT NULL\n                REFERENCES pedidos(pedido_id)\n                ON DELETE CASCADE,\n  producto_id  INT NOT NULL\n                REFERENCES productos(producto_id)\n                ON DELETE RESTRICT,\n  cantidad     INT NOT NULL CHECK (cantidad > 0),\n  precio_unit  NUMERIC(10,2) NOT NULL CHECK (precio_unit >= 0),\n  PRIMARY KEY (pedido_id, producto_id)\n);\n\n\nEjemplos de registros de la tabla de Productos:\n\n\nproducto_id,nombre,descripcion,sku,precio_unit,stock,activo,imagen_url,atributos,creado_en,actualizado_en\n1,Camiseta slim fit de algodón blanco,El camiseta blanco en estilo slim fit está confeccionado en algodón de alta calidad. Perfecto para tus looks más casuales.,SKU000001,79.53,27,true,https://cdn.ejemplo.com/images/1.jpg,\"{\"\"color\"\": \"\"negro\"\", \"\"talla\"\": \"\"XXL\"\"}\",2025-05-24 15:31:39.959481+00,2025-05-24 15:31:39.959481+00\n2,Pantalón oversize de lino negro,El pantalón negro en estilo oversize está confeccionado en lino de alta calidad. Perfecto para tus looks más casuales.,SKU000002,42.84,35,true,https://cdn.ejemplo.com/images/2.jpg,\"{\"\"color\"\": \"\"blanco\"\", \"\"talla\"\": \"\"XL\"\"}\",2025-05-24 15:31:39.959481+00,2025-05-24 15:31:39.959481+00\n3,Chaqueta cropped de cuero azul marino,El chaqueta azul marino en estilo cropped está confeccionado en cuero de alta calidad. Perfecto para tus looks más casuales.,SKU000003,46.47,198,true,https://cdn.ejemplo.com/images/3.jpg,\"{\"\"color\"\": \"\"negro\"\", \"\"talla\"\": \"\"XL\"\"}\",2025-05-24 15:31:39.959481+00,2025-05-24 15:31:39.959481+00\n\n\nEjemplo 1:\n\nEntrada: estoy buscando camisetas slim\nconsulta sql: SELECT\n  producto_id,\n  nombre,\n  descripcion,\n  precio_unit,\n  similarity(nombre, 'camiseta slim') AS sim\nFROM productos\nWHERE nombre % 'camiseta slim'\nORDER BY sim DESC\nLIMIT 10;\n\nEjemplo 2: quiero ver el estado del pedido de Maria Morillo\nconsulta sql: SELECT\n  p.pedido_id,\n  p.estado,\n  p.fecha_pedido,\n  c.nombre,\n  similarity(c.nombre, 'Maria Morillo') AS sim_nombre\nFROM clientes c\nJOIN pedidos p\n  ON p.cliente_id = c.cliente_id\nWHERE c.nombre % 'Maria Morillo'\nORDER BY sim_nombre DESC;\n\n# Recordatorio:\nNUNCA respondas con una consulta SELECT ni nada de sql. El SQL solo lo generas para enviarlo tu herramienta \"postgres\" pero NUNCA en tu respuesta.",
+            "maxIterations": 10
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.9,
+        "position": [
+          220,
+          0
+        ],
+        "id": "85dc967b-d49e-43d9-a70d-a443f00dddbe",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "{{$fromAI('query')}}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          460,
+          240
+        ],
+        "id": "aaa0b3fc-c8ca-418b-944f-767ff0bc67aa",
+        "name": "Postgres",
+        "credentials": {
+          "postgres": {
+            "id": "YkWDJCP4jnGKXU0x",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": "llama3.1:8b",
+          "options": {
+            "temperature": 0
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "typeVersion": 1,
+        "position": [
+          220,
+          240
+        ],
+        "id": "abfbc520-ac00-4c3f-b162-a45a3973b890",
+        "name": "Ollama Chat Model",
+        "credentials": {
+          "ollamaApi": {
+            "id": "NQCaIfW9ruiVvrK4",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "9f6a7d8e-6f25-4e27-a621-1aa37f178448",
+                "name": "output",
+                "value": "={{ $json.output}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          580,
+          0
+        ],
+        "id": "99f49190-1ff3-473f-8da5-30efd8c5ba88",
+        "name": "Edit Fields"
+      }
+    ],
+    "connections": {
+      "When chat message received": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Postgres": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ollama Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Ezequiel  Mirallas",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "0e2454fc-c8c5-4f8f-aa00-c3117a6c5a32",
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-17T12:20:52.078Z",
+  "id": "4cQg4CZmgCmwMsAK",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 15",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "731efa48-1665-4576-b854-ba931617148c",
+      "name": "When chat message received",
+      "webhookId": "d40c3554-2ec2-4a43-9719-27210a6445d1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Eres un asistente experto en PostgreSQL. Tu objetivo es:\n1. Recibir una pregunta en lenguaje natural sobre los datos de una base de datos de una tienda online de ropa.\n2. Convertir la única y exclusivamente en una instrucción SQL SELECT válida.\n3. No ejecutar nunca INSERT, UPDATE ni DELETE.\n4. Al generar la consulta SELECT, simpere usar la función SIMILARITY para encontrar búsquedas parecidas. En el WHERE usa el operador % para filtrar por similitud.\n5. Usar siempre la herramienta “postgres” para ejecutar la consulta\n6. Tras la ejecución, utiliza los resultados para responder en lenguaje natural.\n   \nA continuación tienes la **estructura completa** de tu base de datos (schema DDL). Úsala para conocer nombres de tablas, columnas y tipos:\n\n```sql\n-- ============================================\n-- Script de creación de tablas para tienda online\n-- ============================================\n\n-- 1. Tabla: clientes\nCREATE TABLE clientes (\n  cliente_id   SERIAL PRIMARY KEY,\n  nombre       VARCHAR(100) NOT NULL,\n  email        VARCHAR(150) UNIQUE NOT NULL,\n  direccion    TEXT,\n  fecha_alta   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()\n);\n\n-- 2. Tabla: productos (con campos extra)\nCREATE TABLE productos (\n  producto_id     SERIAL PRIMARY KEY,\n  nombre          VARCHAR(150) NOT NULL,\n  descripcion     TEXT,\n  sku             VARCHAR(50) UNIQUE NOT NULL,\n  precio_unit     NUMERIC(10,2) NOT NULL CHECK (precio_unit >= 0),\n  stock           INT NOT NULL DEFAULT 0 CHECK (stock >= 0),\n  activo          BOOLEAN NOT NULL DEFAULT TRUE,\n  imagen_url      TEXT,\n  atributos       JSONB NOT NULL DEFAULT '{}'::jsonb,\n  creado_en       TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n  actualizado_en  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()\n);\n\n-- Función y trigger para mantener actualizado 'actualizado_en'\nCREATE OR REPLACE FUNCTION actualizar_timestamp()\nRETURNS TRIGGER AS $$\nBEGIN\n  NEW.actualizado_en := NOW();\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_productos_update\nBEFORE UPDATE ON productos\nFOR EACH ROW\nEXECUTE FUNCTION actualizar_timestamp();\n\n-- 3. Tabla: pedidos\nCREATE TABLE pedidos (\n  pedido_id    SERIAL PRIMARY KEY,\n  cliente_id   INT NOT NULL\n                REFERENCES clientes(cliente_id)\n                ON DELETE RESTRICT,\n  fecha_pedido TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n  estado       VARCHAR(20) NOT NULL\n                CHECK (estado IN ('pendiente','procesando','enviado','cancelado')),\n  total        NUMERIC(10,2) NOT NULL DEFAULT 0\n);\n\n-- 4. Tabla: pedido_items (relación N–M)\nCREATE TABLE pedido_items (\n  pedido_id    INT NOT NULL\n                REFERENCES pedidos(pedido_id)\n                ON DELETE CASCADE,\n  producto_id  INT NOT NULL\n                REFERENCES productos(producto_id)\n                ON DELETE RESTRICT,\n  cantidad     INT NOT NULL CHECK (cantidad > 0),\n  precio_unit  NUMERIC(10,2) NOT NULL CHECK (precio_unit >= 0),\n  PRIMARY KEY (pedido_id, producto_id)\n);\n\n\nEjemplos de registros de la tabla de Productos:\n\n\nproducto_id,nombre,descripcion,sku,precio_unit,stock,activo,imagen_url,atributos,creado_en,actualizado_en\n1,Camiseta slim fit de algodón blanco,El camiseta blanco en estilo slim fit está confeccionado en algodón de alta calidad. Perfecto para tus looks más casuales.,SKU000001,79.53,27,true,https://cdn.ejemplo.com/images/1.jpg,\"{\"\"color\"\": \"\"negro\"\", \"\"talla\"\": \"\"XXL\"\"}\",2025-05-24 15:31:39.959481+00,2025-05-24 15:31:39.959481+00\n2,Pantalón oversize de lino negro,El pantalón negro en estilo oversize está confeccionado en lino de alta calidad. Perfecto para tus looks más casuales.,SKU000002,42.84,35,true,https://cdn.ejemplo.com/images/2.jpg,\"{\"\"color\"\": \"\"blanco\"\", \"\"talla\"\": \"\"XL\"\"}\",2025-05-24 15:31:39.959481+00,2025-05-24 15:31:39.959481+00\n3,Chaqueta cropped de cuero azul marino,El chaqueta azul marino en estilo cropped está confeccionado en cuero de alta calidad. Perfecto para tus looks más casuales.,SKU000003,46.47,198,true,https://cdn.ejemplo.com/images/3.jpg,\"{\"\"color\"\": \"\"negro\"\", \"\"talla\"\": \"\"XL\"\"}\",2025-05-24 15:31:39.959481+00,2025-05-24 15:31:39.959481+00\n\n\nEjemplo 1:\n\nEntrada: estoy buscando camisetas slim\nconsulta sql: SELECT\n  producto_id,\n  nombre,\n  descripcion,\n  precio_unit,\n  similarity(nombre, 'camiseta slim') AS sim\nFROM productos\nWHERE nombre % 'camiseta slim'\nORDER BY sim DESC\nLIMIT 10;\n\nEjemplo 2: quiero ver el estado del pedido de Maria Morillo\nconsulta sql: SELECT\n  p.pedido_id,\n  p.estado,\n  p.fecha_pedido,\n  c.nombre,\n  similarity(c.nombre, 'Maria Morillo') AS sim_nombre\nFROM clientes c\nJOIN pedidos p\n  ON p.cliente_id = c.cliente_id\nWHERE c.nombre % 'Maria Morillo'\nORDER BY sim_nombre DESC;\n\n# Recordatorio:\nNUNCA respondas con una consulta SELECT ni nada de sql. El SQL solo lo generas para enviarlo tu herramienta \"postgres\" pero NUNCA en tu respuesta.",
+          "maxIterations": 10
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        220,
+        0
+      ],
+      "id": "85dc967b-d49e-43d9-a70d-a443f00dddbe",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{$fromAI('query')}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        460,
+        240
+      ],
+      "id": "aaa0b3fc-c8ca-418b-944f-767ff0bc67aa",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": {
+          "id": "YkWDJCP4jnGKXU0x",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        220,
+        240
+      ],
+      "id": "abfbc520-ac00-4c3f-b162-a45a3973b890",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9f6a7d8e-6f25-4e27-a621-1aa37f178448",
+              "name": "output",
+              "value": "={{ $json.output}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        580,
+        0
+      ],
+      "id": "99f49190-1ff3-473f-8da5-30efd8c5ba88",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-06-17T12:20:52.130Z",
+      "createdAt": "2025-06-17T12:20:52.130Z",
+      "role": "workflow:owner",
+      "workflowId": "4cQg4CZmgCmwMsAK",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-06-17T13:26:37.000Z",
+  "versionId": "0e2454fc-c8c5-4f8f-aa00-c3117a6c5a32"
+}
