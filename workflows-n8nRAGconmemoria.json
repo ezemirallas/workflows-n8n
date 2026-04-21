@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Download File": {
       "main": [
@@ -207,6 +209,7 @@
   },
   "createdAt": "2025-03-11T15:30:13.130Z",
   "id": "gEDvA6kU7yXUr8Kz",
+  "isArchived": false,
   "meta": null,
   "name": "RAGconmemoria",
   "nodes": [
@@ -662,6 +665,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-03-11T15:30:13.210Z",
+      "createdAt": "2025-03-11T15:30:13.210Z",
+      "role": "workflow:owner",
+      "workflowId": "gEDvA6kU7yXUr8Kz",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
