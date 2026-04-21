@@ -1,0 +1,430 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Extract Document Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Document Text": {
+      "main": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Old Doc Rows": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set File ID": {
+      "main": [
+        [
+          {
+            "node": "Delete Old Doc Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Set File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-10T13:19:41.661Z",
+  "id": "MsxtwJUBLpskWFVE",
+  "isArchived": false,
+  "meta": null,
+  "name": "ragsedes",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "95c0e472-b08a-47df-9bc3-9215f8bc65a7",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "\n",
+        "height": 772,
+        "width": 3077,
+        "color": 5
+      },
+      "id": "8016813a-54a3-42f9-aff3-4e42754da080",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -960,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "text/plain"
+            }
+          }
+        }
+      },
+      "id": "1e27ae27-55fc-4738-9087-285f3848e545",
+      "name": "Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        860,
+        1080
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "47e840c2-4900-49ef-8be0-69b895a470fd",
+      "name": "Extract Document Text",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        1080
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "documents_sedes",
+        "filterType": "string",
+        "filterString": "=metadata->>file_id=like.*{{ $json.file_id }}*"
+      },
+      "id": "09070c16-af4f-4739-8563-bfe9108e1b68",
+      "name": "Delete Old Doc Rows",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1080
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
+              "name": "file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "383386a5-5fc1-4fcb-b8b5-6f6dc1b0bee0",
+      "name": "Set File ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -280,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1s8UX9bjMVI5NVeidOfzF81kgyJ1MwTp_",
+            "mode": "list",
+            "cachedResultName": "n8n Sedes",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1s8UX9bjMVI5NVeidOfzF81kgyJ1MwTp_"
+          }
+        },
+        "options": {}
+      },
+      "id": "1b354ac5-7853-4a5a-b882-2f88e504fb62",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        300,
+        1080
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1s8UX9bjMVI5NVeidOfzF81kgyJ1MwTp_",
+            "mode": "list",
+            "cachedResultName": "n8n Sedes",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1s8UX9bjMVI5NVeidOfzF81kgyJ1MwTp_"
+          }
+        },
+        "options": {}
+      },
+      "id": "2379f365-7160-4064-976f-923f09b3f991",
+      "name": "Google Drive1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -540,
+        1080
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "523fe412-9d26-4fb6-b6b9-066964cab968",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2e1100d7-0922-44f8-964c-254d88914277",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        580,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_sedes",
+          "mode": "list",
+          "cachedResultName": "documents_sedes"
+        },
+        "options": {
+          "queryName": "match_documents_sedes"
+        }
+      },
+      "id": "75b8aa1e-ee86-45b1-baca-78e1621df885",
+      "name": "Insert into Supabase Vectorstore",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        1080
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "intfloat/multilingual-e5-large",
+        "options": {}
+      },
+      "id": "3d01910e-2247-441c-a900-26206d76bb53",
+      "name": "Embeddings HuggingFace Inference1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        1320
+      ],
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "a7d430ac-abef-416a-95fc-6f8d95e92655",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "separator": "---------------------------------------------------------------------------------------------------------",
+        "chunkSize": 600,
+        "chunkOverlap": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        1520
+      ],
+      "id": "8f48b4e2-f733-450c-b31b-8427f4440720",
+      "name": "Character Text Splitter"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-06-10T13:19:41.705Z",
+      "createdAt": "2025-06-10T13:19:41.705Z",
+      "role": "workflow:owner",
+      "workflowId": "MsxtwJUBLpskWFVE",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-11T12:12:51.000Z",
+  "versionId": "d157ce74-4484-496b-ab8e-bcf83ec94813"
+}
