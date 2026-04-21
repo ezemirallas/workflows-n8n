@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When clicking ‘Test workflow’": {
       "main": [
@@ -112,6 +114,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2024-12-04T15:00:59.043Z",
+      "createdAt": "2024-12-04T15:00:59.043Z",
+      "role": "workflow:owner",
+      "workflowId": "oyYp2LZehMbLdase",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
