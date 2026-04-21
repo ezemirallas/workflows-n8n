@@ -1,5 +1,137 @@
 {
-  "active": false,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-12T10:46:43.997Z",
+    "createdAt": "2026-01-12T10:46:43.997Z",
+    "versionId": "c595e370-7bd2-488a-aa86-59907fba2b15",
+    "workflowId": "6QD6uAeAaQMHvWTz",
+    "nodes": [
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -100,
+          0
+        ],
+        "id": "6d9695f7-589d-4e6b-a527-4da3568dccfd",
+        "name": "When chat message received",
+        "webhookId": "cc7bab53-0844-4a3f-997f-9f7301e8d01a"
+      },
+      {
+        "parameters": {
+          "options": {
+            "systemMessage": "=Actúa como un agente experto en gestión de prestaciones en Mendoza. Dispones de una base de datos con las siguientes columnas: Especialidad, TipoConvenio, CentroPrestador, Domicilio, Teléfono, Localidad, Departamento, Zona, DescripcionPractica, AutorizacionPrevia.\n\nTu tarea es responder preguntas sobre:\n\n- Qué prácticas se realizan según la especialidad o tipo de convenio.\n- Dónde se realizan esas prácticas (Centro, domicilio, localidad, zona).\n- Si requieren o no autorización previa.\n\nResponde de forma clara, precisa, y útil para un paciente que busca atención.\n\nEjemplos de consultas:\n- ¿Qué centros tratan adicciones en Godoy Cruz?\n- ¿Dónde puedo realizar una admisión en salud mental?\n- ¿Qué prácticas requieren autorización previa?\n\nSi la pregunta no se puede responder con la base de datos, indica que no hay información disponible.\n\nTen en cuenta que algunos campos pueden estar vacíos o repetidos. Responde agrupando o resumiendo si es necesario.\n"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 1.9,
+        "position": [
+          220,
+          0
+        ],
+        "id": "6e5feebf-e55b-42d8-8fc2-72dd064c481d",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": "llama3.1:8b",
+          "options": {
+            "temperature": 0.1
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+        "typeVersion": 1,
+        "position": [
+          140,
+          220
+        ],
+        "id": "8f1220d8-990c-4959-828e-fa47f9082f64",
+        "name": "Ollama Chat Model",
+        "credentials": {
+          "ollamaApi": {
+            "id": "NQCaIfW9ruiVvrK4",
+            "name": "Ollama account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1P-yJXwzyyWFbRHSyrnVjXuP6IycS54c1JWoEgTymNm8",
+            "mode": "list",
+            "cachedResultName": "Practica",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P-yJXwzyyWFbRHSyrnVjXuP6IycS54c1JWoEgTymNm8/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 2043756964,
+            "mode": "list",
+            "cachedResultName": "Hoja 4",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1P-yJXwzyyWFbRHSyrnVjXuP6IycS54c1JWoEgTymNm8/edit#gid=2043756964"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.5,
+        "position": [
+          480,
+          220
+        ],
+        "id": "1eed9266-337e-498c-bd46-695f0deb51a5",
+        "name": "Google Sheets",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "8g1UuMKxFMytrLaY",
+            "name": "Google Sheets account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "When chat message received": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ollama Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Google Sheets": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "c595e370-7bd2-488a-aa86-59907fba2b15",
   "connections": {
     "When chat message received": {
       "main": [
@@ -132,9 +264,18 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-05-15T18:47:18.744Z",
+      "createdAt": "2025-05-15T18:47:18.744Z",
+      "role": "workflow:owner",
+      "workflowId": "6QD6uAeAaQMHvWTz",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-07T13:39:03.000Z",
+  "updatedAt": "2025-05-22T13:05:16.000Z",
   "versionId": "c595e370-7bd2-488a-aa86-59907fba2b15"
 }
