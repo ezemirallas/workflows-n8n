@@ -1,5 +1,7 @@
 {
-  "active": true,
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "On clicking 'execute'": {
       "main": [
@@ -185,9 +187,7 @@
   "createdAt": "2025-02-27T10:05:41.100Z",
   "id": "BfxsAqRBlkZIwZDX",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "meta": null,
   "name": "Backup workflows",
   "nodes": [
     {
@@ -228,7 +228,6 @@
       ],
       "typeVersion": 1,
       "alwaysOutputData": true,
-      "webhookId": "f30f3d83-1864-4ba6-b84d-f3d8bc6ae4ef",
       "credentials": {
         "githubApi": {
           "id": "p7sguaSe5ybqfIlc",
@@ -317,7 +316,6 @@
         -400
       ],
       "typeVersion": 1,
-      "webhookId": "4f8c934a-1cef-4469-b230-569b68c03b64",
       "credentials": {
         "githubApi": {
           "id": "p7sguaSe5ybqfIlc",
@@ -360,7 +358,7 @@
       "typeVersion": 1,
       "credentials": {
         "n8nApi": {
-          "id": "M8g1OOLqnbKx0SGs",
+          "id": "mfolGbE9TgAnPz00",
           "name": "n8n account"
         }
       }
@@ -454,7 +452,6 @@
         480
       ],
       "typeVersion": 1,
-      "webhookId": "c5d69fcd-91ab-4faf-a3f3-94853d2ac2a5",
       "credentials": {
         "githubApi": {
           "id": "p7sguaSe5ybqfIlc",
@@ -480,9 +477,18 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-02-27T10:05:41.124Z",
+      "createdAt": "2025-02-27T10:05:41.124Z",
+      "role": "workflow:owner",
+      "workflowId": "BfxsAqRBlkZIwZDX",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2025-10-09T10:19:55.000Z",
-  "versionId": "d2c2524a-3b0a-4745-9b7a-f2d4eea670f4"
+  "triggerCount": 0,
+  "updatedAt": "2025-04-09T13:50:39.000Z",
+  "versionId": "fc2d462a-b5bd-4086-8888-72ee7774cd81"
 }
