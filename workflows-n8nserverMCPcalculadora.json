@@ -1,5 +1,56 @@
 {
-  "active": false,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-12T10:46:43.997Z",
+    "createdAt": "2026-01-12T10:46:43.997Z",
+    "versionId": "3e75f1fb-a16c-4f93-bb04-3b27736fda08",
+    "workflowId": "crG3aYephYpppGXt",
+    "nodes": [
+      {
+        "parameters": {
+          "path": "MCP"
+        },
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "typeVersion": 1,
+        "position": [
+          -180,
+          -120
+        ],
+        "id": "67195816-affe-4cc6-8fb3-26ab540967f8",
+        "name": "MCP Server Trigger",
+        "webhookId": "210959b5-07f1-45ec-a140-5070ab0613dd"
+      },
+      {
+        "parameters": {},
+        "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+        "typeVersion": 1,
+        "position": [
+          -20,
+          140
+        ],
+        "id": "d6a81e2b-9fbc-49e2-99ce-dd260c63709c",
+        "name": "Calculator"
+      }
+    ],
+    "connections": {
+      "Calculator": {
+        "ai_tool": [
+          [
+            {
+              "node": "MCP Server Trigger",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "3e75f1fb-a16c-4f93-bb04-3b27736fda08",
   "connections": {
     "Calculator": {
       "ai_tool": [
@@ -51,9 +102,18 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-05-14T14:55:03.220Z",
+      "createdAt": "2025-05-14T14:55:03.220Z",
+      "role": "workflow:owner",
+      "workflowId": "crG3aYephYpppGXt",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-07T13:39:10.000Z",
+  "updatedAt": "2025-05-15T11:59:40.000Z",
   "versionId": "3e75f1fb-a16c-4f93-bb04-3b27736fda08"
 }
