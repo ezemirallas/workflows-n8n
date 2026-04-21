@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Calendar AI Agent": {
       "main": [
@@ -50,7 +52,7 @@
         ]
       ]
     },
-    "Get availability in a calendar in Google Calendar": {
+    "Google Calendar": {
       "ai_tool": [
         [
           {
@@ -103,9 +105,9 @@
         "toolDescription": "Utilice esta herramienta de Google Calendar cuando se le solicite crear un evento.",
         "calendar": {
           "__rl": true,
-          "value": "ezemirallas2011@gmail.com",
+          "value": "family06768887662418209056@group.calendar.google.com",
           "mode": "list",
-          "cachedResultName": "Firma digital"
+          "cachedResultName": "reuniones"
         },
         "start": "={{ new Date($fromAI(\"start_date\")).toISOString() }}",
         "end": "={{ new Date($fromAI(\"end_date\")).toISOString() }}",
@@ -269,18 +271,16 @@
         "resource": "calendar",
         "calendar": {
           "__rl": true,
-          "value": "ezemirallas2011@gmail.com",
+          "value": "family06768887662418209056@group.calendar.google.com",
           "mode": "list",
-          "cachedResultName": "Firma digital"
+          "cachedResultName": "reuniones"
         },
         "timeMin": "={{ new Date($fromAI(\"start_date\")).toISOString() }}",
         "timeMax": "={{ new Date($fromAI(\"end_date\")).toISOString() }}",
         "options": {
           "timezone": {
-            "__rl": true,
-            "value": "America/Argentina/Mendoza",
             "mode": "list",
-            "cachedResultName": "America/Argentina/Mendoza"
+            "value": ""
           }
         }
       },
@@ -291,7 +291,7 @@
         1040
       ],
       "id": "4ac26df2-bc2e-4bcc-82d9-e2962eba917d",
-      "name": "Get availability in a calendar in Google Calendar",
+      "name": "Google Calendar",
       "credentials": {
         "googleCalendarOAuth2Api": {
           "id": "Vf5bgRrnud34w82z",
@@ -302,9 +302,18 @@
   ],
   "pinData": {},
   "settings": {},
+  "shared": [
+    {
+      "updatedAt": "2025-03-20T10:14:50.353Z",
+      "createdAt": "2025-03-20T10:14:50.353Z",
+      "role": "workflow:owner",
+      "workflowId": "C30GXSZ3QbEw8Ze1",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-08-19T13:57:45.000Z",
-  "versionId": "0ac774a6-7623-4641-a0f3-9b9846069f26"
+  "updatedAt": "2025-05-27T13:19:35.000Z",
+  "versionId": "8219f82e-26cf-4090-93a6-797512d1f531"
 }
