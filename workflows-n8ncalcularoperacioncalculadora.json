@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "When chat message received": {
       "main": [
@@ -137,6 +139,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-05-14T14:56:32.925Z",
+      "createdAt": "2025-05-14T14:56:32.925Z",
+      "role": "workflow:owner",
+      "workflowId": "lgdAXDpWz89MtXeT",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
