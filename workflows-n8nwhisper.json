@@ -1,0 +1,276 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook - Recibir Audio": {
+      "main": [
+        [
+          {
+            "node": "Validar Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Audio": {
+      "main": [
+        [
+          {
+            "node": "Whisper STT - Transcribir",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Manejo de Errores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Whisper STT - Transcribir": {
+      "main": [
+        [
+          {
+            "node": "Formatear Respuesta",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Manejo de Errores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Respuesta": {
+      "main": [
+        [
+          {
+            "node": "Responder al Cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-08T14:15:11.377Z",
+  "id": "mwjtupLIVSk1dvfj",
+  "isArchived": false,
+  "meta": null,
+  "name": "whisper",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "stt",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "493a9e60-d32b-4def-856d-b0da7ef2f6ce",
+      "name": "Webhook - Recibir Audio",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "whisper-stt-webhook",
+      "notes": "Endpoint: POST /webhook/stt\nEnviar audio como multipart/form-data con campo 'file'"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Verificar que llegó un archivo de audio\nconst items = $input.all();\n\nfor (const item of items) {\n  const binaryData = item.binary;\n  \n  if (!binaryData || Object.keys(binaryData).length === 0) {\n    throw new Error('No se recibió ningún archivo de audio. Enviá el audio como multipart/form-data con el campo \"file\"');\n  }\n  \n  // Obtener el primer campo binario disponible\n  const fieldName = Object.keys(binaryData)[0];\n  const file = binaryData[fieldName];\n  \n  // Validar tipo de archivo\n  const allowedTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/webm', 'audio/flac', 'audio/mp4', 'video/mp4'];\n  const allowedExtensions = ['mp3', 'wav', 'ogg', 'webm', 'flac', 'm4a', 'mp4', 'mpeg'];\n  \n  const fileExt = file.fileName ? file.fileName.split('.').pop().toLowerCase() : '';\n  \n  if (!allowedExtensions.includes(fileExt)) {\n    throw new Error(`Formato no soportado: .${fileExt}. Formatos válidos: ${allowedExtensions.join(', ')}`);\n  }\n  \n  item.json.audioFieldName = fieldName;\n  item.json.fileName = file.fileName || 'audio.mp3';\n  item.json.mimeType = file.mimeType || 'audio/mpeg';\n}\n\nreturn items;"
+      },
+      "id": "b077f5ee-6086-4d6d-a601-2939b525144b",
+      "name": "Validar Audio",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "notes": "Valida que llegó un archivo de audio válido"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:9000/asr",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "task",
+              "value": "transcribe"
+            },
+            {
+              "name": "language",
+              "value": "es"
+            },
+            {
+              "name": "output",
+              "value": "json"
+            },
+            {
+              "name": "word_timestamps",
+              "value": "false"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "audio_file",
+              "inputDataFieldName": "={{ $json.audioFieldName }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "3d56e204-8abd-4ea4-a300-3d637b568f74",
+      "name": "Whisper STT - Transcribir",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        448,
+        0
+      ],
+      "notes": "Llama a Whisper corriendo en Docker.\n\nCambiar URL si Whisper está en otro host/puerto.\n\nPara inglés: cambiar language=en\nPara detección automática: eliminar el parámetro language"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "transcription",
+              "name": "transcription",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "language",
+              "name": "language_detected",
+              "value": "={{ $json.language || 'es' }}",
+              "type": "string"
+            },
+            {
+              "id": "duration",
+              "name": "duration_seconds",
+              "value": "={{ $json.duration || null }}",
+              "type": "number"
+            },
+            {
+              "id": "segments",
+              "name": "segments",
+              "value": "={{ $json.segments || [] }}",
+              "type": "array"
+            },
+            {
+              "id": "filename",
+              "name": "file_name",
+              "value": "={{ $('Validar Audio').item.json.fileName }}",
+              "type": "string"
+            },
+            {
+              "id": "timestamp",
+              "name": "processed_at",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6cc0adfa-8754-4b3a-b532-d662be8b068f",
+      "name": "Formatear Respuesta",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        0
+      ],
+      "notes": "Estructura la respuesta JSON con los campos más útiles"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"transcription\": \"{{ $json.transcription }}\",\n  \"language\": \"{{ $json.language_detected }}\",\n  \"duration_seconds\": {{ $json.duration_seconds || 'null' }},\n  \"file_name\": \"{{ $json.file_name }}\",\n  \"processed_at\": \"{{ $json.processed_at }}\"\n}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "X-Powered-By",
+                "value": "n8n + Whisper OSS"
+              }
+            ]
+          }
+        }
+      },
+      "id": "cce0d3ce-41a7-4168-8b40-577b51b74d78",
+      "name": "Responder al Cliente",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        0
+      ],
+      "notes": "Devuelve JSON con la transcripción lista para usar"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": false,\n  \"error\": \"{{ $json.message }}\",\n  \"timestamp\": \"{{ $now }}\"\n}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "b3780fa9-24b6-4862-9517-039375962f20",
+      "name": "Manejo de Errores",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        432,
+        240
+      ],
+      "notes": "Captura errores y devuelve mensaje claro al cliente"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-08T14:15:11.382Z",
+      "createdAt": "2026-04-08T14:15:11.382Z",
+      "role": "workflow:owner",
+      "workflowId": "mwjtupLIVSk1dvfj",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-21T17:34:34.954Z",
+  "versionId": "17f4c1e2-9bca-413a-9baa-2113ef85c453"
+}
