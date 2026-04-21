@@ -1,5 +1,7 @@
 {
-  "active": true,
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Retrieve Documents": {
       "ai_tool": [
@@ -225,6 +227,7 @@
   },
   "createdAt": "2025-02-27T13:18:03.281Z",
   "id": "3DzWfDO6YlO18t5g",
+  "isArchived": false,
   "meta": null,
   "name": "RAG actualizado",
   "nodes": [
@@ -238,7 +241,7 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
       "position": [
-        760,
+        768,
         800
       ]
     },
@@ -253,8 +256,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
       "typeVersion": 1,
       "position": [
-        200,
-        -60
+        208,
+        -64
       ]
     },
     {
@@ -269,8 +272,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        40,
-        -180
+        48,
+        -176
       ]
     },
     {
@@ -310,7 +313,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        20,
+        32,
         560
       ],
       "executeOnce": true,
@@ -331,7 +334,7 @@
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        340,
+        352,
         560
       ],
       "alwaysOutputData": true
@@ -348,8 +351,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -920,
-        540
+        -928,
+        544
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -379,7 +382,7 @@
       "typeVersion": 3.4,
       "position": [
         -1120,
-        540
+        544
       ]
     },
     {
@@ -393,8 +396,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -700,
-        -140
+        -704,
+        -144
       ]
     },
     {
@@ -417,7 +420,7 @@
       "typeVersion": 3,
       "position": [
         -720,
-        540
+        544
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -435,8 +438,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -460,
-        540
+        -464,
+        544
       ]
     },
     {
@@ -459,7 +462,7 @@
       "typeVersion": 3,
       "position": [
         -1360,
-        540
+        544
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -487,7 +490,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -200,
+        -208,
         560
       ]
     },
@@ -536,7 +539,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1,
       "position": [
-        60,
+        64,
         80
       ],
       "credentials": {
@@ -553,8 +556,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1640,
-        540
+        -1648,
+        544
       ]
     },
     {
@@ -566,8 +569,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -660,
-        -60
+        -656,
+        -64
       ],
       "webhookId": "aaf10f32-b1b7-448f-84e2-93a7475bd95b"
     },
@@ -585,7 +588,7 @@
       "typeVersion": 1.6,
       "position": [
         -320,
-        -60
+        -64
       ]
     },
     {
@@ -595,8 +598,8 @@
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        840,
-        980
+        848,
+        992
       ],
       "id": "7ef4b037-03a8-4189-86d1-42405a1fbb10",
       "name": "Recursive Character Text Splitter"
@@ -611,8 +614,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
       "typeVersion": 1,
       "position": [
-        -460,
-        180
+        -448,
+        176
       ],
       "id": "1421235f-5a09-45de-b10a-43d541c7d9e9",
       "name": "Ollama Chat Model",
@@ -653,8 +656,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
       "typeVersion": 1,
       "position": [
-        180,
-        220
+        192,
+        224
       ],
       "id": "ca00b2f9-8d5e-4ad3-8069-1aa1f8530cd5",
       "name": "Embeddings HuggingFace Inference",
@@ -673,7 +676,7 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
       "typeVersion": 1,
       "position": [
-        600,
+        608,
         800
       ],
       "id": "0269712b-1411-4b9e-94f8-ac628d9e26ba",
@@ -701,9 +704,18 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-02-27T13:18:03.305Z",
+      "createdAt": "2025-02-27T13:18:03.305Z",
+      "role": "workflow:owner",
+      "workflowId": "3DzWfDO6YlO18t5g",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2025-02-28T11:12:32.000Z",
-  "versionId": "dc54d47b-6bcd-4689-8660-0a538197961a"
+  "triggerCount": 1,
+  "updatedAt": "2026-03-30T11:56:00.809Z",
+  "versionId": "d4b90339-a182-46b7-8c2a-d074d73fb0be"
 }
