@@ -1,0 +1,253 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-12T10:46:43.997Z",
+    "createdAt": "2026-01-12T10:46:43.997Z",
+    "versionId": "e2372703-032d-41bb-9fec-f6c5b6183fef",
+    "workflowId": "nYudUCEJq9XluSuE",
+    "nodes": [
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -300,
+          -120
+        ],
+        "id": "fead968b-9b06-4d9d-a6af-d6a0686d9759",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "{{ $json.query.SQL}}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -80,
+          -120
+        ],
+        "id": "1cb08204-8783-47e9-a9a8-b0e3e1cc1e52",
+        "name": "Postgres",
+        "credentials": {
+          "postgres": {
+            "id": "YkWDJCP4jnGKXU0x",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "6a8891fc-3283-43fb-bd4d-fc90e4b27dde",
+                "name": "response",
+                "value": "={{ $json }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          140,
+          -120
+        ],
+        "id": "a465255a-1c1a-4fd4-9f64-e80871d34b02",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "jsCode": "//Inicializar un objeto para almacenar el resultado combinado\nlet combinedObject = {};\n\n//Iterar a través de todos los elementos de entrada\nlet index = 0;\nitems.forEach(item =>{\n  try {\n    // Parsear el string JSON de cada respuesta a un objeto\n    const parsedData = JSON.parse(item.json.response);\n    // Para cada propiedad en el objeto parseado\n    Object.keys(parsedData).forEach(key => {\n      // Crear una clave unica usando el indice para evitar colisiones\n      const uniqueKey = \"${key}_${index}\";\n      combinedObject[uniqueKey]= parsedData[key]; \n    });\n  index++;\n} catch (error) {\n    console.log(\"Error al parsear JSON: ${error.message}\");\n}\n});\n\n// Crear un unico item con el objeto resultante\nreturn [{\n  json: {\n    combinedData: combinedObject\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          360,
+          -120
+        ],
+        "id": "c3156f9f-c630-48b7-9ac8-076037ca320c",
+        "name": "Code"
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Postgres",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Postgres": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "e2372703-032d-41bb-9fec-f6c5b6183fef",
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-05-22T15:29:38.519Z",
+  "id": "nYudUCEJq9XluSuE",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "execute_query_tool",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -300,
+        -120
+      ],
+      "id": "fead968b-9b06-4d9d-a6af-d6a0686d9759",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $json.query.SQL}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -80,
+        -120
+      ],
+      "id": "1cb08204-8783-47e9-a9a8-b0e3e1cc1e52",
+      "name": "Postgres",
+      "credentials": {
+        "postgres": {
+          "id": "YkWDJCP4jnGKXU0x",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6a8891fc-3283-43fb-bd4d-fc90e4b27dde",
+              "name": "response",
+              "value": "={{ $json }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        140,
+        -120
+      ],
+      "id": "a465255a-1c1a-4fd4-9f64-e80871d34b02",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "//Inicializar un objeto para almacenar el resultado combinado\nlet combinedObject = {};\n\n//Iterar a través de todos los elementos de entrada\nlet index = 0;\nitems.forEach(item =>{\n  try {\n    // Parsear el string JSON de cada respuesta a un objeto\n    const parsedData = JSON.parse(item.json.response);\n    // Para cada propiedad en el objeto parseado\n    Object.keys(parsedData).forEach(key => {\n      // Crear una clave unica usando el indice para evitar colisiones\n      const uniqueKey = \"${key}_${index}\";\n      combinedObject[uniqueKey]= parsedData[key]; \n    });\n  index++;\n} catch (error) {\n    console.log(\"Error al parsear JSON: ${error.message}\");\n}\n});\n\n// Crear un unico item con el objeto resultante\nreturn [{\n  json: {\n    combinedData: combinedObject\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        360,
+        -120
+      ],
+      "id": "c3156f9f-c630-48b7-9ac8-076037ca320c",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-05-22T15:29:38.544Z",
+      "createdAt": "2025-05-22T15:29:38.544Z",
+      "role": "workflow:owner",
+      "workflowId": "nYudUCEJq9XluSuE",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-05-30T12:10:40.000Z",
+  "versionId": "e2372703-032d-41bb-9fec-f6c5b6183fef"
+}
