@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Ollama Chat Model": {
       "ai_languageModel": [
@@ -176,6 +178,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-02-19T11:55:12.317Z",
+      "createdAt": "2025-02-19T11:55:12.317Z",
+      "role": "workflow:owner",
+      "workflowId": "3CUz0JLtYGCWkmgT",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
