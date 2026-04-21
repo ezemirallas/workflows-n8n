@@ -1,5 +1,86 @@
 {
-  "active": false,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-12T10:46:43.997Z",
+    "createdAt": "2026-01-12T10:46:43.997Z",
+    "versionId": "77ab6aae-54c7-4c06-bb85-f2821db69b40",
+    "workflowId": "Fd8ftW2x2TnqWv25",
+    "nodes": [
+      {
+        "parameters": {
+          "path": "67a55c8c-db06-4c5f-bf59-2dd04e018819"
+        },
+        "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          -60
+        ],
+        "id": "52cc6aa9-c2ee-46b1-9705-49593fbbb326",
+        "name": "MCP Server Trigger",
+        "webhookId": "67a55c8c-db06-4c5f-bf59-2dd04e018819"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE",
+            "mode": "list",
+            "cachedResultName": "usuariossga",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17e-BLAq1Wf4M1BW-4-DsNdLlL6_x7ITVWNn_4gZgicE/edit#gid=0"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "DNI",
+                "lookupValue": "={{ $fromAI(\"DNI\") }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.5,
+        "position": [
+          160,
+          160
+        ],
+        "id": "07b78c56-80f1-4e0b-b2e9-698d1cb5b5a1",
+        "name": "Google Sheets",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "8g1UuMKxFMytrLaY",
+            "name": "Google Sheets account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Google Sheets": {
+        "ai_tool": [
+          [
+            {
+              "node": "MCP Server Trigger",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "77ab6aae-54c7-4c06-bb85-f2821db69b40",
   "connections": {
     "Google Sheets": {
       "ai_tool": [
@@ -81,9 +162,18 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-05-06T10:54:33.123Z",
+      "createdAt": "2025-05-06T10:54:33.123Z",
+      "role": "workflow:owner",
+      "workflowId": "Fd8ftW2x2TnqWv25",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-07-07T13:39:09.000Z",
+  "updatedAt": "2025-05-15T12:18:51.000Z",
   "versionId": "77ab6aae-54c7-4c06-bb85-f2821db69b40"
 }
