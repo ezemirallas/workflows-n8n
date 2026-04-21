@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Map": {
       "main": [
@@ -108,7 +110,7 @@
       "name": "On clicking 'execute'",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        380,
+        384,
         240
       ],
       "typeVersion": 1,
@@ -121,8 +123,8 @@
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1020,
-        390
+        1024,
+        400
       ],
       "typeVersion": 1,
       "id": "6c6e93d6-6031-4419-9280-146fc9988371"
@@ -137,8 +139,8 @@
       "name": "Move Binary Data",
       "type": "n8n-nodes-base.moveBinaryData",
       "position": [
-        1480,
-        380
+        1488,
+        384
       ],
       "typeVersion": 1,
       "id": "65816453-e137-48bb-b0d4-8f68ccedbfe0"
@@ -150,8 +152,8 @@
       "name": "Map",
       "type": "n8n-nodes-base.function",
       "position": [
-        770,
-        390
+        784,
+        400
       ],
       "typeVersion": 1,
       "id": "5ef9330f-c89c-4c3f-8c9d-5ffc4c4c31ae"
@@ -165,12 +167,18 @@
       "name": "Get Workflow",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        890,
-        530
+        896,
+        544
       ],
       "notesInFlow": false,
       "typeVersion": 1,
       "id": "30139ae4-674d-48ef-9fe3-5ebe734d827c",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "Ka3Av09A0xaGnOMT",
+          "name": "Unnamed credential"
+        }
+      },
       "notes": "Don't forget to add your credentials for your n8n instance in this Node. Use Basic Auth for this. "
     },
     {
@@ -181,8 +189,8 @@
       "name": "Get Workflow List",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        580,
-        380
+        592,
+        384
       ],
       "typeVersion": 1,
       "id": "97f9e747-3768-4a41-afd2-b33eff174307",
@@ -195,8 +203,8 @@
       "name": "FunctionItem",
       "type": "n8n-nodes-base.functionItem",
       "position": [
-        1220,
-        380
+        1232,
+        384
       ],
       "typeVersion": 1,
       "id": "ffed8997-baff-4d2b-8ba0-ac2f9d0f77e8"
@@ -214,8 +222,8 @@
       "name": "Google Drive",
       "type": "n8n-nodes-base.googleDrive",
       "position": [
-        1640,
-        380
+        1648,
+        384
       ],
       "typeVersion": 1,
       "id": "aa262332-6a52-42e9-9db9-a42e3bd351b0"
@@ -234,7 +242,7 @@
       "name": "Run Daily at 2:30am",
       "type": "n8n-nodes-base.cron",
       "position": [
-        380,
+        384,
         480
       ],
       "typeVersion": 1,
@@ -243,11 +251,21 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
+  "shared": [
+    {
+      "updatedAt": "2024-11-07T16:04:55.564Z",
+      "createdAt": "2024-11-07T16:04:55.564Z",
+      "role": "workflow:owner",
+      "workflowId": "Jr0fouUimjSc5JXT",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2024-11-07T16:04:55.543Z",
-  "versionId": "8c866c29-ec72-4626-b3a5-1e4c307cf305"
+  "updatedAt": "2026-04-21T17:37:43.401Z",
+  "versionId": "cd666cd8-83b1-4e64-9d95-ebbcd67c815e"
 }
