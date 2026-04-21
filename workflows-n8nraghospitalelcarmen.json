@@ -1,0 +1,430 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Download File": {
+      "main": [
+        [
+          {
+            "node": "Extract Document Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Document Text": {
+      "main": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Old Doc Rows": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set File ID": {
+      "main": [
+        [
+          {
+            "node": "Delete Old Doc Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Set File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Download File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert into Supabase Vectorstore",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-10T13:57:50.636Z",
+  "id": "OnjS4hzJutI3xDmt",
+  "isArchived": false,
+  "meta": null,
+  "name": "raghospitalelcarmen",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5f0f8612-e521-4cad-8d74-2ca4c4c397cf",
+      "name": "Default Data Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        1280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "\n ",
+        "height": 772,
+        "width": 3217,
+        "color": 5
+      },
+      "id": "5812cde9-56ee-4402-8fbd-cf876f1f06ac",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "text/plain"
+            }
+          }
+        }
+      },
+      "id": "52e5ad24-0f9d-47e4-bcb5-18971a40233a",
+      "name": "Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        860,
+        1080
+      ],
+      "executeOnce": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "5f3bb5d0-4dc4-4fee-99a2-26be92b7bbcf",
+      "name": "Extract Document Text",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        1080
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "documents_hospital_carmen",
+        "filterType": "string",
+        "filterString": "=metadata->>file_id=like.*{{ $json.file_id }}*"
+      },
+      "id": "aecbba45-65e7-4b5f-a330-defcc12fead0",
+      "name": "Delete Old Doc Rows",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1080
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10646eae-ae46-4327-a4dc-9987c2d76173",
+              "name": "file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0ab98bac-5f8a-45af-94a8-9d2f5d003b51",
+      "name": "Set File ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -280,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1oo3rQWiIH0flnXUDKXLRH5eDBA-JXtmP",
+            "mode": "list",
+            "cachedResultName": "n8n hospitalelcarmen",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1oo3rQWiIH0flnXUDKXLRH5eDBA-JXtmP"
+          }
+        },
+        "options": {}
+      },
+      "id": "e4a10dc9-c0b4-4201-8967-49585fc6da48",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        300,
+        1080
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1oo3rQWiIH0flnXUDKXLRH5eDBA-JXtmP",
+            "mode": "list",
+            "cachedResultName": "n8n hospitalelcarmen",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1oo3rQWiIH0flnXUDKXLRH5eDBA-JXtmP"
+          }
+        },
+        "options": {}
+      },
+      "id": "444e8e52-6b2e-42a9-a411-36fa0d5d37f5",
+      "name": "Google Drive1",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -540,
+        1080
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "2hXlyK5bG8OVDfOA",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "523fe412-9d26-4fb6-b6b9-066964cab968",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dec2d577-2f22-4890-ad5e-d7a6f65adc74",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        580,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents_hospital_carmen",
+          "mode": "list",
+          "cachedResultName": "documents_hospital_carmen"
+        },
+        "options": {
+          "queryName": "match_documents_hospital_carmen"
+        }
+      },
+      "id": "bc76ce6e-3b63-4efc-bb27-12c3e42dc261",
+      "name": "Insert into Supabase Vectorstore",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        1080
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "intfloat/multilingual-e5-large",
+        "options": {}
+      },
+      "id": "6a2224cf-5408-4063-8016-9aeb41868a48",
+      "name": "Embeddings HuggingFace Inference1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        1320
+      ],
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "eb7474ad-a635-4a6f-ac1a-e597976c758d",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -860,
+        1080
+      ]
+    },
+    {
+      "parameters": {
+        "separator": "---------------------------------------------------------------------------------------------------------",
+        "chunkSize": 600,
+        "chunkOverlap": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1900,
+        1520
+      ],
+      "id": "87e48775-d8d8-402a-9468-d221bb0e7f89",
+      "name": "Character Text Splitter"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-06-10T13:57:50.661Z",
+      "createdAt": "2025-06-10T13:57:50.661Z",
+      "role": "workflow:owner",
+      "workflowId": "OnjS4hzJutI3xDmt",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-11T12:12:20.000Z",
+  "versionId": "1a5da4c7-2158-48f7-92a4-3e57b8e7a2b7"
+}
