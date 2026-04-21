@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Download File": {
       "main": [
@@ -213,6 +215,7 @@
   },
   "createdAt": "2025-03-18T13:41:35.204Z",
   "id": "7ve6hQGFqLGOOifx",
+  "isArchived": false,
   "meta": null,
   "name": "ragultimo",
   "nodes": [
@@ -686,6 +689,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-03-18T13:41:35.213Z",
+      "createdAt": "2025-03-18T13:41:35.213Z",
+      "role": "workflow:owner",
+      "workflowId": "7ve6hQGFqLGOOifx",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
