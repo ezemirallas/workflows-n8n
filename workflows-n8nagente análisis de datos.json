@@ -1,0 +1,1755 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch - Tipo de Entrada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch - Tipo de Entrada": {
+      "main": [
+        [
+          {
+            "node": "Enviar Bienvenida",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notificar Procesamiento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get many rows2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "extraer numero",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "extraer numero1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not Support",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificar Procesamiento": {
+      "main": [
+        [
+          {
+            "node": "Descargar Archivo Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar Archivo Telegram": {
+      "main": [
+        [
+          {
+            "node": "Análisis Estadístico Python",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Análisis Estadístico Python": {
+      "main": [
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Data Analyst1": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent - Query sobre Datos",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent - Query sobre Datos": {
+      "main": [
+        [
+          {
+            "node": "Enviar Respuesta Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Query sobre Datos",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Enviar Reporte de Análisis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Data Analyst1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a row": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - Data Analyst1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows1": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent - Query sobre Datos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Respuesta Query5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Update a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Enviar Respuesta Query1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extraer numero": {
+      "main": [
+        [
+          {
+            "node": "Get many rows3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extraer numero1": {
+      "main": [
+        [
+          {
+            "node": "Get many rows4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows4": {
+      "main": [
+        [
+          {
+            "node": "Update a row3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a row2": {
+      "main": [
+        [
+          {
+            "node": "Enviar Respuesta Query2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Respuesta Query3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a row3": {
+      "main": [
+        [
+          {
+            "node": "Enviar Respuesta Query4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enviar Respuesta Query6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Bienvenida": {
+      "main": [
+        [
+          {
+            "node": "Get many rows5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update a row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a row1": {
+      "main": [
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Update a row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Crear Test",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows5": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-07T14:11:59.271Z",
+  "id": "KQwYFZK_Ns4G0mg5Us8YH",
+  "isArchived": false,
+  "meta": null,
+  "name": "agente análisis de datos",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "id": "f2798873-313d-46d2-a62f-ca712520fb81",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -544,
+        768
+      ],
+      "webhookId": "data-analysis-bot",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "is-command",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "/start",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "/start"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "has-document",
+                    "leftValue": "={{ $json.message.document }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "📎 Documento Adjunto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ece41f1e-f3a0-4d60-966a-66aa741f65cc",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "/archivos",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "/archivo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "667b18b5-db9a-4273-afda-b55417d0dc92",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "/activar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "/activar"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7efb6737-2751-484b-9350-299254c91b49",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "/desactivar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "/desactivar"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "b355d6ea-3c6d-48ef-aa5a-1a3267e19a41",
+      "name": "Switch - Tipo de Entrada",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -304,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "=🤖 Bienvenido al Agente de Análisis de Datos\nMaster Data Science - UDLA\n\n━━━━━━━━━━━━━━━━━━\n\n📤 CÓMO EMPEZAR\nSimplemente envíame un archivo y recibirás un análisis automático completo:\n- CSV\n- Excel (.xlsx, .xls)\n- JSON\n\n━━━━━━━━━━━━━━━━━━\n\n📊 QUÉ ANALIZO\n✅ Estadísticas descriptivas\n✅ Valores faltantes y outliers\n✅ Correlaciones entre variables\n✅ Tipos de datos y distribuciones\n✅ Recomendaciones de modelos ML\n\n━━━━━━━━━━━━━━━━━━\n\n💬 HACER PREGUNTAS\nUna vez que tengas un archivo activo, pregúntame:\n- ¿Cuántas filas y columnas hay?\n- ¿Hay valores faltantes?\n- ¿Qué correlaciones hay?\n- ¿Qué modelo ML recomiendas?\n\n━━━━━━━━━━━━━━━━━━\n\n🛠️ COMANDOS\n/archivos - Ver tus archivos guardados\n/activar [número] - Cambiar archivo activo\n/desactivar - Apagar todos\n/start - Ver este mensaje\n\n━━━━━━━━━━━━━━━━━━\n\n⚠️ IMPORTANTE\nSolo 1 archivo puede estar activo a la vez\n\n━━━━━━━━━━━━━━━━━━\n\n🚀 ¡Sube tu primer archivo para comenzar!",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "01e1183c-6fb5-41e1-891b-da4e07332c0c",
+      "name": "Enviar Bienvenida",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        64
+      ],
+      "webhookId": "0037d607-de80-44eb-bebd-bf35d326cfac",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "📥 Descargando tu archivo... Un momento por favor.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "8e82e537-73dc-4e5b-8676-a21e1a9137fc",
+      "name": "Notificar Procesamiento",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        32,
+        368
+      ],
+      "webhookId": "19f56aa3-d59a-4b0e-8b06-a55bdb2a4fa2",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Switch - Tipo de Entrada').item.json.message.document.file_id }}",
+        "additionalFields": {}
+      },
+      "id": "f174cb3b-7d66-4608-b6e3-a46a7e937144",
+      "name": "Descargar Archivo Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        368
+      ],
+      "webhookId": "5a613ea1-831d-4bb9-87e5-ee5c72ca8a97",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "pythonNative",
+        "pythonCode": "import pandas as pd\nimport numpy as np\nfrom io import BytesIO\nimport base64\n\n# Obtener item actual\nitem = items[0]\n\n# Buscar nombre del archivo\nfile_name = None\n\nif 'file_name' in item['json']:\n    file_name = item['json']['file_name']\nelif 'fileName' in item['json']:\n    file_name = item['json']['fileName']\nelif 'message' in item['json'] and 'document' in item['json']['message']:\n    if 'file_name' in item['json']['message']['document']:\n        file_name = item['json']['message']['document']['file_name']\n\nif not file_name and 'result' in item['json'] and 'file_path' in item['json']['result']:\n    file_path = item['json']['result']['file_path']\n    file_name = file_path.split('/')[-1]\n\nif not file_name:\n    file_name = 'archivo_desconocido'\n\n# LEER DATOS BINARIOS\ntry:\n    if 'data' in item['binary']:\n        binary_data = item['binary']['data']\n        \n        if isinstance(binary_data, str):\n            file_bytes = base64.b64decode(binary_data)\n        elif hasattr(binary_data, 'data'):\n            raw = binary_data.data\n            if isinstance(raw, str):\n                file_bytes = base64.b64decode(raw)\n            else:\n                file_bytes = bytes(list(raw))\n        else:\n            file_bytes = bytes(list(binary_data))\n    else:\n        return {'json': {'error': 'No se encontró data en binary'}}\n        \nexcept Exception as e:\n    return {'json': {'error': f'Error accediendo binario: {str(e)}'}}\n\n# DETECTAR Y PARSEAR ARCHIVO SEGÚN TIPO\ndf = None\nfile_type = None\n\ntry:\n    # Obtener extensión\n    extension = file_name.lower().split('.')[-1] if '.' in file_name else ''\n    \n    # 1. CSV\n    if extension == 'csv':\n        df = pd.read_csv(BytesIO(file_bytes))\n        file_type = 'CSV'\n    \n    # 2. EXCEL\n    elif extension in ['xlsx', 'xls', 'xlsm']:\n        df = pd.read_excel(BytesIO(file_bytes))\n        file_type = 'Excel'\n    \n    # 3. JSON\n    elif extension == 'json':\n        df = pd.read_json(BytesIO(file_bytes))\n        file_type = 'JSON'\n    \n    # 4. TSV (Tab-separated)\n    elif extension in ['tsv', 'tab']:\n        df = pd.read_csv(BytesIO(file_bytes), sep='\\t')\n        file_type = 'TSV'\n    \n    # 5. TXT (intentar como CSV con varios separadores)\n    elif extension == 'txt':\n        # Intentar diferentes separadores\n        for sep in [',', ';', '\\t', '|']:\n            try:\n                df = pd.read_csv(BytesIO(file_bytes), sep=sep)\n                if len(df.columns) > 1:  # Si detectó múltiples columnas\n                    file_type = f'TXT ({sep})'\n                    break\n            except:\n                continue\n        \n        if df is None:\n            return {'json': {\n                'error': 'No se pudo parsear el archivo TXT',\n                'suggestion': 'Asegúrate que use separadores: , ; | o tabulaciones'\n            }}\n    \n    # 6. PARQUET (si está disponible)\n    elif extension == 'parquet':\n        try:\n            df = pd.read_parquet(BytesIO(file_bytes))\n            file_type = 'Parquet'\n        except ImportError:\n            return {'json': {\n                'error': 'Formato Parquet no soportado',\n                'suggestion': 'Convierte el archivo a CSV o Excel'\n            }}\n    \n    # 7. FORMATOS NO SOPORTADOS\n    else:\n        unsupported_formats = {\n            'pdf': 'PDFs requieren procesamiento especial',\n            'docx': 'Word requiere librerías adicionales',\n            'doc': 'Word antiguo no soportado',\n            'png': 'Imágenes no son archivos de datos tabulares',\n            'jpg': 'Imágenes no son archivos de datos tabulares',\n            'jpeg': 'Imágenes no son archivos de datos tabulares',\n            'zip': 'Archivos comprimidos no soportados',\n            'rar': 'Archivos comprimidos no soportados'\n        }\n        \n        if extension in unsupported_formats:\n            return {'json': {\n                'error': f'Formato .{extension} no soportado',\n                'reason': unsupported_formats[extension],\n                'supported_formats': ['CSV', 'Excel (.xlsx, .xls)', 'JSON', 'TSV', 'TXT']\n            }}\n        \n        # Intentar detectar automáticamente como CSV\n        try:\n            df = pd.read_csv(BytesIO(file_bytes))\n            file_type = 'CSV (auto-detectado)'\n        except:\n            return {'json': {\n                'error': f'Formato .{extension} no reconocido',\n                'filename': file_name,\n                'supported_formats': ['CSV', 'Excel (.xlsx, .xls)', 'JSON', 'TSV', 'TXT'],\n                'suggestion': 'Convierte tu archivo a uno de los formatos soportados'\n            }}\n    \n    # Verificar que se leyó correctamente\n    if df is None or len(df) == 0:\n        return {'json': {\n            'error': 'No se pudieron extraer datos del archivo',\n            'filename': file_name,\n            'bytes_read': len(file_bytes)\n        }}\n        \nexcept Exception as e:\n    return {'json': {\n        'error': f'Error parseando archivo: {str(e)}',\n        'filename': file_name,\n        'file_type': extension if 'extension' in locals() else 'desconocido'\n    }}\n\n# 1. INFORMACIÓN BÁSICA\nbasic_info = {\n    'filename': file_name,\n    'file_type': file_type,\n    'rows': int(len(df)),\n    'columns': int(len(df.columns)),\n    'column_names': df.columns.tolist(),\n    'memory_usage': f\"{df.memory_usage(deep=True).sum() / 1024:.2f} KB\"\n}\n\n# 2. TIPOS DE DATOS\ndata_types = {\n    'numeric_columns': df.select_dtypes(include=[np.number]).columns.tolist(),\n    'categorical_columns': df.select_dtypes(include=['object', 'category']).columns.tolist(),\n    'datetime_columns': df.select_dtypes(include=['datetime64']).columns.tolist(),\n    'dtypes': {k: str(v) for k, v in df.dtypes.to_dict().items()}\n}\n\n# 3. ESTADÍSTICAS DESCRIPTIVAS\nnumeric_df = df.select_dtypes(include=[np.number])\nif not numeric_df.empty:\n    stats_desc = {col: {k: float(v) if pd.notna(v) else None \n                       for k, v in stats.items()} \n                 for col, stats in numeric_df.describe().to_dict().items()}\nelse:\n    stats_desc = {}\n\n# 4. MISSING VALUES\nmissing_values = {\n    'total_missing': int(df.isnull().sum().sum()),\n    'missing_by_column': {k: int(v) for k, v in df.isnull().sum().to_dict().items()},\n    'missing_percentage': {k: float(round(v, 2)) for k, v in (df.isnull().sum() / len(df) * 100).to_dict().items()}\n}\n\n# 5. DETECCIÓN DE OUTLIERS\noutliers_info = {}\nfor col in numeric_df.columns:\n    Q1 = numeric_df[col].quantile(0.25)\n    Q3 = numeric_df[col].quantile(0.75)\n    IQR = Q3 - Q1\n    lower_bound = Q1 - 1.5 * IQR\n    upper_bound = Q3 + 1.5 * IQR\n    outliers = numeric_df[(numeric_df[col] < lower_bound) | (numeric_df[col] > upper_bound)][col]\n    \n    outliers_info[col] = {\n        'count': int(len(outliers)),\n        'percentage': float(round(len(outliers) / len(df) * 100, 2)),\n        'lower_bound': float(lower_bound) if not pd.isna(lower_bound) else None,\n        'upper_bound': float(upper_bound) if not pd.isna(upper_bound) else None\n    }\n\n# 6. CORRELACIONES\nif len(numeric_df.columns) > 1:\n    correlation_matrix = {k: {k2: float(v2) if not pd.isna(v2) else None for k2, v2 in v.items()} \n                         for k, v in numeric_df.corr().to_dict().items()}\n    \n    corr_df = numeric_df.corr()\n    np.fill_diagonal(corr_df.values, 0)\n    strong_correlations = []\n    \n    for i in range(len(corr_df.columns)):\n        for j in range(i+1, len(corr_df.columns)):\n            corr_val = corr_df.iloc[i, j]\n            if not pd.isna(corr_val) and abs(corr_val) > 0.5:\n                strong_correlations.append({\n                    'var1': str(corr_df.columns[i]),\n                    'var2': str(corr_df.columns[j]),\n                    'correlation': float(round(corr_val, 3))\n                })\nelse:\n    correlation_matrix = {}\n    strong_correlations = []\n\n# 7. VALORES ÚNICOS\nunique_values = {}\nfor col in data_types['categorical_columns'][:5]:\n    unique_count = int(df[col].nunique())\n    if unique_count <= 20:\n        value_counts = df[col].value_counts().head(10)\n        unique_values[col] = {\n            'count': unique_count,\n            'values': {str(k): int(v) for k, v in value_counts.to_dict().items()}\n        }\n    else:\n        unique_values[col] = {\n            'count': unique_count,\n            'note': 'Demasiadas categorías para listar'\n        }\n\n# 8. MUESTRA DE DATOS\ndata_sample = []\nfor _, row in df.head(5).iterrows():\n    row_dict = {}\n    for col in df.columns:\n        val = row[col]\n        if pd.isna(val):\n            row_dict[col] = None\n        elif isinstance(val, (np.int64, np.int32)):\n            row_dict[col] = int(val)\n        elif isinstance(val, (np.float64, np.float32)):\n            row_dict[col] = float(val)\n        else:\n            row_dict[col] = str(val)\n    data_sample.append(row_dict)\n\n# 9. RECOMENDACIONES ML\nrecommendations = []\npotential_targets = [col for col in df.columns if any(keyword in col.lower() \n                    for keyword in ['target', 'label', 'class', 'y', 'price', 'sales', 'revenue', 'churn'])]\n\nif potential_targets:\n    target_col = potential_targets[0]\n    unique_count = int(df[target_col].nunique())\n    \n    if df[target_col].dtype in [np.int64, np.int32] and unique_count < 10:\n        recommendations.append({\n            'type': 'Clasificación',\n            'target_column': target_col,\n            'num_classes': unique_count,\n            'models': ['Logistic Regression', 'Random Forest', 'XGBoost', 'SVM'],\n            'reason': f'Variable objetivo categórica con {unique_count} clases'\n        })\n    elif df[target_col].dtype in [np.float64, np.int64]:\n        recommendations.append({\n            'type': 'Regresión',\n            'target_column': target_col,\n            'models': ['Linear Regression', 'Random Forest', 'XGBoost', 'Ridge'],\n            'reason': 'Variable objetivo numérica continua'\n        })\nelse:\n    recommendations.append({\n        'type': 'Análisis Exploratorio / No Supervisado',\n        'models': ['K-Means', 'PCA', 'DBSCAN', 't-SNE'],\n        'reason': 'No se detectó variable objetivo'\n    })\n\n# Preprocesamiento\npreprocessing = []\nif missing_values['total_missing'] > 0:\n    preprocessing.append('⚠️ Imputar o eliminar valores faltantes')\nif any(info['count'] > 0 for info in outliers_info.values()):\n    preprocessing.append('⚠️ Tratar outliers (IQR, Z-score)')\nif len(data_types['categorical_columns']) > 0:\n    preprocessing.append('📝 Encodear variables categóricas')\nif len(numeric_df.columns) > 0:\n    preprocessing.append('📏 Escalar features numéricas')\nif len(df) < 100:\n    preprocessing.append('⚠️ Dataset pequeño - considerar cross-validation')\n\n# RESULTADO\nresult = {\n    'basic_info': basic_info,\n    'data_types': data_types,\n    'statistics': stats_desc,\n    'missing_values': missing_values,\n    'outliers': outliers_info,\n    'correlations': {\n        'matrix': correlation_matrix,\n        'strong_correlations': strong_correlations\n    },\n    'unique_values': unique_values,\n    'data_sample': data_sample,\n    'ml_recommendations': recommendations,\n    'preprocessing_steps': preprocessing\n}\n\nreturn {'json': result}"
+      },
+      "id": "7261669c-45e7-4f70-94e4-41eb67bc147c",
+      "name": "Análisis Estadístico Python",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        368
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=id registrado : {{ $json.Id }}\n{{ $json.analysis }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "2046e990-ed91-4515-bb01-de676206874d",
+      "name": "Enviar Reporte de Análisis",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2144,
+        272
+      ],
+      "webhookId": "0e0b9139-d72d-4ba6-8580-7df6bcb1e170",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🎓 AGENTE DE ANÁLISIS DE DATOS\n\n**Master Data Science - UDLA**\n\n### 📱 FLUJO:\n1️⃣ Usuario envía mensaje a Telegram\n2️⃣ Switch detecta tipo:\n   📎 Archivo → Analiza\n   💬 Pregunta → Responde\n   ⚡ /start → Bienvenida\n3️⃣ Python analiza datos\n4️⃣ AI genera reporte\n5️⃣ Respuesta por Telegram\n\n### ✅ Features:\n• Estadísticas descriptivas\n• Detección outliers (IQR)\n• Correlaciones\n• Recomendaciones ML\n• Quality checks",
+        "height": 464,
+        "width": 776,
+        "color": 4
+      },
+      "id": "bf251a4b-d99b-4ec7-920b-104bb6dd3525",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=❌ **Error al procesar el archivo**\n\n{{ $json.error }}\n\n💡 **Asegúrate de:**\n• Subir archivo CSV, Excel (.xlsx) o JSON\n• El archivo tiene encabezados\n• Los datos están bien formateados",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "2309a9c2-526b-45a8-9043-acbeae542425",
+      "name": "Enviar Error",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        832,
+        448
+      ],
+      "webhookId": "001134c9-7b35-49d0-9691-d1b0b61e77d1",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Switch - Tipo de Entrada').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "dffc7366-38a2-457f-a817-752c1f4cd457",
+      "name": "Enviar Respuesta Query",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        976,
+        1984
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "contextWindowLength": 15
+      },
+      "id": "03e889a1-1122-4076-81b3-12adc846aca2",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        656,
+        2144
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ JSON.stringify($('Análisis Estadístico Python').item.json) }}",
+        "options": {
+          "systemMessage": "=Eres un analista de datos experto que recibe análisis estadísticos en formato JSON y genera reportes claros y accionables en español.\n\nTU TAREA:\n1. Analizar el JSON con estadísticas del dataset\n2. Identificar insights clave y patrones importantes\n3. Generar un reporte estructurado y fácil de entender\n4. Dar recomendaciones prácticas\n\nFORMATO DE SALIDA (usa emojis para hacerlo visual):\n\n📊 ANÁLISIS DE DATOS COMPLETADO\n\n📁 **Archivo:** [nombre]\n📏 **Dimensiones:** [filas] filas × [columnas] columnas\n💾 **Tamaño:** [memoria]\n\n---\n\n🔢 **ESTRUCTURA DE DATOS**\n- Columnas numéricas: [listar]\n- Columnas categóricas: [listar principales]\n- Columnas de fecha: [listar]\n\n---\n\n📈 **INSIGHTS CLAVE**\n[Analiza y destaca los 3-5 hallazgos más importantes:]\n- Distribuciones interesantes\n- Valores únicos relevantes\n- Proporciones importantes\n- Patrones detectados\n\n---\n\n⚠️ **CALIDAD DE DATOS**\n- Valores faltantes: [X%] - [estado]\n- Outliers detectados: [descripción]\n- Problemas potenciales: [listar si hay]\n\n---\n\n🔗 **CORRELACIONES** (si aplica)\n[Listar correlaciones fuertes > 0.5]\n\n---\n\n🎯 **RECOMENDACIONES ML**\n- Tipo de problema sugerido: [Clasificación/Regresión/Clustering]\n- Modelos recomendados: [listar]\n- Razón: [explicar por qué]\n\n---\n\n🛠️ **PRÓXIMOS PASOS**\n1. [Paso de preprocesamiento 1]\n2. [Paso de preprocesamiento 2]\n3. [Paso de preprocesamiento 3]\n\n---\n\n💡 **TIPS ADICIONALES**\n[Consejos específicos basados en los datos]\n\n---\n¿Necesitas un análisis más profundo de alguna variable específica? ¡Pregúntame! 🚀"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1600,
+        272
+      ],
+      "id": "92233eac-7110-4a9e-9b82-d0cf92a68b5d",
+      "name": "AI Agent - Data Analyst1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Switch - Tipo de Entrada').item.json.message.text }}",
+        "options": {
+          "systemMessage": "=Eres un asistente de análisis de datos especializado en responder preguntas específicas sobre datasets.\n\nCONTEXTO DE DATOS:\nDispones del análisis completo de un dataset entregado como texto estructurado en la siguiente variable:\n{{ $json.analysis }}\n\nEste análisis proviene del archivo:\n{{ $json.filename }}\n\nDebes asumir que toda la información válida para responder se encuentra exclusivamente en ese análisis.\n\nINSTRUCCIONES:\n\nUsa únicamente la información contenida en {{ $json.analysis }} para responder\n\nResponde solo preguntas que puedan inferirse directamente desde ese análisis\n\nSi la información solicitada no está presente, indícalo claramente y sugiere volver a cargar el archivo\n\nResponde siempre en español\n\nMantén las respuestas claras, directas y concisas\n\nUsa emojis de forma moderada para hacer la respuesta amigable\n\nNO uses Markdown ni HTML, solo texto plano con emojis\n\nEn cada respuesta, indica explícitamente el origen de la información usando el nombre del archivo {{ $json.filename }}\n\nEJEMPLOS DE PREGUNTAS QUE PUEDES RESPONDER:\n✅ ¿Cuántas filas tiene el dataset?\n✅ ¿Cuántas personas son mujeres?\n✅ ¿Qué porcentaje son hombres?\n✅ ¿Hay valores faltantes?\n✅ ¿Cuáles son las columnas?\n✅ ¿Cuántos trabajos únicos hay?\n✅ ¿Hay outliers?\n✅ ¿Qué rango de edad hay?\n\nFORMATO DE RESPUESTA:\n\nRespuesta directa y corta (2 a 5 líneas)\n\nDatos numéricos cuando sea posible\n\nAl final, indica el origen de los datos de la siguiente forma:\nFuente: {{ $json.filename }}\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        560,
+        1984
+      ],
+      "id": "633b0f97-f14b-42c7-a3fb-063dda5864c9",
+      "name": "AI Agent - Query sobre Datos"
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        544,
+        2144
+      ],
+      "id": "e574cec4-ab25-4ed2-a18f-6c9c701c77af",
+      "name": "LLM",
+      "credentials": {
+        "openRouterApi": {
+          "id": "m4uESVBJbfnfou6N",
+          "name": "OpenRouter free"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "create",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "=filename",
+              "fieldValue": "={{ $('Análisis Estadístico Python').item.json.basic_info.filename }}"
+            },
+            {
+              "fieldName": "user_id",
+              "fieldValue": "={{ $('Telegram Trigger').item.json.message.from.id }}"
+            },
+            {
+              "fieldName": "timestamp",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldName": "analysis",
+              "fieldValue": "={{ $json.output }}"
+            },
+            {
+              "fieldName": "activo",
+              "fieldValue": "=true"
+            },
+            {
+              "fieldName": "username",
+              "fieldValue": "={{ $('Telegram Trigger').item.json.message.chat.first_name }} {{ $('Telegram Trigger').item.json.message.chat.last_name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        1936,
+        272
+      ],
+      "id": "d298cc70-2354-4a48-8d13-f57646cd87a8",
+      "name": "Create a row",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": "meta-llama/llama-3.3-70b-instruct:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1552,
+        480
+      ],
+      "id": "0693eddc-5fbb-40aa-bd8b-33e0051b9619",
+      "name": "LLM1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "m4uESVBJbfnfou6N",
+          "name": "OpenRouter free"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "update",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "=Id",
+              "fieldValue": "={{ $json.Id }}"
+            },
+            {
+              "fieldName": "activo",
+              "fieldValue": "=false"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        1392,
+        272
+      ],
+      "id": "16841a48-2d57-43c3-a39d-07ef1e5b8e25",
+      "name": "Update a row"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "getAll",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "returnAll": true,
+        "options": {
+          "fields": [],
+          "where": "=(user_id,eq,{{ $('Telegram Trigger').item.json.message.from.id }})"
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        832,
+        272
+      ],
+      "id": "117a66b0-7668-4a5a-b5ee-6c6e8fc8f95d",
+      "name": "Get many rows"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "getAll",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "returnAll": true,
+        "options": {
+          "fields": [],
+          "where": "=(user_id,eq,{{ $('Telegram Trigger').item.json.message.from.id }})"
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        48,
+        2000
+      ],
+      "id": "21ed78ca-eebe-4918-9271-bbddc728cbb1",
+      "name": "Get many rows1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8d8af030-b8c6-4f42-a7f5-3c386d4f317a",
+              "leftValue": "={{ $json.activo }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": false
+        }
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        272,
+        2000
+      ],
+      "id": "803463d1-9e62-499f-b403-3e1ef59e1985",
+      "name": "Filter1",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "getAll",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "returnAll": true,
+        "options": {
+          "fields": [],
+          "where": "=(user_id,eq,{{ $('Telegram Trigger').item.json.message.from.id }})"
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        64,
+        784
+      ],
+      "id": "edb6ecf3-526d-4a5e-8bda-fab27c199029",
+      "name": "Get many rows2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8d8af030-b8c6-4f42-a7f5-3c386d4f317a",
+              "leftValue": "={{ $json.activo }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "0e218a1f-be1f-46aa-9400-2f5e4e17baf0",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        272
+      ],
+      "id": "e2e3dea9-76ea-4279-b222-b0f00309149e",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "jsCode": "const files = items.map(i => i.json);\nconst chatId = $('Telegram Trigger').first().json.message.chat.id;\nconst userId = $('Telegram Trigger').first().json.message.from.id;\n\n// Ordenar: primero activos, luego por timestamp\nfiles.sort((a, b) => {\n  if (a.activo && !b.activo) return -1;\n  if (!a.activo && b.activo) return 1;\n  return new Date(b.timestamp) - new Date(a.timestamp);\n});\n\n// Construir mensaje\nlet message = \"📂 TUS ARCHIVOS ANALIZADOS\\n\";\nmessage += \"━━━━━━━━━━━━━━━━━━\\n\\n\";\n\nfiles.forEach((file, index) => {\n  const statusIcon = file.activo ? \"✅\" : \"⚪\";\n  const statusText = file.activo ? \"🟢 Activo\" : \"🔴 Apagado\";\n  \n  message += `${statusIcon} ${index + 1}. ${file.filename} (ID: ${file.Id})\\n`;\n  message += `   ${statusText}\\n\\n`;\n});\n\nmessage += \"━━━━━━━━━━━━━━━━━━\\n\";\nmessage += \"💡 Para activar un archivo usa:\\n\";\nmessage += \"   /activar [número id]\\n\";\nmessage += \"   Ejemplo: /activar 2\\n\\n\";\nmessage += \"💡 Para desactivar todos:\\n\";\nmessage += \"   /desactivar\\n\\n\";\nmessage += \"⚠️ Solo 1 archivo puede estar activo\";\n\nreturn [{\n  json: {\n    telegram_message: message,\n    files_count: files.length,\n    chatId: chatId,\n    userId: userId\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        784
+      ],
+      "id": "fd1e3f1b-a9c0-4caa-b0fb-6c340d947038",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.userId }}",
+        "text": "={{ $json.telegram_message }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "8a9b4fb2-2eef-415d-9639-a1c890262409",
+      "name": "Enviar Respuesta Query1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        496,
+        784
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text;\n\n// Buscar el patrón /activar seguido de un número (en cualquier parte del mensaje)\nconst match = text.match(/\\/activar\\s+(\\d+)/);\n\nconst userId = $input.first().json.message.from.id;\nconst chatId = $input.first().json.message.chat.id;\n\nif (!match) {\n  return [{\n    json: {\n      error: true,\n      chatId: chatId,\n      message: \"❌ Formato incorrecto.\\n\\n✅ Usa: /activar [número]\\nEjemplo: /activar 2\"\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    userId: userId,\n    chatId: chatId,\n    fileNumber: parseInt(match[1]),\n    error: false\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        1184
+      ],
+      "id": "75f17dee-7bb9-4d87-b551-4d842511e181",
+      "name": "extraer numero",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.message.text;\n\n// Buscar el patrón /activar seguido de un número (en cualquier parte del mensaje)\nconst match = text.match(/\\/activar\\s+(\\d+)/);\n\nconst userId = $input.first().json.message.from.id;\nconst chatId = $input.first().json.message.chat.id;\n\nif (!match) {\n  return [{\n    json: {\n      error: true,\n      chatId: chatId,\n      message: \"❌ Formato incorrecto.\\n\\n✅ Usa: /activar [número]\\nEjemplo: /activar 2\"\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    userId: userId,\n    chatId: chatId,\n    fileNumber: parseInt(match[1]),\n    error: false\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        1584
+      ],
+      "id": "38d78aac-85dc-4418-a361-545710513e10",
+      "name": "extraer numero1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "getAll",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "returnAll": true,
+        "options": {
+          "fields": [],
+          "where": "=(user_id,eq,{{ $('Telegram Trigger').item.json.message.from.id }})"
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        288,
+        1184
+      ],
+      "id": "f49bbaed-8086-4eec-9e6b-5b2429099557",
+      "name": "Get many rows3"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "getAll",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "returnAll": true,
+        "options": {
+          "fields": [],
+          "where": "=(user_id,eq,{{ $('Telegram Trigger').item.json.message.from.id }})"
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        272,
+        1584
+      ],
+      "id": "6dd5fb3c-7022-4638-8edd-bc3b47f2576f",
+      "name": "Get many rows4"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "update",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "=Id",
+              "fieldValue": "={{ $json.ID }}"
+            },
+            {
+              "fieldName": "activo",
+              "fieldValue": "=true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        1312,
+        1088
+      ],
+      "id": "9a531eee-1a96-4807-85de-46a9e2cf6d98",
+      "name": "Update a row2",
+      "disabled": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.chatId }}",
+        "text": "=Documento Activado Exitosamente\n\n¿Que deseas consultar?",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "6fe6c742-1b44-4e1a-b474-6aa0b8c4cc6e",
+      "name": "Enviar Respuesta Query2",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1520,
+        1088
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.telegram_user_id }}",
+        "text": "=Ese ID de Documento no existe",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "c069e3ed-3b6e-415c-8dfa-562021006775",
+      "name": "Enviar Respuesta Query3",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1520,
+        1264
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "update",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "=Id",
+              "fieldValue": "="
+            },
+            {
+              "fieldName": "activo",
+              "fieldValue": "=true"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        512,
+        1584
+      ],
+      "id": "ad9e326e-fcb4-487b-b850-6e39611477df",
+      "name": "Update a row3",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.telegram_user_id }}",
+        "text": "=Documento Desactivado Exitosamente",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "ab4e267d-448d-4d15-b767-6f85a6934cda",
+      "name": "Enviar Respuesta Query4",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        1488
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Switch - Tipo de Entrada').item.json.message.from.id }}",
+        "text": "=Debes tener un Archivo Activo para poder hacer consultas previas",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "4940bb99-53ef-4c1f-ab4c-6881d3e36d6b",
+      "name": "Enviar Respuesta Query5",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        272,
+        2144
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        1232
+      ],
+      "id": "65c3dfe2-b0c0-47af-95f8-e38c503b7726"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        512,
+        1184
+      ],
+      "id": "3a6464f4-1406-4a88-9f5d-0355e0019a72",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "update",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "=Id",
+              "fieldValue": "={{ $json.Id }}"
+            },
+            {
+              "fieldName": "activo",
+              "fieldValue": "=false"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        960,
+        1232
+      ],
+      "id": "00bce38b-4bdb-4d89-bc8d-1adf3078b126",
+      "name": "Update a row1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4a0a168c-b3ba-4892-bbb8-e9a370c2cf29",
+              "name": "ID",
+              "value": "={{ $('extraer numero').item.json.fileNumber }}",
+              "type": "string"
+            },
+            {
+              "id": "28afb549-9c5d-4a23-803e-7c28477db73a",
+              "name": "chatId",
+              "value": "={{ $('extraer numero').item.json.chatId }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        1088
+      ],
+      "id": "af419fb0-e337-4c8d-9b5e-7f4e57122a72",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        960,
+        1088
+      ],
+      "id": "23b4f4a1-3682-4cfc-8f96-7a99e0224ce9",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.telegram_user_id }}",
+        "text": "=Ese ID de Documento no existe",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "94526d74-24d4-436f-bce0-e88a610d8767",
+      "name": "Enviar Respuesta Query6",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        1664
+      ],
+      "webhookId": "0c7c0815-34e8-44eb-ba5d-4f539086feb9",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a2a5fcbd-3b70-4602-81fe-4c6353ca6d35",
+              "leftValue": "={{ $json.user_id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        496,
+        64
+      ],
+      "id": "e9175060-39ed-47d1-beaa-cbba8f5a743d",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "returnAll": true,
+        "options": {
+          "fields": [],
+          "where": "=(user_id,eq,{{ $('Telegram Trigger').item.json.message.from.id }})"
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        288,
+        64
+      ],
+      "id": "6ef2160f-5466-4059-b8f4-4269a5032267",
+      "name": "Get many rows5"
+    },
+    {
+      "parameters": {
+        "authentication": "nocoDbApiToken",
+        "operation": "create",
+        "projectId": "pgrko0ejw5pot86",
+        "table": "mhsc3k3n0qp42ts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldName": "=filename",
+              "fieldValue": "=Test"
+            },
+            {
+              "fieldName": "user_id",
+              "fieldValue": "=Test"
+            },
+            {
+              "fieldName": "timestamp",
+              "fieldValue": "={{ $now }}"
+            },
+            {
+              "fieldName": "analysis",
+              "fieldValue": "=test"
+            },
+            {
+              "fieldName": "activo",
+              "fieldValue": "=true"
+            },
+            {
+              "fieldName": "username",
+              "fieldValue": "={{ $('Telegram Trigger').item.json.message.chat.first_name }} {{ $('Telegram Trigger').item.json.message.chat.last_name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.nocoDb",
+      "typeVersion": 3,
+      "position": [
+        720,
+        48
+      ],
+      "id": "1f2588c7-62fa-44ee-a34b-1abc0f155e11",
+      "name": "Crear Test"
+    },
+    {
+      "parameters": {
+        "content": "## /start",
+        "height": 224,
+        "width": 912,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "78b08ebb-63e9-4948-b1dc-98d3d37d5d87",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Documento",
+        "height": 384,
+        "width": 2368,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "1cd94d7d-e6cd-4ee5-a285-3ade4384d728",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## /archivos",
+        "height": 384,
+        "width": 2368,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        640
+      ],
+      "id": "8d440745-c497-4891-8362-1b5b38f814a8",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## /activar",
+        "height": 384,
+        "width": 2368,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1040
+      ],
+      "id": "d27aeb85-59d6-41b8-a078-ba252ee4b272",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## /desactivar",
+        "height": 384,
+        "width": 2368,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1440
+      ],
+      "id": "d119eb52-dd71-4b45-a83b-06258ab98eca",
+      "name": "Sticky Note5",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Agente Querys",
+        "height": 432,
+        "width": 2368,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1872
+      ],
+      "id": "e40ef6e2-969c-43a9-bff4-3088cb0d50c9",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=el documento que envio no es un documento soportado\n",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "d8735847-8e14-4f5d-ab4c-421d439948a2",
+      "name": "Not Support",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -304,
+        1152
+      ],
+      "webhookId": "001134c9-7b35-49d0-9691-d1b0b61e77d1",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Acceso a la comunidad gratis :\nhttps://www.skool.com/innovarketing-8629\n",
+        "width": 480,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        1120
+      ],
+      "id": "4b196284-b618-4841-9bcf-d3ea3049e1cd",
+      "name": "Sticky Note7"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-07T14:11:59.345Z",
+      "createdAt": "2026-04-07T14:11:59.345Z",
+      "role": "workflow:owner",
+      "workflowId": "KQwYFZK_Ns4G0mg5Us8YH",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "updatedAt": "2026-04-07T14:00:05.394Z",
+      "createdAt": "2026-04-07T14:00:05.394Z",
+      "id": "BLSgJNO37VY1lgWU",
+      "name": "Data Science"
+    },
+    {
+      "updatedAt": "2026-04-07T14:00:05.525Z",
+      "createdAt": "2026-04-07T14:00:05.525Z",
+      "id": "KqbkYwkHLaPQvKKY",
+      "name": "AI Agent"
+    },
+    {
+      "updatedAt": "2026-04-07T14:00:05.608Z",
+      "createdAt": "2026-04-07T14:00:05.608Z",
+      "id": "SUwapI7HmIshRYvd",
+      "name": "Education"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-09T16:14:16.308Z",
+  "versionId": "da373308-110c-4dd5-b04a-ebe0c2ff45d0"
+}
