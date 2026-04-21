@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Set github repository": {
       "main": [
@@ -277,11 +279,20 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-01-08T17:03:53.880Z",
+      "createdAt": "2025-01-08T17:03:53.880Z",
+      "role": "workflow:owner",
+      "workflowId": "2q6ZcFOCVPxFFzLj",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2025-01-08T17:03:21.808Z",
       "updatedAt": "2025-01-08T17:03:21.808Z",
+      "createdAt": "2025-01-08T17:03:21.808Z",
       "id": "ZxbksJ4xELHKufDR",
       "name": "#Agentes IA"
     }
