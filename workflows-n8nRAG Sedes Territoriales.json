@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Download File": {
       "main": [
@@ -130,6 +132,7 @@
   },
   "createdAt": "2025-02-24T16:52:55.428Z",
   "id": "yShLCgeUKO4O9e6c",
+  "isArchived": false,
   "meta": null,
   "name": "RAG Sedes Territoriales",
   "nodes": [
@@ -415,6 +418,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-02-24T16:52:55.438Z",
+      "createdAt": "2025-02-24T16:52:55.438Z",
+      "role": "workflow:owner",
+      "workflowId": "yShLCgeUKO4O9e6c",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
