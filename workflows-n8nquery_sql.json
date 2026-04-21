@@ -1,0 +1,249 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2025-06-17T11:24:17.830Z",
+    "createdAt": "2025-06-17T11:24:17.830Z",
+    "versionId": "492ffe72-7707-4564-895c-233f5f0aa6d5",
+    "workflowId": "6kYA64GFPoWYqKQE",
+    "nodes": [
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "{{ $json.query.some_input }}",
+          "options": {}
+        },
+        "id": "26675461-8b3e-44e5-a54e-6b753073637b",
+        "name": "Postgres",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.5,
+        "position": [
+          240,
+          0
+        ],
+        "credentials": {
+          "postgres": {
+            "id": "YkWDJCP4jnGKXU0x",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e2f94fb1-3deb-466a-a36c-e3476511d5f2",
+                "name": "response",
+                "value": "={{ $json }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "fb10af99-1c97-44ef-9de1-83e9e491b709",
+        "name": "Edit Fields",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          680,
+          0
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "78b262f5-63bf-429e-95ef-808e3ecf2704",
+        "name": "Execute Workflow Trigger",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Obtener los items de entrada\nconst items = $input.all();\n\n// Unir todos los elementos en un solo objeto\nconst combinedItem = {\n  resultado: items.map(item => ({\n    ...item.json // Mantiene todos los parámetros dinámicamente\n  }))\n};\n\n// Retornar el nuevo array con un solo objeto\nreturn [{ json: combinedItem }];\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          460,
+          0
+        ],
+        "id": "b0462f92-f811-4aee-af03-f43d4dc599ca",
+        "name": "Code"
+      }
+    ],
+    "connections": {
+      "Postgres": {
+        "main": [
+          [
+            {
+              "node": "Code",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Postgres",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Ezequiel  Mirallas",
+    "name": null,
+    "description": null,
+    "autosaved": false
+  },
+  "activeVersionId": "492ffe72-7707-4564-895c-233f5f0aa6d5",
+  "connections": {
+    "Postgres": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Postgres",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-13T11:34:09.969Z",
+  "id": "6kYA64GFPoWYqKQE",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "query_sql",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "{{ $json.query.some_input }}",
+        "options": {}
+      },
+      "id": "26675461-8b3e-44e5-a54e-6b753073637b",
+      "name": "Postgres",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        240,
+        0
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "YkWDJCP4jnGKXU0x",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e2f94fb1-3deb-466a-a36c-e3476511d5f2",
+              "name": "response",
+              "value": "={{ $json }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fb10af99-1c97-44ef-9de1-83e9e491b709",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        680,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "78b262f5-63bf-429e-95ef-808e3ecf2704",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener los items de entrada\nconst items = $input.all();\n\n// Unir todos los elementos en un solo objeto\nconst combinedItem = {\n  resultado: items.map(item => ({\n    ...item.json // Mantiene todos los parámetros dinámicamente\n  }))\n};\n\n// Retornar el nuevo array con un solo objeto\nreturn [{ json: combinedItem }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        0
+      ],
+      "id": "b0462f92-f811-4aee-af03-f43d4dc599ca",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-06-13T11:34:09.972Z",
+      "createdAt": "2025-06-13T11:34:09.972Z",
+      "role": "workflow:owner",
+      "workflowId": "6kYA64GFPoWYqKQE",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-17T11:24:17.000Z",
+  "versionId": "492ffe72-7707-4564-895c-233f5f0aa6d5"
+}
