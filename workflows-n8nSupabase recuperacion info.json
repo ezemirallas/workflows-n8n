@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Retrieve by Query": {
       "ai_vectorStore": [
@@ -70,6 +72,7 @@
   },
   "createdAt": "2025-02-28T10:28:27.029Z",
   "id": "CWhNgnvtXMjGCD6W",
+  "isArchived": false,
   "meta": {
     "templateId": "2395"
   },
@@ -233,6 +236,15 @@
   ],
   "pinData": {},
   "settings": {},
+  "shared": [
+    {
+      "updatedAt": "2025-02-28T10:28:27.072Z",
+      "createdAt": "2025-02-28T10:28:27.072Z",
+      "role": "workflow:owner",
+      "workflowId": "CWhNgnvtXMjGCD6W",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
