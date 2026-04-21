@@ -1,5 +1,7 @@
 {
   "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Telegram Trigger": {
       "main": [
@@ -132,6 +134,7 @@
   },
   "createdAt": "2025-02-27T10:33:54.295Z",
   "id": "aYiyn5rxVtFgeFQB",
+  "isArchived": false,
   "meta": null,
   "name": "My workflow",
   "nodes": [
@@ -383,6 +386,15 @@
   "settings": {
     "executionOrder": "v1"
   },
+  "shared": [
+    {
+      "updatedAt": "2025-02-27T10:33:54.312Z",
+      "createdAt": "2025-02-27T10:33:54.312Z",
+      "role": "workflow:owner",
+      "workflowId": "aYiyn5rxVtFgeFQB",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
