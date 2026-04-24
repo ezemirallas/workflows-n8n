@@ -1,0 +1,200 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-23T17:12:53.000Z",
+    "createdAt": "2026-04-23T16:29:41.861Z",
+    "versionId": "1369961f-88e6-4f48-93a3-a2f05e01c003",
+    "workflowId": "AdYUh4iz4QXqpwRY",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "prometheus-alerts",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -144,
+          0
+        ],
+        "id": "3c82f829-4f6d-4d88-a235-20a9dbfbf60d",
+        "webhookId": "a134e7a5-359f-4693-a706-8887d36d1f8d"
+      },
+      {
+        "parameters": {
+          "jsCode": "const alerts = $input.first().json.alerts || [];\nconst messages = [];\n\nfor (const alert of alerts) {\n  const status = alert.status === 'firing' ? '🔴 ALERTA' : '✅ RESUELTO';\n  const severity = alert.labels?.severity?.toUpperCase() || 'N/A';\n  const name = alert.labels?.alertname || 'Sin nombre';\n  const summary = alert.annotations?.summary || 'Sin descripción';\n  const description = alert.annotations?.description || '';\n  const since = alert.startsAt ? new Date(alert.startsAt).toLocaleString('es-AR', {timeZone: 'America/Argentina/Mendoza'}) : '';\n\n  let msg = `${status} [${severity}]\\n`;\n  msg += `📛 *${name}*\\n`;\n  msg += `📝 ${summary}\\n`;\n  if (description) msg += `🔍 ${description}\\n`;\n  if (since) msg += `🕐 Desde: ${since}`;\n\n  messages.push({ json: { text: msg } });\n}\n\nreturn messages.length > 0 ? messages : [{ json: { text: '📭 Sin alertas en el payload' } }];"
+        },
+        "name": "Formatear mensaje",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          192,
+          0
+        ],
+        "id": "7e15cb4d-6c0b-46c5-9774-e6da3b3852d2"
+      },
+      {
+        "parameters": {
+          "chatId": "1504682028",
+          "text": "={{ $json.text }}",
+          "additionalFields": {
+            "parse_mode": "Markdown"
+          }
+        },
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1,
+        "position": [
+          480,
+          0
+        ],
+        "id": "a5caeeaf-af68-4807-818a-1c7f32364f9e",
+        "webhookId": "0a3fc61a-49f8-453a-b1c2-659904449b6a",
+        "credentials": {
+          "telegramApi": {
+            "id": "LWRfeeJcaUjynccC",
+            "name": "Telegram account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Formatear mensaje",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Formatear mensaje": {
+        "main": [
+          [
+            {
+              "node": "Telegram",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Ezequiel  Mirallas",
+    "name": "Version 1369961f",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "1369961f-88e6-4f48-93a3-a2f05e01c003",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Formatear mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear mensaje": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-23T16:27:37.761Z",
+  "id": "AdYUh4iz4QXqpwRY",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Prometheus Alerts → Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "prometheus-alerts",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        0
+      ],
+      "id": "3c82f829-4f6d-4d88-a235-20a9dbfbf60d",
+      "webhookId": "a134e7a5-359f-4693-a706-8887d36d1f8d"
+    },
+    {
+      "parameters": {
+        "jsCode": "const alerts = $input.first().json.alerts || [];\nconst messages = [];\n\nfor (const alert of alerts) {\n  const status = alert.status === 'firing' ? '🔴 ALERTA' : '✅ RESUELTO';\n  const severity = alert.labels?.severity?.toUpperCase() || 'N/A';\n  const name = alert.labels?.alertname || 'Sin nombre';\n  const summary = alert.annotations?.summary || 'Sin descripción';\n  const description = alert.annotations?.description || '';\n  const since = alert.startsAt ? new Date(alert.startsAt).toLocaleString('es-AR', {timeZone: 'America/Argentina/Mendoza'}) : '';\n\n  let msg = `${status} [${severity}]\\n`;\n  msg += `📛 *${name}*\\n`;\n  msg += `📝 ${summary}\\n`;\n  if (description) msg += `🔍 ${description}\\n`;\n  if (since) msg += `🕐 Desde: ${since}`;\n\n  messages.push({ json: { text: msg } });\n}\n\nreturn messages.length > 0 ? messages : [{ json: { text: '📭 Sin alertas en el payload' } }];"
+      },
+      "name": "Formatear mensaje",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "7e15cb4d-6c0b-46c5-9774-e6da3b3852d2"
+    },
+    {
+      "parameters": {
+        "chatId": "1504682028",
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        480,
+        0
+      ],
+      "id": "a5caeeaf-af68-4807-818a-1c7f32364f9e",
+      "webhookId": "0a3fc61a-49f8-453a-b1c2-659904449b6a",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-23T16:27:37.809Z",
+      "createdAt": "2026-04-23T16:27:37.809Z",
+      "role": "workflow:owner",
+      "workflowId": "AdYUh4iz4QXqpwRY",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-04-23T16:29:41.860Z",
+  "versionId": "1369961f-88e6-4f48-93a3-a2f05e01c003"
+}
