@@ -1,0 +1,254 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-04-30T15:54:01.000Z",
+    "createdAt": "2026-04-30T15:53:36.476Z",
+    "versionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f",
+    "workflowId": "AdYUh4iz4QXqpwRY",
+    "nodes": [
+      {
+        "parameters": {
+          "chatId": "1504682028",
+          "text": "=🚨 *ALERTA: TRÁFICO TRAEFIK* 🚨\n\n*Servicio*: {{ $json.servicio }}\n*Pod*: {{ $json.pod }}\n*Cluster*: santiago-upgrade\n*Carga actual*: {{ $json.cantidad_requests }} req/s\n*Estado*: {{ $json.estado }}\n*Hora*: {{ new Date().toLocaleString('es-AR', {timeZone: 'America/Argentina/Mendoza'}) }}",
+          "additionalFields": {
+            "parse_mode": "Markdown"
+          }
+        },
+        "name": "Telegram",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1,
+        "position": [
+          80,
+          0
+        ],
+        "id": "a5caeeaf-af68-4807-818a-1c7f32364f9e",
+        "webhookId": "0a3fc61a-49f8-453a-b1c2-659904449b6a",
+        "credentials": {
+          "telegramApi": {
+            "id": "LWRfeeJcaUjynccC",
+            "name": "Telegram account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e320003f-99e2-4242-a8b7-80f3255918bd",
+                "name": "cantidad_requests",
+                "value": "={{ $json.body.alerts[0].values.A }}",
+                "type": "string"
+              },
+              {
+                "id": "373885ff-8e5b-4fbe-bd37-96ad6e877623",
+                "name": "servicio",
+                "value": "={{ $json.body.alerts[0].labels.service }}",
+                "type": "string"
+              },
+              {
+                "id": "37df4640-4d79-4ad7-bd09-56402c106eb9",
+                "name": "pod",
+                "value": "={{ $json.body.alerts[0].labels.pod }}",
+                "type": "string"
+              },
+              {
+                "id": "d46d3593-aaa6-4607-a97a-542ff5418571",
+                "name": "estado",
+                "value": "={{ $json.body.state }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -224,
+          0
+        ],
+        "id": "21f8d7ae-c4a0-495f-b3a3-9d57e2f0b52e",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "grafana-alerts",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -560,
+          0
+        ],
+        "id": "d13adade-600b-4522-b9ce-5dcdcdb4f511",
+        "name": "Webhook1",
+        "webhookId": "a64a2e25-eba5-4422-a5f9-36c0e4f44952"
+      }
+    ],
+    "connections": {
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Telegram",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook1": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Ezequiel  Mirallas",
+    "name": "Version 93b518fc",
+    "description": "",
+    "autosaved": true
+  },
+  "activeVersionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f",
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-23T16:27:37.761Z",
+  "id": "AdYUh4iz4QXqpwRY",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Grafana Alerts → Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "1504682028",
+        "text": "=🚨 *ALERTA: TRÁFICO TRAEFIK* 🚨\n\n*Servicio*: {{ $json.servicio }}\n*Pod*: {{ $json.pod }}\n*Cluster*: santiago-upgrade\n*Carga actual*: {{ $json.cantidad_requests }} req/s\n*Estado*: {{ $json.estado }}\n*Hora*: {{ new Date().toLocaleString('es-AR', {timeZone: 'America/Argentina/Mendoza'}) }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "name": "Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        80,
+        0
+      ],
+      "id": "a5caeeaf-af68-4807-818a-1c7f32364f9e",
+      "webhookId": "0a3fc61a-49f8-453a-b1c2-659904449b6a",
+      "credentials": {
+        "telegramApi": {
+          "id": "LWRfeeJcaUjynccC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e320003f-99e2-4242-a8b7-80f3255918bd",
+              "name": "cantidad_requests",
+              "value": "={{ $json.body.alerts[0].values.A }}",
+              "type": "string"
+            },
+            {
+              "id": "373885ff-8e5b-4fbe-bd37-96ad6e877623",
+              "name": "servicio",
+              "value": "={{ $json.body.alerts[0].labels.service }}",
+              "type": "string"
+            },
+            {
+              "id": "37df4640-4d79-4ad7-bd09-56402c106eb9",
+              "name": "pod",
+              "value": "={{ $json.body.alerts[0].labels.pod }}",
+              "type": "string"
+            },
+            {
+              "id": "d46d3593-aaa6-4607-a97a-542ff5418571",
+              "name": "estado",
+              "value": "={{ $json.body.state }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        0
+      ],
+      "id": "21f8d7ae-c4a0-495f-b3a3-9d57e2f0b52e",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "grafana-alerts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        0
+      ],
+      "id": "d13adade-600b-4522-b9ce-5dcdcdb4f511",
+      "name": "Webhook1",
+      "webhookId": "a64a2e25-eba5-4422-a5f9-36c0e4f44952"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-23T16:27:37.809Z",
+      "createdAt": "2026-04-23T16:27:37.809Z",
+      "role": "workflow:owner",
+      "workflowId": "AdYUh4iz4QXqpwRY",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-04-30T15:53:36.474Z",
+  "versionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f"
+}
