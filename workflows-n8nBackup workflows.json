@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-04T10:37:28.000Z",
-    "createdAt": "2026-04-21T17:47:13.337Z",
-    "versionId": "224812c8-0bad-4145-b58f-33747f7d9a1c",
+    "updatedAt": "2026-05-05T11:43:30.000Z",
+    "createdAt": "2026-05-04T10:50:42.928Z",
+    "versionId": "82f5a125-f762-4776-bd15-f0b87e25a511",
     "workflowId": "BfxsAqRBlkZIwZDX",
     "nodes": [
       {
@@ -12,8 +12,8 @@
         "name": "On clicking 'execute'",
         "type": "n8n-nodes-base.manualTrigger",
         "position": [
-          -1888,
-          80
+          -1920,
+          128
         ],
         "typeVersion": 1
       },
@@ -475,11 +475,11 @@
       }
     },
     "authors": "Ezequiel  Mirallas",
-    "name": "Version 224812c8",
+    "name": "Version 82f5a125",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "224812c8-0bad-4145-b58f-33747f7d9a1c",
+  "activeVersionId": "82f5a125-f762-4776-bd15-f0b87e25a511",
   "connections": {
     "On clicking 'execute'": {
       "main": [
