@@ -1,0 +1,204 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-05-15T12:47:43.734Z",
+  "id": "8uKh8q1Tlwl3Ns3i",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 17",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        48,
+        -32
+      ],
+      "id": "b625a44c-e48f-4faf-afc1-995e8b6eb238",
+      "name": "Email Trigger (IMAP)",
+      "credentials": {
+        "imap": {
+          "id": "PoRoPBW8jnv4HiaP",
+          "name": "IMAP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        256,
+        -32
+      ],
+      "id": "6a377a1c-2345-45fa-831c-cbfc920ace44",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d003d928-c6ec-45c1-b8bb-4e81fc0f97a8",
+              "name": "cuerpo",
+              "value": "={{ $json.textPlain }}",
+              "type": "string"
+            },
+            {
+              "id": "a5bc5cba-2ff5-44b9-b1b4-44c489713b7e",
+              "name": "asunto",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "d7526155-6e88-4be8-99d1-b8f0cc6804b5",
+              "name": "destinatarios",
+              "value": "={{ $json.to }}",
+              "type": "string"
+            },
+            {
+              "id": "5421dfdf-2e33-48b0-9707-5c9ab74c0773",
+              "name": "de",
+              "value": "={{ $json.from }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        -16
+      ],
+      "id": "b420b9ba-0b5f-42ec-8407-42ebf411ae22",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const str = $input.item.json.destinatarios;\nconst excluir = \"osep.notificaciones@osep.mendoza.gov.ar\";\n\n// Convertimos a array, limpiamos espacios y filtramos\nconst resultado = str.split(',')\n  .map(email => email.trim())\n  .filter(email => email.toLowerCase() !== excluir.toLowerCase());\n\nreturn {\n  correo_final: resultado[0] // Retorna el primero que no sea el excluido\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        -16
+      ],
+      "id": "a068ef01-0ecc-495b-a5f7-c1eee24e420f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.correo_final }}",
+        "subject": "={{ $('Edit Fields').item.json.asunto }}",
+        "message": "={{ $('Edit Fields').item.json.cuerpo }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        -16
+      ],
+      "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
+      "name": "Send a message",
+      "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "B54ZrCQE7BGakg77",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-05-15T12:47:43.747Z",
+      "createdAt": "2026-05-15T12:47:43.747Z",
+      "role": "workflow:owner",
+      "workflowId": "8uKh8q1Tlwl3Ns3i",
+      "projectId": "ykl3JaRVM7UvdLLB"
+    }
+  ],
+  "staticData": {
+    "node:Email Trigger (IMAP)": {
+      "lastMessageUid": 18117
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-05-18T11:15:27.243Z",
+  "versionId": "325a9285-ff15-431e-90ba-05f58f1d12d5"
+}
