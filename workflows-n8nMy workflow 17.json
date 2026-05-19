@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-05-18T15:36:56.000Z",
-    "createdAt": "2026-05-18T11:15:27.245Z",
-    "versionId": "325a9285-ff15-431e-90ba-05f58f1d12d5",
+    "updatedAt": "2026-05-18T17:35:06.000Z",
+    "createdAt": "2026-05-18T17:35:02.490Z",
+    "versionId": "d63b4466-f060-4a9b-8cf8-7bb36933c74a",
     "workflowId": "8uKh8q1Tlwl3Ns3i",
     "nodes": [
       {
@@ -97,17 +97,43 @@
           "sendTo": "={{ $json.correo_final }}",
           "subject": "={{ $('Edit Fields').item.json.asunto }}",
           "message": "={{ $('Edit Fields').item.json.cuerpo }}",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          944,
+          -240
+        ],
+        "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
+        "name": "Send a message",
+        "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "zH7ds7PFEgjOW22z",
+            "name": "Gmail account 3"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.correo_final }}",
+          "subject": "={{ $('Edit Fields').item.json.asunto }}",
+          "message": "={{ $('Edit Fields').item.json.cuerpo }}",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          976,
+          944,
           -16
         ],
-        "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
-        "name": "Send a message",
-        "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
+        "id": "1ee27a2f-8d4f-4572-8ac5-ce3cf07e36a0",
+        "name": "Send a message1",
+        "webhookId": "c0a67a4b-db4b-42d6-b745-8c9aeea1b0d7",
         "credentials": {
           "gmailOAuth2": {
             "id": "B54ZrCQE7BGakg77",
@@ -155,7 +181,7 @@
         "main": [
           [
             {
-              "node": "Send a message",
+              "node": "Send a message1",
               "type": "main",
               "index": 0
             }
@@ -163,6 +189,11 @@
         ]
       },
       "Send a message": {
+        "main": [
+          []
+        ]
+      },
+      "Send a message1": {
         "main": [
           [
             {
@@ -175,11 +206,11 @@
       }
     },
     "authors": "Ezequiel  Mirallas",
-    "name": "Version 325a9285",
+    "name": "Version d63b4466",
     "description": "",
     "autosaved": true
   },
-  "activeVersionId": "325a9285-ff15-431e-90ba-05f58f1d12d5",
+  "activeVersionId": "d63b4466-f060-4a9b-8cf8-7bb36933c74a",
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -219,7 +250,7 @@
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Send a message1",
             "type": "main",
             "index": 0
           }
@@ -227,6 +258,11 @@
       ]
     },
     "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Send a message1": {
       "main": [
         [
           {
@@ -337,17 +373,43 @@
         "sendTo": "={{ $json.correo_final }}",
         "subject": "={{ $('Edit Fields').item.json.asunto }}",
         "message": "={{ $('Edit Fields').item.json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        944,
+        -240
+      ],
+      "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
+      "name": "Send a message",
+      "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zH7ds7PFEgjOW22z",
+          "name": "Gmail account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.correo_final }}",
+        "subject": "={{ $('Edit Fields').item.json.asunto }}",
+        "message": "={{ $('Edit Fields').item.json.cuerpo }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        976,
+        944,
         -16
       ],
-      "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
-      "name": "Send a message",
-      "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
+      "id": "1ee27a2f-8d4f-4572-8ac5-ce3cf07e36a0",
+      "name": "Send a message1",
+      "webhookId": "c0a67a4b-db4b-42d6-b745-8c9aeea1b0d7",
       "credentials": {
         "gmailOAuth2": {
           "id": "B54ZrCQE7BGakg77",
@@ -372,11 +434,11 @@
   ],
   "staticData": {
     "node:Email Trigger (IMAP)": {
-      "lastMessageUid": 18188
+      "lastMessageUid": 18283
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-18T11:15:27.243Z",
-  "versionId": "325a9285-ff15-431e-90ba-05f58f1d12d5"
+  "updatedAt": "2026-05-18T17:35:02.489Z",
+  "versionId": "d63b4466-f060-4a9b-8cf8-7bb36933c74a"
 }
