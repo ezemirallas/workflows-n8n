@@ -1,216 +1,7 @@
 {
-  "active": true,
-  "activeVersion": {
-    "updatedAt": "2026-05-18T17:35:06.000Z",
-    "createdAt": "2026-05-18T17:35:02.490Z",
-    "versionId": "d63b4466-f060-4a9b-8cf8-7bb36933c74a",
-    "workflowId": "8uKh8q1Tlwl3Ns3i",
-    "nodes": [
-      {
-        "parameters": {
-          "options": {}
-        },
-        "type": "n8n-nodes-base.emailReadImap",
-        "typeVersion": 2.1,
-        "position": [
-          48,
-          -32
-        ],
-        "id": "b625a44c-e48f-4faf-afc1-995e8b6eb238",
-        "name": "Email Trigger (IMAP)",
-        "credentials": {
-          "imap": {
-            "id": "PoRoPBW8jnv4HiaP",
-            "name": "IMAP account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "options": {}
-        },
-        "type": "n8n-nodes-base.splitInBatches",
-        "typeVersion": 3,
-        "position": [
-          256,
-          -32
-        ],
-        "id": "6a377a1c-2345-45fa-831c-cbfc920ace44",
-        "name": "Loop Over Items"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "d003d928-c6ec-45c1-b8bb-4e81fc0f97a8",
-                "name": "cuerpo",
-                "value": "={{ $json.textPlain }}",
-                "type": "string"
-              },
-              {
-                "id": "a5bc5cba-2ff5-44b9-b1b4-44c489713b7e",
-                "name": "asunto",
-                "value": "={{ $json.subject }}",
-                "type": "string"
-              },
-              {
-                "id": "d7526155-6e88-4be8-99d1-b8f0cc6804b5",
-                "name": "destinatarios",
-                "value": "={{ $json.to }}",
-                "type": "string"
-              },
-              {
-                "id": "5421dfdf-2e33-48b0-9707-5c9ab74c0773",
-                "name": "de",
-                "value": "={{ $json.from }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          480,
-          -16
-        ],
-        "id": "b420b9ba-0b5f-42ec-8407-42ebf411ae22",
-        "name": "Edit Fields"
-      },
-      {
-        "parameters": {
-          "jsCode": "const str = $input.item.json.destinatarios;\nconst excluir = \"osep.notificaciones@osep.mendoza.gov.ar\";\n\n// Convertimos a array, limpiamos espacios y filtramos\nconst resultado = str.split(',')\n  .map(email => email.trim())\n  .filter(email => email.toLowerCase() !== excluir.toLowerCase());\n\nreturn {\n  correo_final: resultado[0] // Retorna el primero que no sea el excluido\n};"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          704,
-          -16
-        ],
-        "id": "a068ef01-0ecc-495b-a5f7-c1eee24e420f",
-        "name": "Code in JavaScript"
-      },
-      {
-        "parameters": {
-          "sendTo": "={{ $json.correo_final }}",
-          "subject": "={{ $('Edit Fields').item.json.asunto }}",
-          "message": "={{ $('Edit Fields').item.json.cuerpo }}",
-          "options": {
-            "appendAttribution": false
-          }
-        },
-        "type": "n8n-nodes-base.gmail",
-        "typeVersion": 2.2,
-        "position": [
-          944,
-          -240
-        ],
-        "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
-        "name": "Send a message",
-        "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
-        "credentials": {
-          "gmailOAuth2": {
-            "id": "zH7ds7PFEgjOW22z",
-            "name": "Gmail account 3"
-          }
-        },
-        "disabled": true
-      },
-      {
-        "parameters": {
-          "sendTo": "={{ $json.correo_final }}",
-          "subject": "={{ $('Edit Fields').item.json.asunto }}",
-          "message": "={{ $('Edit Fields').item.json.cuerpo }}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.gmail",
-        "typeVersion": 2.2,
-        "position": [
-          944,
-          -16
-        ],
-        "id": "1ee27a2f-8d4f-4572-8ac5-ce3cf07e36a0",
-        "name": "Send a message1",
-        "webhookId": "c0a67a4b-db4b-42d6-b745-8c9aeea1b0d7",
-        "credentials": {
-          "gmailOAuth2": {
-            "id": "B54ZrCQE7BGakg77",
-            "name": "Gmail account 2"
-          }
-        }
-      }
-    ],
-    "connections": {
-      "Email Trigger (IMAP)": {
-        "main": [
-          [
-            {
-              "node": "Loop Over Items",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Loop Over Items": {
-        "main": [
-          [],
-          [
-            {
-              "node": "Edit Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Edit Fields": {
-        "main": [
-          [
-            {
-              "node": "Code in JavaScript",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Code in JavaScript": {
-        "main": [
-          [
-            {
-              "node": "Send a message1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Send a message": {
-        "main": [
-          []
-        ]
-      },
-      "Send a message1": {
-        "main": [
-          [
-            {
-              "node": "Loop Over Items",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      }
-    },
-    "authors": "Ezequiel  Mirallas",
-    "name": "Version d63b4466",
-    "description": "",
-    "autosaved": true
-  },
-  "activeVersionId": "d63b4466-f060-4a9b-8cf8-7bb36933c74a",
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Email Trigger (IMAP)": {
       "main": [
@@ -250,16 +41,11 @@
       "main": [
         [
           {
-            "node": "Send a message1",
+            "node": "If",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "Send a message": {
-      "main": [
-        []
       ]
     },
     "Send a message1": {
@@ -267,6 +53,35 @@
         [
           {
             "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a message1",
             "type": "main",
             "index": 0
           }
@@ -357,7 +172,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const str = $input.item.json.destinatarios;\nconst excluir = \"osep.notificaciones@osep.mendoza.gov.ar\";\n\n// Convertimos a array, limpiamos espacios y filtramos\nconst resultado = str.split(',')\n  .map(email => email.trim())\n  .filter(email => email.toLowerCase() !== excluir.toLowerCase());\n\nreturn {\n  correo_final: resultado[0] // Retorna el primero que no sea el excluido\n};"
+        "jsCode": "const item = $input.item.json;\nconst excluir = \"osep.notificaciones@osep.mendoza.gov.ar\";\nconst asunto = item.asunto ?? \"\";\nconst cuerpo = item.cuerpo ?? \"\";\n\nlet correo_final = null;\nlet tipo = null;\n\n// Determinar remitente\nif (asunto.toLowerCase().includes(\"failure\") || asunto.toLowerCase().includes(\"undelivered\")) {\n  const matches = cuerpo.match(/<([^>]+@[^>]+)>/g) ?? [];\n  const emails = matches\n    .map(m => m.replace(/[<>]/g, '').trim())\n    .filter(e => e.toLowerCase() !== excluir.toLowerCase());\n  correo_final = emails[0] ?? null;\n  tipo = \"rebote\";\n} else {\n  const de = item.de ?? \"\";\n  const match = de.match(/<([^>]+)>/) ?? [];\n  correo_final = match[1] ?? de.trim();\n  if (correo_final.toLowerCase() === excluir.toLowerCase()) correo_final = null;\n  tipo = \"respuesta\";\n}\n\n// Derivación aleatoria a uno de las cuentas\nconst cuentas = [\n  \"osep.notificaciones1@gmail.com\",\n  \"osep.notificaciones2@gmail.com\"\n];\nconst cuenta_destino = cuentas[Math.floor(Math.random() * 2)];\n\nreturn [{ json: { correo_final, tipo, asunto, cuenta_destino } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -380,42 +195,163 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        944,
-        -240
-      ],
-      "id": "ad9a2327-45a4-4214-802f-01ac84a18962",
-      "name": "Send a message",
-      "webhookId": "3b0a3d6b-8cf1-491c-841a-a6d5cba219db",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "zH7ds7PFEgjOW22z",
-          "name": "Gmail account 3"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "sendTo": "={{ $json.correo_final }}",
-        "subject": "={{ $('Edit Fields').item.json.asunto }}",
-        "message": "={{ $('Edit Fields').item.json.cuerpo }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
-      "position": [
-        944,
-        -16
+        1232,
+        0
       ],
       "id": "1ee27a2f-8d4f-4572-8ac5-ce3cf07e36a0",
       "name": "Send a message1",
       "webhookId": "c0a67a4b-db4b-42d6-b745-8c9aeea1b0d7",
       "credentials": {
         "gmailOAuth2": {
+          "id": "zH7ds7PFEgjOW22z",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.correo_final }}",
+        "subject": "={{ $('Edit Fields').item.json.cuerpo }}",
+        "message": "={{ $('Edit Fields').item.json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1232,
+        224
+      ],
+      "id": "98f87201-1754-468e-a64d-24d4ebc055ec",
+      "name": "Send a message2",
+      "webhookId": "229507ad-d0f9-427f-aed0-5d55c5172fbf",
+      "credentials": {
+        "gmailOAuth2": {
           "id": "B54ZrCQE7BGakg77",
           "name": "Gmail account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a40068a2-68cb-465b-b436-e6986998b0bd",
+              "leftValue": "={{ $json.cuenta_destino }}",
+              "rightValue": "osep.notificaciones1@gmail.com",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        976,
+        -16
+      ],
+      "id": "a5c52efa-904e-4b4f-97c5-fd6d8094b7f1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d2ecc11b-fe73-4857-ae9c-cf6a1cbaef6f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "03311b59-c975-4837-81ac-45977c73ee89",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ba7818b8-695f-47d3-8d53-08a5f495a922",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        976,
+        -272
+      ],
+      "id": "981dd4cc-bc5b-4ea7-85b0-b36221bf9426",
+      "name": "Switch",
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -434,11 +370,11 @@
   ],
   "staticData": {
     "node:Email Trigger (IMAP)": {
-      "lastMessageUid": 18283
+      "lastMessageUid": 18352
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-05-18T17:35:02.489Z",
-  "versionId": "d63b4466-f060-4a9b-8cf8-7bb36933c74a"
+  "updatedAt": "2026-05-19T13:22:03.404Z",
+  "versionId": "11935fb1-ef77-4f02-b6c5-94eedb45f86b"
 }
