@@ -241,8 +241,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -620,
-        -200
+        -624,
+        -208
       ],
       "id": "b00a3392-5ddc-4d3d-af63-503707438acd",
       "name": "When chat message received",
@@ -257,8 +257,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.7,
       "position": [
-        -300,
-        -200
+        -304,
+        -208
       ],
       "id": "26d6685c-da1d-45a7-89d5-18ee70d4832c",
       "name": "AI Agent"
@@ -272,7 +272,7 @@
       "typeVersion": 1,
       "position": [
         -480,
-        40
+        48
       ],
       "id": "04107d99-1138-4c58-9707-453363f86f2c",
       "name": "Ollama Chat Model",
@@ -288,8 +288,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -300,
-        40
+        -304,
+        48
       ],
       "id": "eee8f219-2e95-463a-b790-71a9844e72b6",
       "name": "Window Buffer Memory"
@@ -299,8 +299,8 @@
       "type": "n8n-nodes-mcp.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        -120,
-        40
+        -128,
+        48
       ],
       "id": "6a541a66-b458-4296-b4c1-4ed6ccf80de3",
       "name": "MCP Client",
@@ -321,8 +321,8 @@
       "type": "n8n-nodes-mcp.mcpClientTool",
       "typeVersion": 1,
       "position": [
-        20,
-        40
+        192,
+        -96
       ],
       "id": "2455ea76-d7eb-47fa-95c0-0fc4f7b33387",
       "name": "MCP Client1",
@@ -336,7 +336,8 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
   "shared": [
     {
@@ -350,6 +351,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-04-21T10:25:34.000Z",
-  "versionId": "1c537b75-f542-4a55-9fa5-98e9ac32c802"
+  "updatedAt": "2026-05-21T17:12:14.530Z",
+  "versionId": "e782f3e2-a35b-4d8c-af6f-bf7607a5a9bf"
 }
