@@ -3,17 +3,6 @@
   "activeVersion": null,
   "activeVersionId": null,
   "connections": {
-    "Retrieve Documents": {
-      "ai_tool": [
-        [
-          {
-            "node": "RAG AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Download File": {
       "main": [
         [
@@ -47,17 +36,6 @@
         ]
       ]
     },
-    "Recursive Character Text Splitter": {
-      "ai_textSplitter": [
-        [
-          {
-            "node": "Default Data Loader",
-            "type": "ai_textSplitter",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Delete Old Doc Rows": {
       "main": [
         [
@@ -80,42 +58,8 @@
         ]
       ]
     },
-    "Ollama Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "RAG AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Ollama Chat Model1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Retrieve Documents",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Google Drive": {
       "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
         [
           {
             "node": "Edit Fields",
@@ -147,45 +91,12 @@
         ]
       ]
     },
-    "Insert into Supabase Vectorstore": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Embeddings HuggingFace Inference1": {
       "ai_embedding": [
         [
           {
             "node": "Insert into Supabase Vectorstore",
             "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Embeddings HuggingFace Inference": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Supabase Vector Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Supabase Vector Store": {
-      "ai_vectorStore": [
-        [
-          {
-            "node": "Retrieve Documents",
-            "type": "ai_vectorStore",
             "index": 0
           }
         ]
@@ -206,23 +117,89 @@
       "main": [
         [
           {
-            "node": "RAG AI Agent",
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "RAG AI Agent": {
+    "AI Agent": {
       "main": [
         []
       ]
     },
-    "Postgres Chat Memory": {
+    "Supabase Vector Store": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Buscar",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Buscar",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
       "ai_memory": [
         [
           {
-            "node": "RAG AI Agent",
+            "node": "AI Agent",
             "type": "ai_memory",
             "index": 0
           }
@@ -230,73 +207,39 @@
       ]
     }
   },
-  "createdAt": "2025-05-06T14:20:31.519Z",
-  "id": "uY9gKEuxBg7EYgHM",
+  "createdAt": "2025-03-11T15:30:13.130Z",
+  "id": "gEDvA6kU7yXUr8Kz",
   "isArchived": false,
-  "meta": {
-    "templateCredsSetupCompleted": true
-  },
+  "meta": null,
   "name": "RAGconmemoria",
   "nodes": [
     {
       "parameters": {
-        "jsonMode": "expressionData",
-        "jsonData": "={{ $json.data }}",
         "options": {}
       },
-      "id": "dc3548f5-bddd-4e1d-a500-25b3f086139a",
+      "id": "b555e391-5b77-4077-a436-59d9b73bc69e",
       "name": "Default Data Loader",
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1,
       "position": [
-        720,
-        940
+        1720,
+        1280
       ]
     },
     {
       "parameters": {
-        "name": "user_documents",
-        "description": "Contiene todos los documentos del usuario que puede consultar en busca de contexto para responder preguntas del usuario."
-      },
-      "id": "077d077a-0305-441f-bd34-a075043ac993",
-      "name": "Retrieve Documents",
-      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
-      "typeVersion": 1,
-      "position": [
-        380,
-        160
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Agent Tools for RAG",
-        "height": 528.85546469693,
-        "width": 583.4552380860637,
-        "color": 4
-      },
-      "id": "7c7f759f-5935-4884-a92b-baf49fceee81",
-      "name": "Sticky Note",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        240,
-        60
-      ]
-    },
-    {
-      "parameters": {
-        "content": "## Tool to Add a Google Drive File to Vector DB\n",
-        "height": 832,
-        "width": 3117,
+        "content": "\n",
+        "height": 1132,
+        "width": 3077,
         "color": 5
       },
-      "id": "8d95ccdd-2b6f-4485-a7e6-c261f5dd1e75",
+      "id": "b436616a-b8b0-4761-ab05-caa764008322",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1700,
-        600
+        -1060,
+        900
       ]
     },
     {
@@ -315,13 +258,13 @@
           }
         }
       },
-      "id": "c0c0684b-04ea-4af8-8ba0-7ad5f606b1de",
+      "id": "12488b02-cbe2-46cb-ac4d-b67777b64b1f",
       "name": "Download File",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -20,
-        740
+        840,
+        1080
       ],
       "executeOnce": true,
       "credentials": {
@@ -333,47 +276,33 @@
     },
     {
       "parameters": {
-        "operation": "text",
+        "operation": "pdf",
         "options": {}
       },
-      "id": "ed337409-b4fd-4ee3-bd2e-734e79c87f48",
+      "id": "3c209dcb-e2ee-4788-bf67-08458b830784",
       "name": "Extract Document Text",
       "type": "n8n-nodes-base.extractFromFile",
       "typeVersion": 1,
       "position": [
-        300,
-        740
+        1220,
+        1080
       ],
       "alwaysOutputData": true
     },
     {
       "parameters": {
-        "chunkSize": 1100,
-        "options": {}
-      },
-      "id": "4f52a1b2-23a4-4a43-968d-2dccc6f34a57",
-      "name": "Recursive Character Text Splitter",
-      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
-      "typeVersion": 1,
-      "position": [
-        720,
-        1140
-      ]
-    },
-    {
-      "parameters": {
         "operation": "delete",
-        "tableId": "documents",
+        "tableId": "documents_rag_nuevo",
         "filterType": "string",
         "filterString": "=metadata->>file_id=like.*{{ $json.file_id }}*"
       },
-      "id": "4d3b3627-ea7d-4de7-9f94-f038a0ed4d31",
+      "id": "4ec2e107-cf2d-4933-8fc2-66910ad5a13d",
       "name": "Delete Old Doc Rows",
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -960,
-        720
+        -100,
+        1080
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -397,74 +326,14 @@
         },
         "options": {}
       },
-      "id": "cc0a350b-958c-45da-b4fd-0da312baead9",
+      "id": "71ecdf3f-cf2b-4e5a-9fc8-dac600c11b09",
       "name": "Set File ID",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1160,
-        720
+        -380,
+        1080
       ]
-    },
-    {
-      "parameters": {
-        "content": "## RAG AI Agent with Chat Interface",
-        "height": 525,
-        "width": 933
-      },
-      "id": "27ade56a-a453-4800-b3f0-ac854034ad0c",
-      "name": "Sticky Note2",
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -820,
-        0
-      ]
-    },
-    {
-      "parameters": {
-        "model": "llama3.1:8b",
-        "options": {
-          "temperature": 0,
-          "topK": 1
-        }
-      },
-      "id": "584c7f0e-a16c-4cd6-911b-de32832f3f0b",
-      "name": "Ollama Chat Model",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
-      "typeVersion": 1,
-      "position": [
-        -440,
-        340
-      ],
-      "credentials": {
-        "ollamaApi": {
-          "id": "NQCaIfW9ruiVvrK4",
-          "name": "Ollama account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "model": "llama3.1:8b",
-        "options": {
-          "temperature": 0
-        }
-      },
-      "id": "0b5285d0-4a3b-45b6-b010-d4772c2e78ac",
-      "name": "Ollama Chat Model1",
-      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
-      "typeVersion": 1,
-      "position": [
-        620,
-        340
-      ],
-      "credentials": {
-        "ollamaApi": {
-          "id": "NQCaIfW9ruiVvrK4",
-          "name": "Ollama account"
-        }
-      }
     },
     {
       "parameters": {
@@ -472,21 +341,21 @@
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "1BYU2et2R_dFdcwWD2vUN1Cn5Y_lDeW6c",
+            "value": "1at6D8KX2cVbyb0PBNn5wvh6MOFK474IG",
             "mode": "list",
-            "cachedResultName": "almaconv",
-            "cachedResultUrl": "https://drive.google.com/drive/folders/1BYU2et2R_dFdcwWD2vUN1Cn5Y_lDeW6c"
+            "cachedResultName": "n8n Documents",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1at6D8KX2cVbyb0PBNn5wvh6MOFK474IG"
           }
         },
         "options": {}
       },
-      "id": "cc78137c-588a-4917-9bc9-df578650b518",
+      "id": "d6e02a80-be0c-4fc6-8926-b6bfc6077272",
       "name": "Google Drive",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -760,
-        720
+        200,
+        1080
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -497,38 +366,25 @@
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "id": "763943a3-f9f5-4c0c-a038-5f761ffb3f5d",
-      "name": "Loop Over Items",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        -500,
-        720
-      ]
-    },
-    {
-      "parameters": {
         "resource": "fileFolder",
         "filter": {
           "folderId": {
             "__rl": true,
-            "value": "1BYU2et2R_dFdcwWD2vUN1Cn5Y_lDeW6c",
+            "value": "1at6D8KX2cVbyb0PBNn5wvh6MOFK474IG",
             "mode": "list",
-            "cachedResultName": "almaconv",
-            "cachedResultUrl": "https://drive.google.com/drive/folders/1BYU2et2R_dFdcwWD2vUN1Cn5Y_lDeW6c"
+            "cachedResultName": "n8n Documents",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1at6D8KX2cVbyb0PBNn5wvh6MOFK474IG"
           }
         },
         "options": {}
       },
-      "id": "f8b3dde0-9a41-414a-9b9d-8ba21a1ec6db",
+      "id": "8c8d2585-df1b-47ec-8b83-42b93f59f32e",
       "name": "Google Drive1",
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1400,
-        720
+        -640,
+        1080
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -551,13 +407,13 @@
         },
         "options": {}
       },
-      "id": "cbe09d11-1fc9-4c20-b5be-c21c0f904af6",
+      "id": "44d1b596-e809-4016-aa6c-78dc76944185",
       "name": "Edit Fields",
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -240,
-        740
+        480,
+        1080
       ]
     },
     {
@@ -565,21 +421,21 @@
         "mode": "insert",
         "tableName": {
           "__rl": true,
-          "value": "documents",
+          "value": "documents_rag_nuevo",
           "mode": "list",
-          "cachedResultName": "documents"
+          "cachedResultName": "documents_rag_nuevo"
         },
         "options": {
-          "queryName": "match_documents"
+          "queryName": "match_documents_rag_nuevo"
         }
       },
-      "id": "5694ec34-34c7-46e2-b1bb-22ad533734de",
+      "id": "c1046b89-105f-447e-95a6-7703e286ddc4",
       "name": "Insert into Supabase Vectorstore",
       "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
       "typeVersion": 1,
       "position": [
-        600,
-        740
+        1620,
+        1080
       ],
       "credentials": {
         "supabaseApi": {
@@ -590,127 +446,219 @@
     },
     {
       "parameters": {
-        "modelName": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        "modelName": "jinaai/jina-embeddings-v3",
         "options": {
           "endpointUrl": ""
         }
       },
-      "id": "898d2be2-7e6f-446f-a290-d2ccd11fc86e",
+      "id": "14d6cc16-3feb-4a55-a267-411a9931e0d7",
       "name": "Embeddings HuggingFace Inference1",
       "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
       "typeVersion": 1,
       "position": [
-        540,
-        980
+        1540,
+        1320
       ],
       "credentials": {
         "huggingFaceApi": {
           "id": "DEpo99EJwas7sjrn",
           "name": "HuggingFaceApi account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "modelName": "intfloat/multilingual-e5-large",
-        "options": {}
-      },
-      "id": "21da7fae-7c2c-4d1b-88bd-029bf4175cbd",
-      "name": "Embeddings HuggingFace Inference",
-      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
-      "typeVersion": 1,
-      "position": [
-        440,
-        440
-      ],
-      "credentials": {
-        "huggingFaceApi": {
-          "id": "DEpo99EJwas7sjrn",
-          "name": "HuggingFaceApi account 2"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "tableName": {
-          "__rl": true,
-          "value": "documents",
-          "mode": "list",
-          "cachedResultName": "documents"
-        },
-        "options": {}
-      },
-      "id": "5ddb5f63-c2f9-4c8a-8045-b2a537fa1403",
-      "name": "Supabase Vector Store",
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
-      "typeVersion": 1,
-      "position": [
-        280,
-        320
-      ],
-      "credentials": {
-        "supabaseApi": {
-          "id": "39W8A89HIb10eoXx",
-          "name": "Supabase account"
         }
       }
     },
     {
       "parameters": {},
-      "id": "225af8cd-c1c3-48c5-a68a-d7c4341f6936",
+      "id": "893e3f56-ebec-43ac-a8db-2b550128f8b4",
       "name": "When clicking ‘Test workflow’",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1680,
-        720
+        -960,
+        1080
       ]
     },
     {
       "parameters": {
-        "options": {}
+        "public": true,
+        "initialMessages": "=Hi there! 🙏\n\nYou can ask me anything about Venerable Geshe Kelsang Gyatso's Book - 'How To Transform Your Life'\n\nWhat would you like to know? ",
+        "options": {
+          "responseMode": "lastNode"
+        }
       },
-      "id": "09f7179f-e5f0-4d2e-a383-3d18710a6242",
+      "id": "dc658f38-e658-4c19-9c4d-a375bb004e26",
       "name": "When chat message received",
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.1,
       "position": [
-        -620,
-        120
+        40,
+        140
       ],
-      "webhookId": "aaf10f32-b1b7-448f-84e2-93a7475bd95b"
+      "webhookId": "260c501d-f86f-43ea-8d6a-b35de0fac817",
+      "typeVersion": 1.1
     },
     {
       "parameters": {
         "promptType": "define",
         "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "Tu nombre es ALMA, eres la asistente virtual de OSEP (Obra Social de Empleados Públicos de la Provincia de Mendoza).\nRespondes con tono informal, empático y amable. \nVives en la nube, Trabajas  24/7. Responde con un máximo de 100 caracteres.\nReglas:\n1. Tus respuestas deben ser como para mensajes de WhatsApp, usa \"*\" para poner negrita y/o \"_\" para italic para marcar lo importante. \n2. Usa emojis en tus respuestas.\n3. Nunca adivinar, solo proporcionar información basada en el RAG\n4. Solo responde consultas acerca de OSEP.\n5. Nunca hables mal de OSEP.\nAhora, procede a responder la siguiente pregunta teniendo en cuenta estas instrucciones:\n----------------\n{context}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        380,
+        140
+      ],
+      "id": "fa63d834-1561-4650-bce9-95c1e7c66290",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "tableName": {
+          "__rl": true,
+          "value": "documents_rag_nuevo",
+          "mode": "list",
+          "cachedResultName": "documents_rag_nuevo"
+        },
+        "options": {
+          "queryName": "match_documents_rag_nuevo"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1,
+      "position": [
+        560,
+        520
+      ],
+      "id": "6a23c996-a00c-4842-b996-893588c150fd",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "39W8A89HIb10eoXx",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "jinaai/jina-embeddings-v3",
         "options": {}
       },
-      "id": "e9cf24a2-064e-4c8e-9e29-70ce6a5e57be",
-      "name": "RAG AI Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.6,
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "typeVersion": 1,
       "position": [
-        -360,
-        120
-      ]
+        520,
+        660
+      ],
+      "id": "1c10976d-4e0a-40e3-ba66-bdb4e077c336",
+      "name": "Embeddings HuggingFace Inference2",
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "DEpo99EJwas7sjrn",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0,
+          "vocabOnly": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        900,
+        520
+      ],
+      "id": "c4fefa85-cc20-4fa4-bd1f-167e5cb4d575",
+      "name": "Ollama Chat Model1",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# RETRIEVAL",
+        "height": 822,
+        "width": 1131,
+        "color": 5
+      },
+      "id": "8e32e7b7-40f4-41b1-977c-8d55bb1533e7",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:8b",
+        "options": {
+          "temperature": 0,
+          "vocabOnly": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        240,
+        400
+      ],
+      "id": "5764f20f-c5cd-4509-b87c-942a2fd63f0b",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "NQCaIfW9ruiVvrK4",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 50,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        1500
+      ],
+      "id": "fb4aedf7-5509-435e-bd72-7b11276a501a",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "name": "Buscar",
+        "description": "Contiene todos los documentos del usuario que puede consultar en busca de contexto para responder preguntas del usuario."
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        700,
+        380
+      ],
+      "id": "dc0ed078-39da-42dc-8e4d-dbb1c18a3764",
+      "name": "Buscar"
     },
     {
       "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        -280,
-        340
+        460,
+        400
       ],
-      "id": "8a1f95e2-e023-40f4-b927-d56a4c01bae6",
-      "name": "Postgres Chat Memory",
-      "credentials": {
-        "postgres": {
-          "id": "YkWDJCP4jnGKXU0x",
-          "name": "Postgres account"
-        }
-      }
+      "id": "4be78220-c6d9-4ae8-9001-d28ca9e37830",
+      "name": "Window Buffer Memory"
     }
   ],
   "pinData": {},
@@ -719,16 +667,16 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-05-06T14:20:31.528Z",
-      "createdAt": "2025-05-06T14:20:31.528Z",
+      "updatedAt": "2025-03-11T15:30:13.210Z",
+      "createdAt": "2025-03-11T15:30:13.210Z",
       "role": "workflow:owner",
-      "workflowId": "uY9gKEuxBg7EYgHM",
+      "workflowId": "gEDvA6kU7yXUr8Kz",
       "projectId": "ykl3JaRVM7UvdLLB"
     }
   ],
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-05-08T11:14:13.000Z",
-  "versionId": "c2b65082-003e-4dc8-92b1-2969eb507d5e"
+  "updatedAt": "2025-03-12T17:46:56.000Z",
+  "versionId": "035c6ecf-6885-4199-94c3-9095611c2380"
 }
