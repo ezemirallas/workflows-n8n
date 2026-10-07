@@ -1,8 +1,6 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-20T10:30:40.000Z",
-    "createdAt": "2026-04-20T10:30:17.526Z",
     "versionId": "680f6461-5f20-4e3a-84b7-7fecce2df726",
     "workflowId": "AeQVaxrw716VXJPK",
     "nodes": [
@@ -165,10 +163,13 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "Ezequiel  Mirallas",
     "name": "Version 680f6461",
     "description": "",
-    "autosaved": true
+    "autosaved": true,
+    "createdAt": "2026-04-20T10:30:17.526Z",
+    "updatedAt": "2026-04-20T10:30:40.000Z"
   },
   "activeVersionId": "680f6461-5f20-4e3a-84b7-7fecce2df726",
   "connections": {
@@ -229,6 +230,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "agente motivacional",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -360,16 +362,21 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-04-08T14:23:11.986Z",
-      "createdAt": "2026-04-08T14:23:11.986Z",
       "role": "workflow:owner",
       "workflowId": "AeQVaxrw716VXJPK",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-04-08T14:23:11.986Z",
+      "updatedAt": "2026-04-08T14:23:11.986Z"
     }
   ],
   "staticData": {
     "node:Schedule Trigger": {
-      "recurrenceRules": []
+      "recurrenceRules": [
+        null
+      ],
+      "recurrenceRuleSignatures": [
+        null
+      ]
     }
   },
   "tags": [],
