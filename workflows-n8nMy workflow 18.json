@@ -1,0 +1,50 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {},
+  "createdAt": "2026-10-02T15:53:02.020Z",
+  "id": "QYMoh3lvpy3o9OGX",
+  "isArchived": false,
+  "meta": null,
+  "name": "My workflow 18",
+  "nodeGroups": [],
+  "nodes": [
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.evaluationTrigger",
+      "typeVersion": 4.7,
+      "position": [
+        -336,
+        64
+      ],
+      "id": "ae9e25f8-5f23-4072-acaf-e7561f5d9681",
+      "name": "When fetching a dataset row"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "shared": [
+    {
+      "role": "workflow:owner",
+      "workflowId": "QYMoh3lvpy3o9OGX",
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-10-02T15:53:02.022Z",
+      "updatedAt": "2026-10-02T15:53:02.022Z"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-10-02T15:55:38.837Z",
+  "versionId": "cebfe37a-fdf2-47ad-9846-5d552888ce6c"
+}
