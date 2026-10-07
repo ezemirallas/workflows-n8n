@@ -183,6 +183,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "My workflow 16",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -680,11 +681,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-04-08T14:14:04.150Z",
-      "createdAt": "2026-04-08T14:14:04.150Z",
       "role": "workflow:owner",
       "workflowId": "nYCnr2nMQpd8yNjU",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-04-08T14:14:04.150Z",
+      "updatedAt": "2026-04-08T14:14:04.150Z"
     }
   ],
   "staticData": null,
