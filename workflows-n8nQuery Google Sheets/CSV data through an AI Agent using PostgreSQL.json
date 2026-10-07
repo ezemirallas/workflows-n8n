@@ -173,6 +173,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Query Google Sheets/CSV data through an AI Agent using PostgreSQL",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -539,11 +540,11 @@
   "settings": {},
   "shared": [
     {
-      "updatedAt": "2025-05-30T11:49:59.635Z",
-      "createdAt": "2025-05-30T11:49:59.635Z",
       "role": "workflow:owner",
       "workflowId": "zIN2qWHtOXOhJVwi",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-05-30T11:49:59.635Z",
+      "updatedAt": "2025-05-30T11:49:59.635Z"
     }
   ],
   "staticData": null,
