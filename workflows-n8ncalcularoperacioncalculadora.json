@@ -60,6 +60,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "calcularoperacioncalculadora",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -141,11 +142,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-05-14T14:56:32.925Z",
-      "createdAt": "2025-05-14T14:56:32.925Z",
       "role": "workflow:owner",
       "workflowId": "lgdAXDpWz89MtXeT",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-05-14T14:56:32.925Z",
+      "updatedAt": "2025-05-14T14:56:32.925Z"
     }
   ],
   "staticData": null,
