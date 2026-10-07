@@ -51,6 +51,7 @@
   "isArchived": false,
   "meta": null,
   "name": "multiagentesconclasificador",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -162,11 +163,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-01-09T12:48:10.748Z",
-      "createdAt": "2025-01-09T12:48:10.748Z",
       "role": "workflow:owner",
       "workflowId": "2fbibeuL2bqkts4G",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-01-09T12:48:10.748Z",
+      "updatedAt": "2025-01-09T12:48:10.748Z"
     }
   ],
   "staticData": null,
