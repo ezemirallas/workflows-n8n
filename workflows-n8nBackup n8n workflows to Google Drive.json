@@ -104,6 +104,7 @@
     "templateId": "1150"
   },
   "name": "Backup n8n workflows to Google Drive",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
@@ -256,11 +257,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2024-11-07T16:04:55.564Z",
-      "createdAt": "2024-11-07T16:04:55.564Z",
       "role": "workflow:owner",
       "workflowId": "Jr0fouUimjSc5JXT",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2024-11-07T16:04:55.564Z",
+      "updatedAt": "2024-11-07T16:04:55.564Z"
     }
   ],
   "staticData": null,
