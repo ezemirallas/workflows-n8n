@@ -96,6 +96,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "usuariosRRHH",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -332,11 +333,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2024-11-22T16:34:30.652Z",
-      "createdAt": "2024-11-22T16:34:30.652Z",
       "role": "workflow:owner",
       "workflowId": "ue5mq5xY5pYTu2cP",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2024-11-22T16:34:30.652Z",
+      "updatedAt": "2024-11-22T16:34:30.652Z"
     }
   ],
   "staticData": null,
