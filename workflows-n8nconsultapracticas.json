@@ -60,6 +60,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "consultapracticas",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -143,11 +144,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-04-25T11:13:42.224Z",
-      "createdAt": "2025-04-25T11:13:42.224Z",
       "role": "workflow:owner",
       "workflowId": "Kbdt0jVgvMlv2Oym",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-04-25T11:13:42.224Z",
+      "updatedAt": "2025-04-25T11:13:42.224Z"
     }
   ],
   "staticData": null,
