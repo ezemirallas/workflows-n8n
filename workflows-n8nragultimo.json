@@ -218,6 +218,7 @@
   "isArchived": false,
   "meta": null,
   "name": "ragultimo",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -691,11 +692,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-03-18T13:41:35.213Z",
-      "createdAt": "2025-03-18T13:41:35.213Z",
       "role": "workflow:owner",
       "workflowId": "7ve6hQGFqLGOOifx",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-03-18T13:41:35.213Z",
+      "updatedAt": "2025-03-18T13:41:35.213Z"
     }
   ],
   "staticData": null,
