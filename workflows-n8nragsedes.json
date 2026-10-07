@@ -130,6 +130,7 @@
   "isArchived": false,
   "meta": null,
   "name": "ragsedes",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -415,11 +416,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-06-10T13:19:41.705Z",
-      "createdAt": "2025-06-10T13:19:41.705Z",
       "role": "workflow:owner",
       "workflowId": "MsxtwJUBLpskWFVE",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-06-10T13:19:41.705Z",
+      "updatedAt": "2025-06-10T13:19:41.705Z"
     }
   ],
   "staticData": null,
