@@ -75,6 +75,7 @@
   "isArchived": false,
   "meta": null,
   "name": "multiagentes+RAG",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -221,11 +222,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-02-24T16:06:52.570Z",
-      "createdAt": "2025-02-24T16:06:52.570Z",
       "role": "workflow:owner",
       "workflowId": "BzoXpVByeT6PKqPl",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-02-24T16:06:52.570Z",
+      "updatedAt": "2025-02-24T16:06:52.570Z"
     }
   ],
   "staticData": null,
