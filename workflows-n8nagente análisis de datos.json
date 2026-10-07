@@ -432,6 +432,7 @@
   "isArchived": false,
   "meta": null,
   "name": "agente análisis de datos",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -1721,32 +1722,32 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-04-07T14:11:59.345Z",
-      "createdAt": "2026-04-07T14:11:59.345Z",
       "role": "workflow:owner",
       "workflowId": "KQwYFZK_Ns4G0mg5Us8YH",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-04-07T14:11:59.345Z",
+      "updatedAt": "2026-04-07T14:11:59.345Z"
     }
   ],
   "staticData": null,
   "tags": [
     {
-      "updatedAt": "2026-04-07T14:00:05.394Z",
-      "createdAt": "2026-04-07T14:00:05.394Z",
       "id": "BLSgJNO37VY1lgWU",
-      "name": "Data Science"
+      "name": "Data Science",
+      "createdAt": "2026-04-07T14:00:05.394Z",
+      "updatedAt": "2026-04-07T14:00:05.394Z"
     },
     {
-      "updatedAt": "2026-04-07T14:00:05.525Z",
-      "createdAt": "2026-04-07T14:00:05.525Z",
       "id": "KqbkYwkHLaPQvKKY",
-      "name": "AI Agent"
+      "name": "AI Agent",
+      "createdAt": "2026-04-07T14:00:05.525Z",
+      "updatedAt": "2026-04-07T14:00:05.525Z"
     },
     {
-      "updatedAt": "2026-04-07T14:00:05.608Z",
-      "createdAt": "2026-04-07T14:00:05.608Z",
       "id": "SUwapI7HmIshRYvd",
-      "name": "Education"
+      "name": "Education",
+      "createdAt": "2026-04-07T14:00:05.608Z",
+      "updatedAt": "2026-04-07T14:00:05.608Z"
     }
   ],
   "triggerCount": 0,
