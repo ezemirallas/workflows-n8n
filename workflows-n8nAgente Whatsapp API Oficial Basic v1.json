@@ -293,6 +293,7 @@
   "isArchived": false,
   "meta": null,
   "name": "Agente Whatsapp API Oficial Basic v1",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -1121,20 +1122,20 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-03-12T11:10:07.467Z",
-      "createdAt": "2026-03-12T11:10:07.467Z",
       "role": "workflow:owner",
       "workflowId": "06r9u_yIgzoV2iwqIP7It",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-03-12T11:10:07.467Z",
+      "updatedAt": "2026-03-12T11:10:07.467Z"
     }
   ],
   "staticData": null,
   "tags": [
     {
-      "updatedAt": "2026-03-12T10:41:58.298Z",
-      "createdAt": "2026-03-12T10:41:58.298Z",
       "id": "vhow5EKsgn8R1zWU",
-      "name": "Agente Basico"
+      "name": "Agente Basico",
+      "createdAt": "2026-03-12T10:41:58.298Z",
+      "updatedAt": "2026-03-12T10:41:58.298Z"
     }
   ],
   "triggerCount": 0,
