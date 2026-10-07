@@ -71,6 +71,7 @@
     "templateId": "2703"
   },
   "name": "Agente AI: asistente de calendario de Google",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -304,11 +305,11 @@
   "settings": {},
   "shared": [
     {
-      "updatedAt": "2025-03-20T10:14:50.353Z",
-      "createdAt": "2025-03-20T10:14:50.353Z",
       "role": "workflow:owner",
       "workflowId": "C30GXSZ3QbEw8Ze1",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-03-20T10:14:50.353Z",
+      "updatedAt": "2025-03-20T10:14:50.353Z"
     }
   ],
   "staticData": null,
