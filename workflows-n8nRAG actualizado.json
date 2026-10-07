@@ -230,6 +230,7 @@
   "isArchived": false,
   "meta": null,
   "name": "RAG actualizado",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -706,11 +707,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-02-27T13:18:03.305Z",
-      "createdAt": "2025-02-27T13:18:03.305Z",
       "role": "workflow:owner",
       "workflowId": "3DzWfDO6YlO18t5g",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-02-27T13:18:03.305Z",
+      "updatedAt": "2025-02-27T13:18:03.305Z"
     }
   ],
   "staticData": null,
