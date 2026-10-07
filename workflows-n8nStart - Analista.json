@@ -95,6 +95,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Start - Analista",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -281,20 +282,20 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-01-08T17:03:53.880Z",
-      "createdAt": "2025-01-08T17:03:53.880Z",
       "role": "workflow:owner",
       "workflowId": "2q6ZcFOCVPxFFzLj",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-01-08T17:03:53.880Z",
+      "updatedAt": "2025-01-08T17:03:53.880Z"
     }
   ],
   "staticData": null,
   "tags": [
     {
-      "updatedAt": "2025-01-08T17:03:21.808Z",
-      "createdAt": "2025-01-08T17:03:21.808Z",
       "id": "ZxbksJ4xELHKufDR",
-      "name": "#Agentes IA"
+      "name": "#Agentes IA",
+      "createdAt": "2025-01-08T17:03:21.808Z",
+      "updatedAt": "2025-01-08T17:03:21.808Z"
     }
   ],
   "triggerCount": 0,
