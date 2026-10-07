@@ -44,6 +44,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Desarrollo - Team Leader",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
@@ -120,11 +121,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-01-08T16:58:23.743Z",
-      "createdAt": "2025-01-08T16:58:23.743Z",
       "role": "workflow:owner",
       "workflowId": "5YOeuznl3i2lH8lq",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-01-08T16:58:23.743Z",
+      "updatedAt": "2025-01-08T16:58:23.743Z"
     }
   ],
   "staticData": null,
