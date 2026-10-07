@@ -1,0 +1,415 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "datosCorreo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "osep.notificaciones1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "osep.notificiaciones": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "osep.notificaciones2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "osep.notificiaciones",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "osep.notificaciones1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "osep.notificaciones2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "destinatario": {
+      "main": [
+        [
+          {
+            "node": "aleatorio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datosCorreo": {
+      "main": [
+        [
+          {
+            "node": "destinatario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aleatorio": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-05-15T12:47:43.734Z",
+  "id": "8uKh8q1Tlwl3Ns3i",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "envio emails",
+  "nodeGroups": [],
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        256,
+        -32
+      ],
+      "id": "6a377a1c-2345-45fa-831c-cbfc920ace44",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('destinatario').item.json.correo_final }}",
+        "subject": "={{ $('datosCorreo').item.json.asunto }}",
+        "message": "={{ $('datosCorreo').item.json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1616,
+        192
+      ],
+      "id": "1ee27a2f-8d4f-4572-8ac5-ce3cf07e36a0",
+      "name": "osep.notificaciones1",
+      "webhookId": "c0a67a4b-db4b-42d6-b745-8c9aeea1b0d7",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "zadE0xSQ8DLTDeSq",
+          "name": "osep.notificaciones1"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('destinatario').item.json.correo_final }}",
+        "subject": "={{ $('datosCorreo').item.json.asunto }}",
+        "message": "={{ $('datosCorreo').item.json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1632,
+        448
+      ],
+      "id": "b5c2c27a-242f-41da-976f-265fd2a7aae3",
+      "name": "osep.notificaciones2",
+      "webhookId": "1d6a0cc1-df19-421e-a40f-1b8a6fef4f9d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Ii2aykxncDMPL6d4",
+          "name": "osep.notificaciones2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('destinatario').item.json.correo_final }}",
+        "subject": "={{ $('datosCorreo').item.json.asunto }}",
+        "message": "={{ $('datosCorreo').item.json.cuerpo }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1616,
+        -48
+      ],
+      "id": "c7cdb0fe-b21d-47a2-b1b6-cbe8988fa3ad",
+      "name": "osep.notificiaciones",
+      "webhookId": "949c3867-631c-496c-81ee-606b8fd4890b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fI06HmimhKFf3ck5",
+          "name": "osep.notificiaciones"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "forceReconnect": 30,
+          "trackLastMessageId": false
+        }
+      },
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -32
+      ],
+      "id": "8775860c-8ff6-4f1b-9556-db2be55e95e5",
+      "name": "Email Trigger (IMAP)",
+      "credentials": {
+        "imap": {
+          "id": "21jBm5b9PbYUvVz3",
+          "name": "osepsiga"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.randomNumber }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "7a486633-4a9c-4502-864a-6d5444542d5b"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "248f0b74-0b5d-4657-989a-9ef615950f26",
+                    "leftValue": "={{ $json.randomNumber }}",
+                    "rightValue": 2,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "f32968ec-cdbc-4269-b971-a6bb438232e3",
+                    "leftValue": "={{ $json.randomNumber }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1392,
+        -32
+      ],
+      "id": "f34802c4-9a1a-4e05-ae30-46a5601162d7",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const str = $input.item.json.destinatarios;\nconst excluir = \"osep.notificaciones@osep.mendoza.gov.ar\";\n\n// Convertimos a array, limpiamos espacios y filtramos\nconst resultado = str.split(',')\n  .map(email => email.trim())\n  .filter(email => email.toLowerCase() !== excluir.toLowerCase());\n\nreturn {\n  correo_final: resultado[0] // Retorna el primero que no sea el excluido\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        -16
+      ],
+      "id": "a068ef01-0ecc-495b-a5f7-c1eee24e420f",
+      "name": "destinatario"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d003d928-c6ec-45c1-b8bb-4e81fc0f97a8",
+              "name": "cuerpo",
+              "value": "={{ $json.textPlain }}",
+              "type": "string"
+            },
+            {
+              "id": "a5bc5cba-2ff5-44b9-b1b4-44c489713b7e",
+              "name": "asunto",
+              "value": "={{ $json.subject }}",
+              "type": "string"
+            },
+            {
+              "id": "d7526155-6e88-4be8-99d1-b8f0cc6804b5",
+              "name": "destinatarios",
+              "value": "={{ $json.to }}",
+              "type": "string"
+            },
+            {
+              "id": "5421dfdf-2e33-48b0-9707-5c9ab74c0773",
+              "name": "de",
+              "value": "={{ $json.from }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        576,
+        -16
+      ],
+      "id": "b420b9ba-0b5f-42ec-8407-42ebf411ae22",
+      "name": "datosCorreo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const randomNumber = Math.floor(Math.random() * 3) + 1;\nreturn [{ json: { randomNumber } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1136,
+        -16
+      ],
+      "id": "8e645d39-6e4b-49df-85be-2d19f87c066d",
+      "name": "aleatorio"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "role": "workflow:owner",
+      "workflowId": "8uKh8q1Tlwl3Ns3i",
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-05-15T12:47:43.747Z",
+      "updatedAt": "2026-05-15T12:47:43.747Z"
+    }
+  ],
+  "staticData": {
+    "node:Email Trigger (IMAP)": {}
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-06-02T14:09:41.967Z",
+  "versionId": "da676432-7771-481c-b01f-8c90ca8814ee"
+}
