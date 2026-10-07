@@ -1,8 +1,6 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-12T10:46:43.997Z",
-    "createdAt": "2026-01-12T10:46:43.997Z",
     "versionId": "50afbff4-f3c5-473c-b28c-1322066be66b",
     "workflowId": "iw5inAfYjsM70Am3",
     "nodes": [
@@ -205,10 +203,13 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "system migration",
     "name": null,
     "description": null,
-    "autosaved": false
+    "autosaved": false,
+    "createdAt": "2026-01-12T10:46:43.997Z",
+    "updatedAt": "2026-01-12T10:46:43.997Z"
   },
   "activeVersionId": "50afbff4-f3c5-473c-b28c-1322066be66b",
   "connections": {
@@ -284,6 +285,7 @@
   "isArchived": false,
   "meta": null,
   "name": "agentefleming",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {},
@@ -422,11 +424,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-02-24T16:18:51.712Z",
-      "createdAt": "2025-02-24T16:18:51.712Z",
       "role": "workflow:owner",
       "workflowId": "iw5inAfYjsM70Am3",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-02-24T16:18:51.712Z",
+      "updatedAt": "2025-02-24T16:18:51.712Z"
     }
   ],
   "staticData": null,
