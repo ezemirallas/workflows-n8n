@@ -64,6 +64,7 @@
   "isArchived": false,
   "meta": null,
   "name": "Asistente personal",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -180,11 +181,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-02-19T11:55:12.317Z",
-      "createdAt": "2025-02-19T11:55:12.317Z",
       "role": "workflow:owner",
       "workflowId": "3CUz0JLtYGCWkmgT",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-02-19T11:55:12.317Z",
+      "updatedAt": "2025-02-19T11:55:12.317Z"
     }
   ],
   "staticData": null,
