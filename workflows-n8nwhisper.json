@@ -63,6 +63,7 @@
   "isArchived": false,
   "meta": null,
   "name": "whisper",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -261,11 +262,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-04-08T14:15:11.382Z",
-      "createdAt": "2026-04-08T14:15:11.382Z",
       "role": "workflow:owner",
       "workflowId": "mwjtupLIVSk1dvfj",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-04-08T14:15:11.382Z",
+      "updatedAt": "2026-04-08T14:15:11.382Z"
     }
   ],
   "staticData": null,
