@@ -172,6 +172,7 @@
     "templateId": "2462"
   },
   "name": "Angie, personal AI assistant with Telegram voice and text",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -555,11 +556,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-04-08T15:09:11.810Z",
-      "createdAt": "2026-04-08T15:09:11.810Z",
       "role": "workflow:owner",
       "workflowId": "3GE7WVVQojtj6znF",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-04-08T15:09:11.810Z",
+      "updatedAt": "2026-04-08T15:09:11.810Z"
     }
   ],
   "staticData": null,
