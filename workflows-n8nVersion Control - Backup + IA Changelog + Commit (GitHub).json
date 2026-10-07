@@ -1,0 +1,485 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Schedule Trigger (cada 10 min)": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Get All Workflows (n8n)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Workflows (n8n)": {
+      "main": [
+        [
+          {
+            "node": "Get State File (GitHub)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get State File (GitHub)": {
+      "main": [
+        [
+          {
+            "node": "Detect Changes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect Changes": {
+      "main": [
+        [
+          {
+            "node": "IF hay cambios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF hay cambios": {
+      "main": [
+        [
+          {
+            "node": "Actualizar state.json (GitHub)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Loop por workflow modificado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop por workflow modificado": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Backup: traer workflow completo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Backup: traer workflow completo": {
+      "main": [
+        [
+          {
+            "node": "Traer version anterior (GitHub)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Traer version anterior (GitHub)": {
+      "main": [
+        [
+          {
+            "node": "IA: generar changelog",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IA: generar changelog": {
+      "main": [
+        [
+          {
+            "node": "Armar payload de commit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar payload de commit": {
+      "main": [
+        [
+          {
+            "node": "Commit: version historica",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Commit: actualizar latest.json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Commit: version historica": {
+      "main": [
+        [
+          {
+            "node": "Loop por workflow modificado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-07-23T17:42:27.430Z",
+  "id": "hAwMsFnTzm2U8pHt",
+  "isArchived": false,
+  "meta": null,
+  "name": "Version Control - Backup + IA Changelog + Commit (GitHub)",
+  "nodeGroups": [],
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 10
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger (cada 10 min)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1312,
+        -224
+      ],
+      "id": "347213ef-d3ff-489a-abe2-a6a810f398e7"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "n8n_url",
+              "type": "string",
+              "value": "https://teaches-lamb-ancient-committed.trycloudflare.com"
+            },
+            {
+              "id": "2",
+              "name": "github_owner",
+              "type": "string",
+              "value": "ezemirallas"
+            },
+            {
+              "id": "3",
+              "name": "github_repo",
+              "type": "string",
+              "value": "n8n-workflows-versioning"
+            },
+            {
+              "id": "4",
+              "name": "github_branch",
+              "type": "string",
+              "value": "main"
+            },
+            {
+              "id": "5",
+              "name": "ai_model",
+              "type": "string",
+              "value": "claude-haiku-4-5-20251001"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1088,
+        -224
+      ],
+      "id": "181e8ac7-16c0-4e14-999c-7a7bd8aa5d83"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.n8n_url }}/api/v1/workflows",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "name": "Get All Workflows (n8n)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -864,
+        -224
+      ],
+      "id": "54fc7645-368a-4f36-b9af-713befea37b9"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{ $('Config').item.json.github_owner }}/{{ $('Config').item.json.github_repo }}/contents/state.json?ref={{ $('Config').item.json.github_branch }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "name": "Get State File (GitHub)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -640,
+        -224
+      ],
+      "id": "c8dd5c0a-9728-4dd9-bd8a-4db4c63f92b1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Compara updatedAt actual vs. el último estado commiteado en GitHub\nconst allWorkflows = $('Get All Workflows (n8n)').first().json.data || $('Get All Workflows (n8n)').first().json;\nconst stateResp = $input.first().json;\n\nlet previousState = {};\nif (stateResp && stateResp.content) {\n  try {\n    previousState = JSON.parse(Buffer.from(stateResp.content, 'base64').toString('utf-8'));\n  } catch (e) { previousState = {}; }\n}\n\nconst changed = [];\nconst newState = {};\n\nfor (const wf of allWorkflows) {\n  newState[wf.id] = wf.updatedAt;\n  const prevUpdatedAt = previousState[wf.id];\n  if (!prevUpdatedAt || prevUpdatedAt !== wf.updatedAt) {\n    changed.push({\n      id: wf.id,\n      name: wf.name,\n      updatedAt: wf.updatedAt,\n      previousUpdatedAt: prevUpdatedAt || null\n    });\n  }\n}\n\nreturn {\n  json: {\n    hasChanges: changed.length > 0,\n    changed,\n    newState,\n    stateFileSha: stateResp && stateResp.sha ? stateResp.sha : null\n  }\n};"
+      },
+      "name": "Detect Changes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -432,
+        -224
+      ],
+      "id": "865a52f0-76b6-4e9a-8b38-114512c790d4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.hasChanges }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "IF hay cambios",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        -224
+      ],
+      "id": "aebea425-ed6d-4db1-8940-88b7d805dff1"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/{{ $('Config').item.json.github_owner }}/{{ $('Config').item.json.github_repo }}/contents/state.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"message\": \"chore: actualizar state.json (\" + $json.changed.length + \" workflow(s) modificados)\", \"content\": Buffer.from(JSON.stringify($json.newState, null, 2)).toString('base64'), \"branch\": $('Config').item.json.github_branch, \"sha\": $json.stateFileSha } }}",
+        "options": {}
+      },
+      "name": "Actualizar state.json (GitHub)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        64,
+        -240
+      ],
+      "id": "7e45c7c1-fee8-40a6-a50a-b46ab3ef8774"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Loop por workflow modificado",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -192,
+        96
+      ],
+      "id": "72aa01ae-2e98-4018-b94b-b6e3c4355cc3"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Config').item.json.n8n_url }}/api/v1/workflows/{{ $json.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "name": "Backup: traer workflow completo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        128,
+        112
+      ],
+      "id": "b51ae528-22ff-4e7d-9982-a15aa0474a2a"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{ $('Config').item.json.github_owner }}/{{ $('Config').item.json.github_repo }}/contents/workflows/{{ $json.id }}/latest.json?ref={{ $('Config').item.json.github_branch }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true
+            }
+          }
+        }
+      },
+      "name": "Traer version anterior (GitHub)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        112
+      ],
+      "id": "136d3c75-1c24-413f-a973-00693650f622"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "content-type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"model\": $('Config').item.json.ai_model,\n  \"max_tokens\": 500,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Sos un asistente que redacta changelogs tecnicos breves para versionado de workflows de n8n.\\n\\nWorkflow: \" + $('Backup: traer workflow completo').item.json.name + \"\\n\\nJSON version anterior (puede venir vacio si es la primera version):\\n\" + ($json.content ? Buffer.from($json.content, 'base64').toString('utf-8') : '(sin version previa)') + \"\\n\\nJSON version nueva:\\n\" + JSON.stringify($('Backup: traer workflow completo').item.json) + \"\\n\\nDevolve SOLO un mensaje de commit en una linea (max 20 palabras), en español, describiendo el cambio principal (nodos agregados/eliminados/modificados). No agregues explicaciones ni markdown.\"\n    }\n  ]\n} }}",
+        "options": {}
+      },
+      "name": "IA: generar changelog",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        656,
+        112
+      ],
+      "id": "db4576c4-d6c9-42c4-a4e2-3c470d857d05"
+    },
+    {
+      "parameters": {
+        "jsCode": "const backup = $('Backup: traer workflow completo').first().json;\nconst prevVersion = $('Traer version anterior (GitHub)').first().json;\nconst aiResp = $input.first().json;\n\nlet commitMessage = 'deploy: actualizacion de workflow';\ntry {\n  commitMessage = aiResp.content[0].text.trim();\n} catch (e) {}\n\nconst timestamp = new Date().toISOString().replace(/[:.]/g, '-');\nconst content = Buffer.from(JSON.stringify(backup, null, 2)).toString('base64');\n\nreturn {\n  json: {\n    workflowId: backup.id,\n    commitMessage,\n    timestamp,\n    content,\n    previousSha: prevVersion && prevVersion.sha ? prevVersion.sha : null\n  }\n};"
+      },
+      "name": "Armar payload de commit",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        912,
+        112
+      ],
+      "id": "55adc900-2eac-47cf-83c0-4196639dd310"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/{{ $('Config').item.json.github_owner }}/{{ $('Config').item.json.github_repo }}/contents/workflows/{{ $json.workflowId }}/history/{{ $json.timestamp }}.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"message\": $json.commitMessage + \" [\" + $json.timestamp + \"]\", \"content\": $json.content, \"branch\": $('Config').item.json.github_branch } }}",
+        "options": {}
+      },
+      "name": "Commit: version historica",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1072,
+        272
+      ],
+      "id": "b631d032-a1e2-4468-ad64-ba74ae6ab0cb"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/{{ $('Config').item.json.github_owner }}/{{ $('Config').item.json.github_repo }}/contents/workflows/{{ $json.workflowId }}/latest.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"message\": \"latest: \" + $json.commitMessage, \"content\": $json.content, \"branch\": $('Config').item.json.github_branch, \"sha\": $json.previousSha } }}",
+        "options": {}
+      },
+      "name": "Commit: actualizar latest.json",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1136,
+        -112
+      ],
+      "id": "80cd6e6f-e13b-44a9-a9bc-131cb69d99dd"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "role": "workflow:owner",
+      "workflowId": "hAwMsFnTzm2U8pHt",
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-07-23T17:42:27.783Z",
+      "updatedAt": "2026-07-23T17:42:27.783Z"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-07-23T17:51:50.606Z",
+  "versionId": "babe7fc8-0acb-4096-82a4-6b3fdbe6b49c"
+}
