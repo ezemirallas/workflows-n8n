@@ -223,6 +223,7 @@
   "isArchived": false,
   "meta": null,
   "name": "RAGconquestionandanswer",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -695,11 +696,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-02-28T11:40:50.268Z",
-      "createdAt": "2025-02-28T11:40:50.268Z",
       "role": "workflow:owner",
       "workflowId": "2mSEgSRjRTPGKnEe",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-02-28T11:40:50.268Z",
+      "updatedAt": "2025-02-28T11:40:50.268Z"
     }
   ],
   "staticData": null,
