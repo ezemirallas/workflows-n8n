@@ -1,8 +1,6 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-04-30T15:54:01.000Z",
-    "createdAt": "2026-04-30T15:53:36.476Z",
     "versionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f",
     "workflowId": "AdYUh4iz4QXqpwRY",
     "nodes": [
@@ -112,10 +110,13 @@
         ]
       }
     },
+    "nodeGroups": [],
     "authors": "Ezequiel  Mirallas",
     "name": "Version 93b518fc",
     "description": "",
-    "autosaved": true
+    "autosaved": true,
+    "createdAt": "2026-04-30T15:53:36.476Z",
+    "updatedAt": "2026-04-30T15:54:01.000Z"
   },
   "activeVersionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f",
   "connections": {
@@ -149,6 +150,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "Grafana Alerts → Telegram",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -239,11 +241,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-04-23T16:27:37.809Z",
-      "createdAt": "2026-04-23T16:27:37.809Z",
       "role": "workflow:owner",
       "workflowId": "AdYUh4iz4QXqpwRY",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-04-23T16:27:37.809Z",
+      "updatedAt": "2026-04-23T16:27:37.809Z"
     }
   ],
   "staticData": null,
