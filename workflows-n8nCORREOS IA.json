@@ -42,6 +42,7 @@
   "isArchived": false,
   "meta": null,
   "name": "CORREOS IA",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -150,11 +151,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2026-03-17T17:25:44.525Z",
-      "createdAt": "2026-03-17T17:25:44.525Z",
       "role": "workflow:owner",
       "workflowId": "ZZMYmkg4666HAWsy7Nf0Y",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2026-03-17T17:25:44.525Z",
+      "updatedAt": "2026-03-17T17:25:44.525Z"
     }
   ],
   "staticData": null,
