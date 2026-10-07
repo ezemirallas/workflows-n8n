@@ -130,6 +130,7 @@
   "isArchived": false,
   "meta": null,
   "name": "ragturnos",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -415,11 +416,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-06-12T11:50:49.087Z",
-      "createdAt": "2025-06-12T11:50:49.087Z",
       "role": "workflow:owner",
       "workflowId": "4DQhMia2363bgt3g",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-06-12T11:50:49.087Z",
+      "updatedAt": "2025-06-12T11:50:49.087Z"
     }
   ],
   "staticData": null,
