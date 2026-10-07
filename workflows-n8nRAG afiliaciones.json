@@ -135,6 +135,7 @@
   "isArchived": false,
   "meta": null,
   "name": "RAG afiliaciones",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -426,11 +427,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-02-24T16:42:42.762Z",
-      "createdAt": "2025-02-24T16:42:42.762Z",
       "role": "workflow:owner",
       "workflowId": "2UrnYojelpYuF5p6",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-02-24T16:42:42.762Z",
+      "updatedAt": "2025-02-24T16:42:42.762Z"
     }
   ],
   "staticData": null,
