@@ -31,6 +31,7 @@
   "isArchived": false,
   "meta": null,
   "name": "MCP",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -91,11 +92,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2025-04-15T18:35:25.697Z",
-      "createdAt": "2025-04-15T18:35:25.697Z",
       "role": "workflow:owner",
       "workflowId": "DMGloT1zDhUtGsJm",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2025-04-15T18:35:25.697Z",
+      "updatedAt": "2025-04-15T18:35:25.697Z"
     }
   ],
   "staticData": null,
