@@ -56,6 +56,7 @@
     "templateCredsSetupCompleted": true
   },
   "name": "plantillabotmakerexcel",
+  "nodeGroups": [],
   "nodes": [
     {
       "parameters": {
@@ -182,11 +183,11 @@
   },
   "shared": [
     {
-      "updatedAt": "2024-10-30T12:27:37.408Z",
-      "createdAt": "2024-10-30T12:27:37.408Z",
       "role": "workflow:owner",
       "workflowId": "tyzZTaGyc534NLWL",
-      "projectId": "ykl3JaRVM7UvdLLB"
+      "projectId": "ykl3JaRVM7UvdLLB",
+      "createdAt": "2024-10-30T12:27:37.408Z",
+      "updatedAt": "2024-10-30T12:27:37.408Z"
     }
   ],
   "staticData": null,
