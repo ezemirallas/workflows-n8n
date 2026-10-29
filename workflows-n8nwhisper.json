@@ -249,8 +249,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        432,
-        240
+        464,
+        336
       ],
       "notes": "Captura errores y devuelve mensaje claro al cliente"
     }
@@ -272,6 +272,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-04-21T17:34:34.954Z",
-  "versionId": "17f4c1e2-9bca-413a-9baa-2113ef85c453"
+  "updatedAt": "2026-10-29T11:37:43.256Z",
+  "versionId": "27abc712-6598-4a59-9c67-142f92169e65"
 }
