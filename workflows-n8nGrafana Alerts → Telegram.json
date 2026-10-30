@@ -1,7 +1,7 @@
 {
   "active": true,
   "activeVersion": {
-    "versionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f",
+    "versionId": "ff9b513a-4872-4654-b959-46249d4b76dd",
     "workflowId": "AdYUh4iz4QXqpwRY",
     "nodes": [
       {
@@ -35,7 +35,7 @@
               {
                 "id": "e320003f-99e2-4242-a8b7-80f3255918bd",
                 "name": "cantidad_requests",
-                "value": "={{ $json.body.alerts[0].values.A }}",
+                "value": "={{ $json.body.alerts[0].values.B }}",
                 "type": "string"
               },
               {
@@ -112,13 +112,13 @@
     },
     "nodeGroups": [],
     "authors": "Ezequiel  Mirallas",
-    "name": "Version 93b518fc",
+    "name": "Version ff9b513a",
     "description": "",
     "autosaved": true,
-    "createdAt": "2026-04-30T15:53:36.476Z",
-    "updatedAt": "2026-04-30T15:54:01.000Z"
+    "createdAt": "2026-10-29T16:50:53.700Z",
+    "updatedAt": "2026-10-29T16:54:38.000Z"
   },
-  "activeVersionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f",
+  "activeVersionId": "ff9b513a-4872-4654-b959-46249d4b76dd",
   "connections": {
     "Edit Fields": {
       "main": [
@@ -183,7 +183,7 @@
             {
               "id": "e320003f-99e2-4242-a8b7-80f3255918bd",
               "name": "cantidad_requests",
-              "value": "={{ $json.body.alerts[0].values.A }}",
+              "value": "={{ $json.body.alerts[0].values.B }}",
               "type": "string"
             },
             {
@@ -251,6 +251,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-04-30T15:53:36.474Z",
-  "versionId": "93b518fc-875d-4419-a23f-8bc5bf587f7f"
+  "updatedAt": "2026-10-29T16:50:53.700Z",
+  "versionId": "ff9b513a-4872-4654-b959-46249d4b76dd"
 }
